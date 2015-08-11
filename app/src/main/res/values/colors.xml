@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_pink">#FF006E</color>
+    <color name="color_dark_pink">#ED005F</color>
+    <color name="color_blue_fab">#00F3E1</color>
+    <color name="color_selected_menu">#00D6D2</color>
+    <color name="color_setting_background">#FEFEE6</color>
+    <color name="color_text_settings">#5D3635</color>
+</resources>
