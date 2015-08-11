@@ -1,6 +1,7 @@
 package com.mobapply.happymoments.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.menu.NavigationDrawerFragment;
+import com.mobapply.happymoments.utils.UtilsHappyMoments;
 
 public class AlbumsActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -48,6 +50,13 @@ public class AlbumsActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == UtilsHappyMoments.CODE_SETTING) {
+            mNavigationDrawerFragment.changeMenuItemsSelection(0);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -55,7 +64,6 @@ public class AlbumsActivity extends ActionBarActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
 
 }

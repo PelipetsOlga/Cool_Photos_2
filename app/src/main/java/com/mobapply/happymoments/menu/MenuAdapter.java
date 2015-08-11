@@ -1,6 +1,8 @@
 package com.mobapply.happymoments.menu;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,10 +68,44 @@ public class MenuAdapter extends BaseAdapter {
             rowView.setTag(viewHolder);
         }
 
+
+
         ViewHolder holder = (ViewHolder) rowView.getTag();
         MenuItem item = list.get(position);
-        holder.icon.setImageDrawable(context.getResources().getDrawable(item.getIconId()));
+        Resources resources=context.getResources();
+        Drawable icon=null;
+        switch (position){
+            case 0:
+                if (item.isSelected()){
+                    icon=resources.getDrawable(R.drawable.ic_folder_turquoise_24dp);
+                }else{
+                    icon=resources.getDrawable(R.drawable.ic_folder_brown_24dp);
+                }
+                break;
+            case 1:
+                if (item.isSelected()){
+                    icon=resources.getDrawable(R.drawable.ic_settings_turquoise_24dp);
+                }else{
+                    icon=resources.getDrawable(R.drawable.ic_settings_brown_24dp);
+                }
+                break;
+            case 2:
+                if (item.isSelected()){
+                    icon=resources.getDrawable(R.drawable.ic_exit_turquoise_24dp);
+                }else{
+                    icon=resources.getDrawable(R.drawable.ic_exit_brown_24dp);
+                }
+                break;
+        }
+        holder.icon.setImageDrawable(icon);
+
         holder.text.setText(context.getString(item.getTextId()));
+        if(item.isSelected()){
+            holder.text.setTextColor(context.getResources().getColor(R.color.color_selected_menu));
+         }
+        else{
+            holder.text.setTextColor(context.getResources().getColor(R.color.color_text_settings));
+        }
 
 
         return rowView;

@@ -1,6 +1,7 @@
 package com.mobapply.happymoments.menu;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.mobapply.happymoments.R;
+import com.mobapply.happymoments.activity.SettingsActivity;
+import com.mobapply.happymoments.utils.UtilsHappyMoments;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +64,7 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    private List<com.mobapply.happymoments.menu.MenuItem> list;
 
     public NavigationDrawerFragment() {
     }
@@ -116,12 +120,12 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private List<com.mobapply.happymoments.menu.MenuItem> getMenuItems() {
-
-        List<com.mobapply.happymoments.menu.MenuItem> list = new ArrayList<>();
-        list.add(new com.mobapply.happymoments.menu.MenuItem(R.drawable.ic_folder_brown_24dp, R.string.action_home, false));
-        list.add(new com.mobapply.happymoments.menu.MenuItem(R.drawable.ic_settings_brown_24dp, R.string.action_settings, false));
-        list.add(new com.mobapply.happymoments.menu.MenuItem(R.drawable.ic_exit_brown_24dp, R.string.action_sign_out, false));
-
+        if (list == null || list.size() == 0) {
+            list = new ArrayList<>();
+            list.add(new com.mobapply.happymoments.menu.MenuItem(R.drawable.ic_folder_brown_24dp, R.string.action_home, true));
+            list.add(new com.mobapply.happymoments.menu.MenuItem(R.drawable.ic_settings_brown_24dp, R.string.action_settings, false));
+            list.add(new com.mobapply.happymoments.menu.MenuItem(R.drawable.ic_exit_brown_24dp, R.string.action_sign_out, false));
+        }
         return list;
     }
 
@@ -205,6 +209,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
+        changeMenuItemsSelection(position);
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
@@ -214,6 +219,34 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+        switch (position) {
+            case 0:
+
+                break;
+            case 1:
+                Intent settingIntent=new Intent();
+                settingIntent.setClass(getActivity(),SettingsActivity.class);
+                startActivityForResult(settingIntent, UtilsHappyMoments.CODE_SETTING);
+                break;
+            case 2:
+                getActivity().finish();
+                // TODO stop Servise
+                break;
+        }
+    }
+
+
+
+    public void changeMenuItemsSelection(int position) {
+        if (list != null) {
+            for (com.mobapply.happymoments.menu.MenuItem item : list) {
+                if (list.indexOf(item) == position) {
+                    item.setSelected(true);
+                } else {
+                    item.setSelected(false);
+                }
+            }
         }
     }
 

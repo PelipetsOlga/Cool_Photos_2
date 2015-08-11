@@ -36,5 +36,13 @@ public class MenuItem {
         return iconId;
     }
 
+    public boolean isSelected(){
+        return selected;
+    }
+
+    public void setSelected(boolean value){
+        this.selected=value;
+    }
+
 
 }
