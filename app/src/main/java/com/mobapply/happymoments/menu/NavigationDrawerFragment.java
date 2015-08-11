@@ -23,7 +23,7 @@ import android.widget.ListView;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.activity.SettingsActivity;
-import com.mobapply.happymoments.utils.UtilsHappyMoments;
+import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -227,7 +227,7 @@ public class NavigationDrawerFragment extends Fragment {
             case 1:
                 Intent settingIntent=new Intent();
                 settingIntent.setClass(getActivity(),SettingsActivity.class);
-                startActivityForResult(settingIntent, UtilsHappyMoments.CODE_SETTING);
+                startActivityForResult(settingIntent, HappyMomentsUtils.CODE_SETTING);
                 break;
             case 2:
                 getActivity().finish();

@@ -1,20 +1,14 @@
 package com.mobapply.happymoments.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.menu.NavigationDrawerFragment;
-import com.mobapply.happymoments.utils.UtilsHappyMoments;
+import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
 public class AlbumsActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -52,7 +46,7 @@ public class AlbumsActivity extends ActionBarActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == UtilsHappyMoments.CODE_SETTING) {
+        if (requestCode == HappyMomentsUtils.CODE_SETTING) {
             mNavigationDrawerFragment.changeMenuItemsSelection(0);
         }
         super.onActivityResult(requestCode, resultCode, data);
