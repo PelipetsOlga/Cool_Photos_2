@@ -41,6 +41,11 @@
             android:name=".activity.FullscreenPictureActivity"
             android:label="@string/title_activity_fullscreen_picture" >
         </activity>
+
+        <provider android:name=".provider.PictureProvider"
+            android:authorities="com.mobapply.happymoments.providers.HappyMoments"
+            android:exported="false">
+        </provider>
     </application>
 
 </manifest>
