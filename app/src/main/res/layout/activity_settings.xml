@@ -14,7 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
-        android:layout_gravity="fill_horizontal" />
+        android:layout_gravity="fill_horizontal"
+        android:max="5" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,10 +43,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/color_text_settings" />
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/switch_shuffle"
+        style="@style/Widget.AppCompat.CompoundButton.Switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textOff=""
+
+        android:textOn="" />
 
 </GridLayout>

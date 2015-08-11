@@ -6,4 +6,5 @@
     <color name="color_selected_menu">#00D6D2</color>
     <color name="color_setting_background">#FEFEE6</color>
     <color name="color_text_settings">#5D3635</color>
+    <color name="seekbar_background">#CDBFB7</color>
 </resources>
