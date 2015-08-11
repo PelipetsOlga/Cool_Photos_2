@@ -30,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         sPref = getPreferences(MODE_PRIVATE);
         period = sPref.getInt(PERIOD_UPDATING, 1);
-        shuffle=sPref.getBoolean(SHUFFLE, false);
+        shuffle = sPref.getBoolean(SHUFFLE, false);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -49,7 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putInt(PERIOD_UPDATING, progress);
-                period=progress;
+                period = progress;
                 ed.commit();
             }
 
@@ -65,7 +65,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-
         SwitchCompat switchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
         switchShuffle.setChecked(shuffle);
         switchShuffle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -73,7 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putBoolean(SHUFFLE, isChecked);
-                shuffle=isChecked;
+                shuffle = isChecked;
                 ed.commit();
             }
         });

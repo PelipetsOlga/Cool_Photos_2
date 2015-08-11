@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.GridView;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.menu.NavigationDrawerFragment;
@@ -37,6 +38,10 @@ public class AlbumsActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        //albums container
+        GridView grid= (GridView) findViewById(R.id.gridView);
+
+
 
     }
 
@@ -44,13 +49,7 @@ public class AlbumsActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == HappyMomentsUtils.CODE_SETTING) {
-            mNavigationDrawerFragment.changeMenuItemsSelection(0);
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();

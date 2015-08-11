@@ -65,6 +65,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
     private List<com.mobapply.happymoments.menu.MenuItem> list;
+    private MenuAdapter adapter;
 
     public NavigationDrawerFragment() {
     }
@@ -107,7 +108,7 @@ public class NavigationDrawerFragment extends Fragment {
             }
         };
 
-        MenuAdapter adapter = new MenuAdapter(getActivity(), getMenuItems());
+        adapter = new MenuAdapter(getActivity(), getMenuItems());
 
         mDrawerListView.setOnItemClickListener(listener);
         adapter.setListener(listener);
@@ -227,7 +228,7 @@ public class NavigationDrawerFragment extends Fragment {
             case 1:
                 Intent settingIntent=new Intent();
                 settingIntent.setClass(getActivity(),SettingsActivity.class);
-                startActivityForResult(settingIntent, HappyMomentsUtils.CODE_SETTING);
+                startActivity(settingIntent);
                 break;
             case 2:
                 getActivity().finish();
@@ -236,7 +237,12 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        changeMenuItemsSelection(0);
+        adapter.notifyDataSetChanged();
+    }
 
     public void changeMenuItemsSelection(int position) {
         if (list != null) {
