@@ -10,7 +10,7 @@
 
         <!-- colorAccent is used as the default value for colorControlActivated,
              which is used to tint widgets -->
-        <item name="colorAccent">@color/color_blue_fab</item>
+        <item name="colorAccent">@color/color_selected_menu</item>
 
 
     </style>
