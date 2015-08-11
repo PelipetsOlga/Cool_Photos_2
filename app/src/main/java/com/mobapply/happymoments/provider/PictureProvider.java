@@ -37,6 +37,9 @@ public class PictureProvider extends ContentProvider {
     public static final String PICTURE_IS_PLAY = "is_play";
     public static final String PICTURE_DATE = "date";
 
+    public static final int PLAY=55;
+    public static final int PlAY_NOT=56;
+
 
     private static final String CREATE_TABLE_ALBUM = "create table " + ALBUM_TABLE + "("
             + ALBUM_ID + " integer primary key autoincrement, "

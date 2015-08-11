@@ -2,6 +2,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.mobapply.happymoments.activity.PicturesActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_from_gallery"
+        android:icon="@drawable/ic_add_white_24dp"
+        android:title="@string/ab_add_picture"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_capture"
+        android:icon="@drawable/ic_photo_camera_white_24dp"
+        android:title="@string/ab_capture"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_select_pictures"
+        android:icon="@drawable/ic_check_white_24dp"
+        android:title="@string/ab_select_pictures"
+        app:showAsAction="always" />
 </menu>

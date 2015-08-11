@@ -27,12 +27,12 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            app:fabSize="normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_add_white_24dp"
+            app:fabSize="normal"
             app:layout_anchor="@id/gridView"
             app:layout_anchorGravity="bottom|right|end" />
     </android.support.design.widget.CoordinatorLayout>

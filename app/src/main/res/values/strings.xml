@@ -14,6 +14,9 @@
     <string name="title_activity_select_album">SelectAlbumsActivity</string>
 
     <string name="ab_select_albums">Select albums</string>
+    <string name="ab_add_picture">Add picture from Gallery</string>
+    <string name="ab_capture">Capture</string>
+    <string name="ab_select_pictures">Select pictures</string>
     
     <string name="tv_min">min</string>
     <string name="tv_content_updating">Content updating</string>
