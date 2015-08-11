@@ -1,29 +1,34 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:useDefaultMargins="true"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context="com.mobapply.happymoments.activity.SettingsActivity">
 
-
-    <SeekBar
-        android:id="@+id/seekbar"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:layout_gravity="fill_horizontal"
-        android:max="5" />
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:text="@string/tv_min"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/color_selected_menu" />
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="60" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/tv_min"
+            android:paddingLeft="32dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/color_selected_menu" />
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,24 +38,31 @@
         android:textAppearance="?android:attr/textAppearance"
         android:textColor="@color/color_text_settings" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="left"
-        android:paddingTop="32dp"
-        android:text="@string/tv_shuffle_images"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/color_text_settings" />
+        android:orientation="horizontal"
+        android:paddingTop="32dp">
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch_shuffle"
-        style="@style/Widget.AppCompat.CompoundButton.Switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textOff=""
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
 
-        android:textOn="" />
+            android:text="@string/tv_shuffle_images"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/color_text_settings" />
 
-</GridLayout>
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_shuffle"
+            style="@style/Widget.AppCompat.CompoundButton.Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:layout_gravity="center_horizontal"
+            android:textOff=""
+            android:textOn="" />
+    </LinearLayout>
+
+</LinearLayout>

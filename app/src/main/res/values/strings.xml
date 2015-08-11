@@ -12,10 +12,17 @@
     <string name="action_settings">Settings</string>
     <string name="action_sign_out">Sign Out &amp; Stop</string>
     <string name="title_activity_select_album">SelectAlbumsActivity</string>
+
+    <string name="ab_select_albums">Select albums</string>
     
     <string name="tv_min">min</string>
     <string name="tv_content_updating">Content updating</string>
     <string name="tv_shuffle_images">Shuffle images</string>
+
+    <string name="dialog_title">New album</string>
+    <string name="dialog_hint">Enter a name</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
         
 
     <string name="hello_world">Hello world!</string>
