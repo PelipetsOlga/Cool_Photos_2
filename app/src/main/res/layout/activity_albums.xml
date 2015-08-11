@@ -27,13 +27,14 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
+            app:fabSize="normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:src="@drawable/ic_add_white_24dp"
             android:layout_gravity="bottom|end"
-            app:elevation="6dp"
-            app:pressedTranslationZ="12dp"/>
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add_white_24dp"
+            app:layout_anchor="@id/gridView"
+            app:layout_anchorGravity="bottom|right|end" />
     </android.support.design.widget.CoordinatorLayout>
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
