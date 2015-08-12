@@ -4,17 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.provider.PictureProvider;
@@ -45,7 +39,7 @@ public class NewAlbumDialog extends DialogFragment {
                 if (!TextUtils.isEmpty(newTitle)) {
                     Calendar calendar = Calendar.getInstance();
                     Long date = calendar.getTimeInMillis();
-                    String folderPath = HappyMomentsUtils.getNewDirectoryPath(date);
+                    String folderPath = HappyMomentsUtils.getNewAlbumPath(date);
                     ContentValues cv = new ContentValues();
                     cv.put(PictureProvider.ALBUM_NAME, newTitle);
                     cv.put(PictureProvider.ALBUM_DATE, date);
@@ -54,6 +48,8 @@ public class NewAlbumDialog extends DialogFragment {
                     cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
                     Uri newUri = getActivity().getContentResolver()
                             .insert(PictureProvider.ALBUM_CONTENT_URI, cv);
+                    //String s=newUri.toString();
+
 
                 }
             }

@@ -1,21 +1,25 @@
 package com.mobapply.happymoments.utils;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.graphics.Bitmap;
-        import android.graphics.BitmapFactory;
-        import android.graphics.Matrix;
-        import android.media.ExifInterface;
-        import android.net.Uri;
-        import android.os.Environment;
-        import android.util.DisplayMetrics;
-        import android.view.Display;
-        import android.widget.Toast;
+import android.app.Activity;
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.widget.Toast;
 
-        import java.io.File;
-        import java.io.FileNotFoundException;
-        import java.io.FileOutputStream;
-        import java.io.IOException;
+import com.mobapply.happymoments.Constants;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Olga on 11.08.2015.
@@ -23,16 +27,16 @@ package com.mobapply.happymoments.utils;
 public class HappyMomentsUtils {
 
 
-    public static String getNewDirectoryPath(long date) {
+    public static String getNewAlbumPath(long date) {
         File root = Environment.getExternalStorageDirectory();
-        String path = "HappyMoments/directory" + date;
+        String path = Constants.APP_FOLDER + "/album" + date;
         File file = new File(root, path);
         file.mkdirs();
         return file.getAbsolutePath();
     }
 
     public static File generateCaptureFile(String albumPath) {
-        File f = new File(getAlbumDirectory(albumPath), "photo_"
+        File f = new File(getAlbumDirectory(albumPath), "picture_"
                 + System.currentTimeMillis() + ".jpg");
         return f;
     }
@@ -45,7 +49,7 @@ public class HappyMomentsUtils {
         return dir;
     }
 
-    public static void rotateAndSaveCapture(String filePath, Activity ctx){
+    public static void rotateAndSaveCapture(String filePath, Activity ctx, String newFilepath) {
         Display display = ctx.getWindowManager().getDefaultDisplay();
         DisplayMetrics metricsB = new DisplayMetrics();
         display.getMetrics(metricsB);
@@ -85,7 +89,8 @@ public class HappyMomentsUtils {
                     rotate = 270;
                     break;
             }
-        } catch (IOException e1) { }
+        } catch (IOException e1) {
+        }
 
         if (rotate != 0) {
             // Display display = getWindowManager().getDefaultDisplay();
@@ -96,21 +101,36 @@ public class HappyMomentsUtils {
             try {
                 b = Bitmap.createBitmap(b, 0, 0, w, h, mtx, false);
                 b = b.copy(Bitmap.Config.ARGB_8888, true);
-            } catch (IllegalArgumentException e) { }
+            } catch (IllegalArgumentException e) {
+            }
         }
         FileOutputStream out = null;
         try {
-            out = new FileOutputStream(filePath);
+            out = new FileOutputStream(newFilepath);
             b.compress(Bitmap.CompressFormat.PNG, 100, out);
             if (out != null)
                 out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static String getImagePath(Uri uri, Activity ctx) {
+        if (uri == null)
+            return null;
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = ctx.managedQuery(uri, projection, null, null,
+                null);
+        if (cursor != null) {
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        return uri.getPath();
     }
 
 

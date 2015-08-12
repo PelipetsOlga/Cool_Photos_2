@@ -17,6 +17,7 @@
     <string name="ab_add_picture">Add picture from Gallery</string>
     <string name="ab_capture">Capture</string>
     <string name="ab_select_pictures">Select pictures</string>
+    <string name="chooser_gallery">Select picture</string>
     
     <string name="tv_min">min</string>
     <string name="tv_content_updating">Content updating</string>

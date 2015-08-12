@@ -5,7 +5,10 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -59,7 +62,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
     private void fillData() {
         //pictures container
-        Cursor cursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, null,
+        Cursor cursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,
+                PictureProvider.PICTURE_ALBUM_ID + "=" + idAlbum,
                 null, null);
         startManagingCursor(cursor);
 
@@ -72,9 +76,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), PicturesActivity.class);
-                intent.putExtra(Constants.EXTRA_ID, id);
-                startActivity(intent);
+                //TODO
             }
         });
         grid.setAdapter(adapter);
@@ -113,7 +115,18 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 return true;
 
             case R.id.action_add_from_gallery:
-
+                if (!selectMenu) {
+                    selectMenu = true;
+                    // choose photo from gallery
+                    Intent intentGallery = new Intent();
+                    intentGallery.setType("image/*");
+                    intentGallery
+                            .setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(
+                            Intent.createChooser(intentGallery,
+                                    getResources().getString(R.string.chooser_gallery)),
+                            Constants.REQUEST_CODE_GALLERY);
+                }
                 break;
 
             case R.id.action_capture:
@@ -129,6 +142,9 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.action_select_pictures:
+                if (!selectMenu) {
+                    //TODO
+                }
                 break;
 
             default:
@@ -152,7 +168,9 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         selectMenu = false;
         if (requestCode == Constants.REQUEST_CODE_PHOTO) {
             if (resultCode == RESULT_OK) {
-                HappyMomentsUtils.rotateAndSaveCapture(picturePath, this);
+              //  HappyMomentsUtils.rotateAndSaveCapture(picturePath, this, picturePath);
+                ImageDownloader pictureDownloader = new ImageDownloader();
+                pictureDownloader.execute(picturePath, this, picturePath);
 
                 Calendar calendar = Calendar.getInstance();
                 Long date = calendar.getTimeInMillis();
@@ -165,7 +183,42 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                         .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
 
             }
+        } else if (requestCode == Constants.REQUEST_CODE_GALLERY) {
+            if (resultCode == RESULT_OK && data != null) {
+                Uri selectedImageUri = data.getData();
+                String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
+                File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
+              //  HappyMomentsUtils.rotateAndSaveCapture(selectedImagePath, this, pictureFile.getAbsolutePath());
+
+               ImageDownloader pictureDownloader = new ImageDownloader();
+                pictureDownloader.execute(selectedImagePath, this, pictureFile.getAbsolutePath());
+
+                Calendar calendar = Calendar.getInstance();
+                Long date = calendar.getTimeInMillis();
+                ContentValues cv = new ContentValues();
+                cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
+                cv.put(PictureProvider.PICTURE_DATE, date);
+                cv.put(PictureProvider.PICTURE_FILE, pictureFile.getAbsolutePath());
+                cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+                Uri newUri = getContentResolver()
+                        .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
+
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private class ImageDownloader extends AsyncTask<Object, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Object... param) {
+            String oldPicturePath = (String) param[0];
+            AppCompatActivity ctx = (AppCompatActivity) param[1];
+            String newPicturePath = (String) param[2];
+
+            HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+
+            return null;
+        }
     }
 }
