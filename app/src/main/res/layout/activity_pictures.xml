@@ -4,6 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="6dp"
     tools:context="com.mobapply.happymoments.activity.PicturesActivity">
 
 
@@ -13,9 +14,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:clickable="true"
-        android:horizontalSpacing="8dp"
+        android:horizontalSpacing="6dp"
         android:numColumns="3"
-        android:verticalSpacing="8dp"
+        android:verticalSpacing="6dp"
         android:choiceMode="multipleChoice"
         android:stretchMode="columnWidth" />
 

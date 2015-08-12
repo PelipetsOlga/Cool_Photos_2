@@ -94,7 +94,7 @@ public class AlbumsActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         switch (position) {
             case 0:
-                getSupportActionBar().setTitle(mTitle);
+                getSupportActionBar() .setTitle(mTitle);
                 break;
             case 1:
                 Intent settingIntent=new Intent();
