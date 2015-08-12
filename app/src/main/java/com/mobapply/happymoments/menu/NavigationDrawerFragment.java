@@ -221,20 +221,6 @@ public class NavigationDrawerFragment extends Fragment {
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
         }
-        switch (position) {
-            case 0:
-
-                break;
-            case 1:
-                Intent settingIntent=new Intent();
-                settingIntent.setClass(getActivity(),SettingsActivity.class);
-                startActivity(settingIntent);
-                break;
-            case 2:
-                getActivity().finish();
-                // TODO stop Servise
-                break;
-        }
     }
 
     @Override

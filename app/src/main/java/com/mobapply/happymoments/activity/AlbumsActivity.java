@@ -24,7 +24,7 @@ import com.mobapply.happymoments.provider.PictureProvider;
 import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
 public class AlbumsActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
 
 
 
@@ -37,12 +37,20 @@ public class AlbumsActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private FloatingActionButton fab;
+    private GridView grid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums);
 
+        setupNavigationDrawer();
+        initViews();
+        fillData();
+    }
+
+    private void setupNavigationDrawer(){
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getResources().getString(R.string.action_home);
@@ -52,16 +60,15 @@ public class AlbumsActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
 
-        FloatingActionButton fab= (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewAlbumDialog dialog=new NewAlbumDialog();
-                dialog.show(getFragmentManager(),null);
-            }
-        });
+    private  void initViews(){
+        grid = (GridView) findViewById(R.id.gridView);
+        fab= (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
+    }
 
+    private void fillData(){
         //albums container
         Cursor cursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null, null,
                 null, null);
@@ -72,7 +79,7 @@ public class AlbumsActivity extends ActionBarActivity
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2, cursor, from, to);
 
-        GridView grid = (GridView) findViewById(R.id.gridView);
+
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -82,15 +89,24 @@ public class AlbumsActivity extends ActionBarActivity
             }
         });
         grid.setAdapter(adapter);
-
-
-
-
-
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        switch (position) {
+            case 0:
+                 //NOP
+                break;
+            case 1:
+                Intent settingIntent=new Intent();
+                settingIntent.setClass(this,SettingsActivity.class);
+                startActivity(settingIntent);
+                break;
+            case 2:
+                finish();
+                // TODO stop Servise
+                break;
+        }
     }
 
 
@@ -117,6 +133,16 @@ public class AlbumsActivity extends ActionBarActivity
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fab:
+                NewAlbumDialog dialog=new NewAlbumDialog();
+                dialog.show(getFragmentManager(),null);
+                break;
         }
     }
 }
