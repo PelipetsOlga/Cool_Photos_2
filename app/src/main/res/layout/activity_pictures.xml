@@ -6,21 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.mobapply.happymoments.activity.PicturesActivity">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+
+    <GridView
+        android:id="@+id/gridPictures"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_pictures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_add_white_24dp"
+        android:src="@drawable/ic_play_arrow_white_36dp"
         app:fabSize="normal"
-        app:layout_anchor="@id/text"
+        app:layout_anchor="@id/gridPictures"
         app:layout_anchorGravity="bottom|right|end" />
 </android.support.design.widget.CoordinatorLayout>
 

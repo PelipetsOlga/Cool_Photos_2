@@ -2,28 +2,86 @@ package com.mobapply.happymoments.activity;
 
 
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.SimpleCursorAdapter;
 
+import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.provider.PictureProvider;
 import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
-public class PicturesActivity extends AppCompatActivity {
+import java.io.File;
+import java.util.Calendar;
+
+public class PicturesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Uri uriAlbum;
+    private GridView grid;
+    private long idAlbum;
+    private Uri albumUri;
+    private String albumPath, picturePath;
+    private boolean selectMenu = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pictures);
 
+        restoreActionBar();
+        initViews();
+
+        Intent intent = getIntent();
+        idAlbum = intent.getLongExtra(Constants.EXTRA_ID, 0);
+        if (idAlbum > 0) {
+            uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+        }
+        albumUri = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+        Cursor albumCursor = getContentResolver().query(albumUri, null, null, null, null);
+        if (albumCursor.moveToFirst()) {
+            albumPath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FOLDER));
+        }
+
+        fillData();
+    }
+
+    private void fillData() {
+        //pictures container
+        Cursor cursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, null,
+                null, null);
+        startManagingCursor(cursor);
+
+        String from[] = {PictureProvider.PICTURE_ID, PictureProvider.PICTURE_FILE};
+        int to[] = {android.R.id.text1, android.R.id.text2};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_list_item_2, cursor, from, to);
+
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), PicturesActivity.class);
+                intent.putExtra(Constants.EXTRA_ID, id);
+                startActivity(intent);
+            }
+        });
+        grid.setAdapter(adapter);
+    }
+
+
+    private void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
@@ -31,15 +89,12 @@ public class PicturesActivity extends AppCompatActivity {
         actionBar.setIcon(R.drawable.ic_arrow_back_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-        
-        Intent intent=getIntent();
-        long idAlbum=intent.getLongExtra(HappyMomentsUtils.EXTRA_ID, 0);
-        if (idAlbum>0){
-            uriAlbum  = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
-        }
+    }
 
-        TextView text=(TextView)findViewById(R.id.text);
-        text.setText(uriAlbum.toString());
+    private void initViews() {
+        grid = (GridView) findViewById(R.id.gridPictures);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_pictures);
+        fab.setOnClickListener(this);
     }
 
     @Override
@@ -50,21 +105,67 @@ public class PicturesActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
+            case R.id.action_add_from_gallery:
 
-            finish();
-            return true;
+                break;
+
+            case R.id.action_capture:
+                if (!selectMenu) {
+                    selectMenu = true;
+                    Intent intentCapture = new Intent(
+                            MediaStore.ACTION_IMAGE_CAPTURE);
+                    File f = HappyMomentsUtils.generateCaptureFile(albumPath);
+                    picturePath = f.getAbsolutePath();
+                    intentCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+                    startActivityForResult(intentCapture, Constants.REQUEST_CODE_PHOTO);
+                }
+                break;
+
+            case R.id.action_select_pictures:
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab_pictures:
+                //TODO
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        selectMenu = false;
+        if (requestCode == Constants.REQUEST_CODE_PHOTO) {
+            if (resultCode == RESULT_OK) {
+                HappyMomentsUtils.rotateAndSaveCapture(picturePath, this);
+
+                Calendar calendar = Calendar.getInstance();
+                Long date = calendar.getTimeInMillis();
+                ContentValues cv = new ContentValues();
+                cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
+                cv.put(PictureProvider.PICTURE_DATE, date);
+                cv.put(PictureProvider.PICTURE_FILE, picturePath);
+                cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+                Uri newUri = getContentResolver()
+                        .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
+
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
