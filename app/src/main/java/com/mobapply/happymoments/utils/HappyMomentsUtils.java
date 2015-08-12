@@ -60,7 +60,7 @@ public class HappyMomentsUtils {
         int photoW = opt.outWidth;
         int photoH = opt.outHeight;
         // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+        int scaleFactor = photoW / targetW;
         // Decode the image file into a Bitmap sized to fill the View
         opt.inJustDecodeBounds = false;
         opt.inSampleSize = scaleFactor;
