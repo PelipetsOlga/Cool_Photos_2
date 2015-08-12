@@ -13,9 +13,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:clickable="true"
-        android:horizontalSpacing="10dp"
-        android:numColumns="2"
-        android:verticalSpacing="10dp" />
+        android:horizontalSpacing="8dp"
+        android:numColumns="3"
+        android:verticalSpacing="8dp"
+        android:choiceMode="multipleChoice"
+        android:stretchMode="columnWidth" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_pictures"
