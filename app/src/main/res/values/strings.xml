@@ -37,5 +37,6 @@
     <string name="title_activity_fullscreen_picture">FullscreenPictureActivity</string>
 
     <string name="moments_count">moments</string>
+    <string name="now_playing">Now playing</string>
 
 </resources>

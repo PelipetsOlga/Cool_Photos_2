@@ -5,6 +5,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,10 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
@@ -40,6 +44,13 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     private Uri albumUri;
     private String albumPath, picturePath;
     private boolean selectMenu = false;
+    private FrameLayout frameHeader;
+    private LinearLayout llIsPlaying;
+    private HeaderImageView headerPicture;
+    private TextView albumTitle, albumTvCount;
+    private int albumCount;
+    private FloatingActionButton fab;
+    private int isPlaying = PictureProvider.PlAY_NOT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +72,25 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         }
 
         fillData();
+        refreshFAB();
+    }
+
+    private void refreshFAB() {
+        if (isPlaying == PictureProvider.PlAY_NOT) {
+            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_play_arrow_white_36dp));
+        } else {
+            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_pause_white_36dp));
+        }
     }
 
     private void fillData() {
+        //header
+        refreshHeader();
+
         //pictures container
         Cursor cursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,
-                PictureProvider.PICTURE_ALBUM_ID + "=" + idAlbum,
+                PictureProvider.PICTURE_ALBUM_ID + "=" + idAlbum + " and "
+                        + PictureProvider.PICTURE_IS_MAIN + "=" + PictureProvider.NOT_MAIN,
                 null, null);
         startManagingCursor(cursor);
 
@@ -74,21 +98,45 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         int to[] = {R.id.picture};
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
-      //  View v = getLayoutInflater().inflate(R.layout.header_pictures, null);
-        //((HeaderImageView)v.findViewById(R.id.header_picture)).setImageDrawable(getResources().getDrawable(R.drawable.ic_exit_brown_24dp)););
-        //grid.addHeaderView(v);
+
 
         adapter.setViewBinder(new PicturesViewBinder());
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO
-                View cell = adapter.getView(position,null,null);
-                ImageView selecting= (ImageView) cell.findViewById(R.id.selecting_picture);
-                selecting.setVisibility(View.VISIBLE);
+                View cell = adapter.getView(position, null, null);
+                ImageView selecting = (ImageView) cell.findViewById(R.id.selecting_picture);
+                selecting.setVisibility(View.INVISIBLE);
             }
         });
         grid.setAdapter(adapter);
+    }
+
+    private void refreshHeader() {
+        Cursor albumCursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null,
+                PictureProvider.ALBUM_ID + "=" + idAlbum,
+                null, null);
+        albumCursor.moveToFirst();
+        albumCount = albumCursor.getInt(albumCursor.getColumnIndex(PictureProvider.ALBUM_COUNT));
+        if (albumCount == 0) {
+            frameHeader.setVisibility(View.GONE);
+            fab.setVisibility(View.GONE);
+        } else {
+            frameHeader.setVisibility(View.VISIBLE);
+            fab.setVisibility(View.VISIBLE);
+            //albumCursor.moveToFirst();
+            albumTitle.setText(albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_NAME)));
+            albumTvCount.setText(new Integer(albumCount).toString());
+            isPlaying = albumCursor.getInt(albumCursor.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
+            if (isPlaying == PictureProvider.PLAY) {
+                llIsPlaying.setVisibility(View.VISIBLE);
+            } else {
+                llIsPlaying.setVisibility(View.GONE);
+            }
+            String firstPicturePath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FILE));
+            headerPicture.setImageBitmap(BitmapFactory.decodeFile(firstPicturePath));
+        }
     }
 
 
@@ -104,9 +152,15 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
     private void initViews() {
         grid = (GridView) findViewById(R.id.gridPictures);
-        progressBar = (ProgressBar)findViewById(R.id.progressbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_pictures);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        fab = (FloatingActionButton) findViewById(R.id.fab_pictures);
         fab.setOnClickListener(this);
+
+        frameHeader = (FrameLayout) findViewById(R.id.header);
+        headerPicture = (HeaderImageView) findViewById(R.id.header_picture);
+        albumTitle = (TextView) findViewById(R.id.tv_album_title);
+        albumTvCount = (TextView) findViewById(R.id.tv_album_count);
+        llIsPlaying = (LinearLayout) findViewById(R.id.ll_is_playing);
     }
 
     @Override
@@ -168,7 +222,24 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_pictures:
-                //TODO
+                if (isPlaying == PictureProvider.PLAY) {
+                    isPlaying = PictureProvider.PlAY_NOT;
+                } else {
+                    isPlaying = PictureProvider.PLAY;
+                }
+                refreshFAB();
+
+                ContentValues cvPlayPause = new ContentValues();
+                if (isPlaying == PictureProvider.PLAY) {
+                    cvPlayPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PLAY);
+                } else {
+                    cvPlayPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+                }
+                Uri uriAlbumPlayStop = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+                getContentResolver().update(uriAlbumPlayStop, cvPlayPause, null, null);
+
+                refreshHeader();
+                // TODO start or stop service
                 break;
         }
     }
@@ -189,8 +260,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
                 File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
 
-               AddPictureAsyncTask task = new AddPictureAsyncTask();
-               task.execute(selectedImagePath, this, pictureFile.getAbsolutePath());
+                AddPictureAsyncTask task = new AddPictureAsyncTask();
+                task.execute(selectedImagePath, this, pictureFile.getAbsolutePath());
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -211,34 +282,37 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
             HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
 
+            Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+            Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);
+            int countAlbum = 0;
+            boolean isFirstPicture = false;
+            if (albumQuery.moveToFirst()) {
+                countAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
+                ContentValues cvAlbum = new ContentValues();
+                if (countAlbum == 0) {
+                    // add first picture to empty album
+                    cvAlbum.put(PictureProvider.ALBUM_FILE, newPicturePath);
+                    isFirstPicture = true;
+                }
+                // change count of pictures in the album
+                cvAlbum.put(PictureProvider.ALBUM_COUNT, countAlbum + 1);
+                getContentResolver().update(uriAlbum, cvAlbum, null, null);
+            }
+
             Calendar calendar = Calendar.getInstance();
             Long date = calendar.getTimeInMillis();
             ContentValues cv = new ContentValues();
             cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
             cv.put(PictureProvider.PICTURE_DATE, date);
             cv.put(PictureProvider.PICTURE_FILE, newPicturePath);
+            if (isFirstPicture) {
+                cv.put(PictureProvider.PICTURE_IS_MAIN, PictureProvider.MAIN);
+            } else {
+                cv.put(PictureProvider.PICTURE_IS_MAIN, PictureProvider.NOT_MAIN);
+            }
             cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
             Uri newUri = getContentResolver()
                     .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
-
-
-
-            Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
-            Cursor albumQuery=getContentResolver().query(uriAlbum, null, null, null, null);
-            if (albumQuery.moveToFirst()){
-                ContentValues cvAlbum=new ContentValues();
-                int countAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
-
-                if (countAlbum==0) {
-                    // add first picture to empty album
-                    cvAlbum.put(PictureProvider.ALBUM_FILE, newPicturePath);
-                }
-                // change count of pictures in the album
-                cvAlbum.put(PictureProvider.ALBUM_COUNT, countAlbum + 1);
-                getContentResolver().update(uriAlbum,cvAlbum, null, null);
-            }
-
-
 
             return true;
         }
@@ -246,6 +320,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             progressBar.setVisibility(View.GONE);
+            refreshHeader();
         }
 
         @Override

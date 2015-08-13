@@ -39,6 +39,8 @@ public class PictureProvider extends ContentProvider {
 
     public static final int PLAY=1;
     public static final int PlAY_NOT=0;
+    public static final int MAIN=1;
+    public static final int NOT_MAIN=0;
 
 
     private static final String CREATE_TABLE_ALBUM = "create table " + ALBUM_TABLE + "("
