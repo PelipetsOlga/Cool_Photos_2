@@ -23,6 +23,7 @@ import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
+import com.mobapply.happymoments.adapter.HeaderImageView;
 import com.mobapply.happymoments.adapter.PicturesViewBinder;
 import com.mobapply.happymoments.provider.PictureProvider;
 import com.mobapply.happymoments.utils.HappyMomentsUtils;
@@ -73,6 +74,10 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         int to[] = {R.id.picture};
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
+      //  View v = getLayoutInflater().inflate(R.layout.header_pictures, null);
+        //((HeaderImageView)v.findViewById(R.id.header_picture)).setImageDrawable(getResources().getDrawable(R.drawable.ic_exit_brown_24dp)););
+        //grid.addHeaderView(v);
+
         adapter.setViewBinder(new PicturesViewBinder());
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

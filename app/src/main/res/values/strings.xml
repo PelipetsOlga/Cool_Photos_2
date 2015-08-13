@@ -36,4 +36,6 @@
     <string name="title_activity_add_album">AddAlbumActivity</string>
     <string name="title_activity_fullscreen_picture">FullscreenPictureActivity</string>
 
+    <string name="moments_count">moments</string>
+
 </resources>

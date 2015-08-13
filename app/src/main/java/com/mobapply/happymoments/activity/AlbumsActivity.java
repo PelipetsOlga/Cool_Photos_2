@@ -17,13 +17,14 @@ import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
+import com.mobapply.happymoments.adapter.AlbumViewBinder;
+import com.mobapply.happymoments.adapter.PicturesViewBinder;
 import com.mobapply.happymoments.dialog.CreateAlbumDialog;
 import com.mobapply.happymoments.menu.NavigationDrawerFragment;
 import com.mobapply.happymoments.provider.PictureProvider;
 
 public class AlbumsActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
-
 
 
     /**
@@ -49,7 +50,7 @@ public class AlbumsActivity extends ActionBarActivity
         fillData();
     }
 
-    private void setupNavigationDrawer(){
+    private void setupNavigationDrawer() {
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getResources().getString(R.string.action_home);
@@ -61,28 +62,32 @@ public class AlbumsActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-    private  void initViews(){
+    private void initViews() {
         grid = (GridView) findViewById(R.id.gridAlbums);
-        fab= (FloatingActionButton) findViewById(R.id.fab_albums);
+        fab = (FloatingActionButton) findViewById(R.id.fab_albums);
         fab.setOnClickListener(this);
     }
 
-    private void fillData(){
+    private void fillData() {
         //albums container
         Cursor cursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null, null,
                 null, null);
         startManagingCursor(cursor);
 
-        String from[] = { PictureProvider.ALBUM_NAME, PictureProvider.ALBUM_ID };
-        int to[] = { android.R.id.text1, android.R.id.text2 };
+        String from[] = {PictureProvider.ALBUM_FILE,
+                PictureProvider.ALBUM_NAME,
+                PictureProvider.ALBUM_COUNT,
+                PictureProvider.ALBUM_IS_PLAY};
+        int to[] = {R.id.picture, R.id.tv_album_title,
+                R.id.tv_album_count, R.id.ic_is_playing};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2, cursor, from, to);
+                R.layout.item_album, cursor, from, to);
 
-
+        adapter.setViewBinder(new AlbumViewBinder(this));
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getApplicationContext(), PicturesActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PicturesActivity.class);
                 intent.putExtra(Constants.EXTRA_ID, id);
                 startActivity(intent);
             }
@@ -94,11 +99,11 @@ public class AlbumsActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         switch (position) {
             case 0:
-                getSupportActionBar() .setTitle(mTitle);
+                getSupportActionBar().setTitle(mTitle);
                 break;
             case 1:
-                Intent settingIntent=new Intent();
-                settingIntent.setClass(this,SettingsActivity.class);
+                Intent settingIntent = new Intent();
+                settingIntent.setClass(this, SettingsActivity.class);
                 startActivity(settingIntent);
                 break;
             case 2:
@@ -143,10 +148,10 @@ public class AlbumsActivity extends ActionBarActivity
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.fab_albums:
-                CreateAlbumDialog dialog=new CreateAlbumDialog();
-                dialog.show(getFragmentManager(),null);
+                CreateAlbumDialog dialog = new CreateAlbumDialog();
+                dialog.show(getFragmentManager(), null);
                 break;
         }
     }

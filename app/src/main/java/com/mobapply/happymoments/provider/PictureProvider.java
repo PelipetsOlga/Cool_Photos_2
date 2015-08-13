@@ -11,9 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.text.TextUtils;
 
-/**
- * Created by apelipets on 8/10/15.
- */
+
 public class PictureProvider extends ContentProvider {
 
 

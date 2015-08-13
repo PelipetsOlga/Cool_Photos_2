@@ -13,7 +13,9 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:background="@color/greed_background"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        tools:context="com.mobapply.happymoments.activity.AlbumsActivity">
 
         <GridView
             android:id="@+id/gridAlbums"
@@ -21,9 +23,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:clickable="true"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="4dp"
             android:numColumns="2"
-            android:verticalSpacing="10dp" />
+            android:verticalSpacing="4dp" />
 
 
         <android.support.design.widget.FloatingActionButton

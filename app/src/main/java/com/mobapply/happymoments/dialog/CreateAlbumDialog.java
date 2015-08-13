@@ -48,7 +48,7 @@ public class CreateAlbumDialog extends DialogFragment {
                     cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
                     Uri newUri = getActivity().getContentResolver()
                             .insert(PictureProvider.ALBUM_CONTENT_URI, cv);
-                    //String s=newUri.toString();
+
 
 
                 }
