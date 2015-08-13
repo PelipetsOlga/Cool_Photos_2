@@ -122,7 +122,7 @@ public class PictureProvider extends ContentProvider {
                 break;
             case URI_PICTURES:
                 if (TextUtils.isEmpty(sortOrder)) {
-                    sortOrder = PICTURE_ID + " ASC";
+                    sortOrder = PICTURE_DATE + " DESC";
                 }
                 cursor = db.query(PICTURE_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
                 cursor.setNotificationUri(getContext().getContentResolver(),PICTURE_CONTENT_URI);
