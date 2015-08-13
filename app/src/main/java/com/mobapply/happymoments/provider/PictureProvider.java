@@ -26,6 +26,7 @@ public class PictureProvider extends ContentProvider {
     public static final String ALBUM_NAME = "name";
     public static final String ALBUM_COUNT = "count";
     public static final String ALBUM_FOLDER = "folder";
+    public static final String ALBUM_FILE = "file_name";
     public static final String ALBUM_IS_PLAY = "is_play";
     public static final String ALBUM_DATE = "date";
 
@@ -34,6 +35,7 @@ public class PictureProvider extends ContentProvider {
     public static final String PICTURE_ID = "_id";
     public static final String PICTURE_ALBUM_ID = "album_id";
     public static final String PICTURE_FILE = "file_name";
+    public static final String PICTURE_IS_MAIN = "is_main";
     public static final String PICTURE_IS_PLAY = "is_play";
     public static final String PICTURE_DATE = "date";
 
@@ -46,6 +48,7 @@ public class PictureProvider extends ContentProvider {
             + ALBUM_NAME + " text, "
             + ALBUM_COUNT + " integer, "
             + ALBUM_FOLDER + " text, "
+            + ALBUM_FILE + " text, "
             + ALBUM_IS_PLAY + " integer, "
             + ALBUM_DATE + " integer"
             + ");";
@@ -54,6 +57,7 @@ public class PictureProvider extends ContentProvider {
             + PICTURE_ID + " integer primary key autoincrement, "
             + PICTURE_ALBUM_ID + " integer, "
             + PICTURE_FILE + " text, "
+            + PICTURE_IS_MAIN + " integer, "
             + PICTURE_IS_PLAY + " integer, "
             + PICTURE_DATE + " integer"
             + ");";
