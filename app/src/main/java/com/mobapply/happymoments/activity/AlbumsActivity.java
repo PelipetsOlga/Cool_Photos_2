@@ -17,7 +17,7 @@ import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
-import com.mobapply.happymoments.dialog.NewAlbumDialog;
+import com.mobapply.happymoments.dialog.CreateAlbumDialog;
 import com.mobapply.happymoments.menu.NavigationDrawerFragment;
 import com.mobapply.happymoments.provider.PictureProvider;
 
@@ -145,7 +145,7 @@ public class AlbumsActivity extends ActionBarActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fab_albums:
-                NewAlbumDialog dialog=new NewAlbumDialog();
+                CreateAlbumDialog dialog=new CreateAlbumDialog();
                 dialog.show(getFragmentManager(),null);
                 break;
         }

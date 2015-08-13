@@ -1,36 +1,48 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="4dp"
-    android:background="@color/greed_background"
-    tools:context="com.mobapply.happymoments.activity.PicturesActivity">
+    android:layout_height="match_parent">
 
+    <android.support.design.widget.CoordinatorLayout
 
-    <GridView
-        android:id="@+id/gridPictures"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:horizontalSpacing="4dp"
-        android:numColumns="3"
-        android:verticalSpacing="4dp"
-        android:choiceMode="multipleChoice"
-        android:stretchMode="columnWidth" />
+        android:background="@color/greed_background"
+        android:padding="4dp"
+        tools:context="com.mobapply.happymoments.activity.PicturesActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_pictures"
+
+        <GridView
+            android:id="@+id/gridPictures"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:choiceMode="multipleChoice"
+            android:clickable="true"
+            android:horizontalSpacing="4dp"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="4dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_play_arrow_white_36dp"
+            app:fabSize="normal"
+            app:layout_anchor="@id/gridPictures"
+            app:layout_anchorGravity="bottom|right|end" />
+    </android.support.design.widget.CoordinatorLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_play_arrow_white_36dp"
-        app:fabSize="normal"
-        app:layout_anchor="@id/gridPictures"
-        app:layout_anchorGravity="bottom|right|end" />
-</android.support.design.widget.CoordinatorLayout>
-
-
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+</RelativeLayout>

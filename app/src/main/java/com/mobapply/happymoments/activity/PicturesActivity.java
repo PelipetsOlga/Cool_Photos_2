@@ -5,8 +5,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.Constants;
@@ -35,6 +34,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
     private Uri uriAlbum;
     private GridView grid;
+    private ProgressBar progressBar;
     private long idAlbum;
     private Uri albumUri;
     private String albumPath, picturePath;
@@ -99,6 +99,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
     private void initViews() {
         grid = (GridView) findViewById(R.id.gridPictures);
+        progressBar = (ProgressBar)findViewById(R.id.progressbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_pictures);
         fab.setOnClickListener(this);
     }
@@ -172,19 +173,9 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         selectMenu = false;
         if (requestCode == Constants.REQUEST_CODE_PHOTO) {
             if (resultCode == RESULT_OK) {
-              //  HappyMomentsUtils.rotateAndSaveCapture(picturePath, this, picturePath);
-                ImageDownloader pictureDownloader = new ImageDownloader();
-                pictureDownloader.execute(picturePath, this, picturePath);
+                AddPictureAsyncTask task = new AddPictureAsyncTask();
+                task.execute(picturePath, this, picturePath);
 
-                Calendar calendar = Calendar.getInstance();
-                Long date = calendar.getTimeInMillis();
-                ContentValues cv = new ContentValues();
-                cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
-                cv.put(PictureProvider.PICTURE_DATE, date);
-                cv.put(PictureProvider.PICTURE_FILE, picturePath);
-                cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
-                Uri newUri = getContentResolver()
-                        .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
 
             }
         } else if (requestCode == Constants.REQUEST_CODE_GALLERY) {
@@ -192,37 +183,50 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 Uri selectedImageUri = data.getData();
                 String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
                 File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
-              //  HappyMomentsUtils.rotateAndSaveCapture(selectedImagePath, this, pictureFile.getAbsolutePath());
 
-               ImageDownloader pictureDownloader = new ImageDownloader();
-                pictureDownloader.execute(selectedImagePath, this, pictureFile.getAbsolutePath());
-
-                Calendar calendar = Calendar.getInstance();
-                Long date = calendar.getTimeInMillis();
-                ContentValues cv = new ContentValues();
-                cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
-                cv.put(PictureProvider.PICTURE_DATE, date);
-                cv.put(PictureProvider.PICTURE_FILE, pictureFile.getAbsolutePath());
-                cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
-                Uri newUri = getContentResolver()
-                        .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
-
+               AddPictureAsyncTask task = new AddPictureAsyncTask();
+               task.execute(selectedImagePath, this, pictureFile.getAbsolutePath());
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private class ImageDownloader extends AsyncTask<Object, Void, Void> {
+    private class AddPictureAsyncTask extends AsyncTask<Object, Void, Boolean> {
 
         @Override
-        protected Void doInBackground(Object... param) {
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... param) {
             String oldPicturePath = (String) param[0];
             AppCompatActivity ctx = (AppCompatActivity) param[1];
             String newPicturePath = (String) param[2];
 
             HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
 
-            return null;
+            Calendar calendar = Calendar.getInstance();
+            Long date = calendar.getTimeInMillis();
+            ContentValues cv = new ContentValues();
+            cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
+            cv.put(PictureProvider.PICTURE_DATE, date);
+            cv.put(PictureProvider.PICTURE_FILE, newPicturePath);
+            cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+            Uri newUri = getContentResolver()
+                    .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            progressBar.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onCancelled() {
+            progressBar.setVisibility(View.GONE);
         }
     }
 }

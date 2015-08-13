@@ -19,9 +19,9 @@ import java.util.Calendar;
 /**
  * Created by apelipets on 8/10/15.
  */
-public class NewAlbumDialog extends DialogFragment {
+public class CreateAlbumDialog extends DialogFragment {
 
-    public NewAlbumDialog() {
+    public CreateAlbumDialog() {
     }
 
     @Override
