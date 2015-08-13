@@ -12,7 +12,15 @@
              which is used to tint widgets -->
         <item name="colorAccent">@color/color_selected_menu</item>
 
+        <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
 
+
+    </style>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/color_selected_menu</item>
+        <item name="android:textColorPrimary">@color/color_text_settings</item>
+        <item name="android:background">@color/color_setting_background</item>
     </style>
 
 </resources>

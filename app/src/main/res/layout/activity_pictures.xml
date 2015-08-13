@@ -12,12 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+
+         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/header"
-            layout="@layout/header_pictures"
+            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" />
+            android:layout_height="wrap_content">
+
+            <com.mobapply.happymoments.adapter.HeaderImageView
+                android:id="@+id/header_picture"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src ="@drawable/empty_folder_button_360dp"/>
+
+            <ImageView
+                android:id="@+id/selecting_picture_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_selecting_image"
+                android:src="@drawable/ic_check_white_48dp"
+                android:layout_gravity="center"
+                android:scaleType="center"
+                android:visibility="gone"/>
+
+        </FrameLayout>
 
         <GridView
             android:id="@+id/gridPictures"

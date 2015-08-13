@@ -1,6 +1,6 @@
 package com.mobapply.happymoments.dialog;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentValues;
@@ -16,9 +16,7 @@ import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
 import java.util.Calendar;
 
-/**
- * Created by apelipets on 8/10/15.
- */
+
 public class CreateAlbumDialog extends DialogFragment {
 
     public CreateAlbumDialog() {
@@ -26,7 +24,8 @@ public class CreateAlbumDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle bundle) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(getActivity());
         final EditText view = new EditText(getActivity());
         view.setHint(getActivity().getResources().getString(R.string.dialog_hint));
         view.setPadding(16, 24, 16, 24);
