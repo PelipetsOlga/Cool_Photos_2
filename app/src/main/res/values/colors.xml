@@ -7,4 +7,6 @@
     <color name="color_setting_background">#FEFEE6</color>
     <color name="color_text_settings">#5D3635</color>
     <color name="seekbar_background">#CDBFB7</color>
+    <color name="greed_background">#FFFCF2</color>
+    <color name="color_selecting_image">#7d00D6D2</color>
 </resources>

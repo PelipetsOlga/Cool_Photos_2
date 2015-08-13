@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.Constants;
@@ -70,13 +71,16 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
         String from[] = {PictureProvider.PICTURE_FILE};
         int to[] = {R.id.picture};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
         adapter.setViewBinder(new PicturesViewBinder());
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO
+                View cell = adapter.getView(position,null,null);
+                ImageView selecting= (ImageView) cell.findViewById(R.id.selecting_picture);
+                selecting.setVisibility(View.VISIBLE);
             }
         });
         grid.setAdapter(adapter);
