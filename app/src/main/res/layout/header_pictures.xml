@@ -2,13 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/frame_picture_header"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.mobapply.happymoments.adapter.HeaderImageView
         android:id="@+id/header_picture"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:src ="@drawable/empty_folder_button_360dp"/>
 
     <ImageView
         android:id="@+id/selecting_picture_header"
