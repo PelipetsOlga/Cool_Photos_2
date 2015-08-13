@@ -21,9 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- * Created by Olga on 11.08.2015.
- */
+
 public class HappyMomentsUtils {
 
 
@@ -65,6 +63,9 @@ public class HappyMomentsUtils {
         int photoH = opt.outHeight;
         // Determine how much to scale down the image
         int scaleFactor = photoW / targetW;
+        if (scaleFactor<1){
+            scaleFactor=1;
+        }
         // Decode the image file into a Bitmap sized to fill the View
         opt.inJustDecodeBounds = false;
         opt.inSampleSize = scaleFactor;

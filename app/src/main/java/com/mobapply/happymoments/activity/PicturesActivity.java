@@ -227,13 +227,13 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             Cursor albumQuery=getContentResolver().query(uriAlbum, null, null, null, null);
             if (albumQuery.moveToFirst()){
                 ContentValues cvAlbum=new ContentValues();
-                int countAlbum=albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
-                if (countAlbum==0){
-                    // add first picture to empty album
-                    cvAlbum.put(PictureProvider.ALBUM_FILE, newPicturePath );
-                }
+                int countAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
+
+                // add last picture to empty album
+                cvAlbum.put(PictureProvider.ALBUM_FILE, newPicturePath);
+
                 // change count of pictures in the album
-                cvAlbum.put(PictureProvider.ALBUM_COUNT, countAlbum+1);
+                cvAlbum.put(PictureProvider.ALBUM_COUNT, countAlbum + 1);
                 getContentResolver().update(uriAlbum,cvAlbum, null, null);
             }
 
