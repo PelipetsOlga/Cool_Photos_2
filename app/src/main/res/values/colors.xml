@@ -9,6 +9,6 @@
     <color name="seekbar_background">#CDBFB7</color>
     <color name="greed_background">#FFFCF2</color>
     <color name="color_selecting_image">#5500D6D2</color>
-    <color name="color_end_gradient">#0000D6D2</color>
-    <color name="color_start_gradient">#ff00D6D2</color>
+    <color name="color_end_gradient">#00000000</color>
+    <color name="color_start_gradient">#77000000</color>
 </resources>
