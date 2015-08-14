@@ -41,6 +41,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
     private long idAlbum;
     private long countPictures;
+    private String titleAlbum;
     private Uri uriAlbum;
     private CoordinatorLayout container;
     private RelativeLayout empty;
@@ -82,13 +83,16 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = getIntent();
         idAlbum = intent.getLongExtra(Constants.EXTRA_ID, 0);
         countPictures = intent.getIntExtra(Constants.EXTRA_COUNT, 0);
+        titleAlbum = intent.getStringExtra(Constants.EXTRA_TITLE);
     }
 
     private void updateLayout(){
         if(countPictures >0){
+            getSupportActionBar().setTitle("");
             container.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);
         } else{
+            getSupportActionBar().setTitle(titleAlbum);
             container.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
         }

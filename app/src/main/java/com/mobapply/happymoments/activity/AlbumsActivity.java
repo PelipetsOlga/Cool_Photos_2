@@ -89,9 +89,11 @@ public class AlbumsActivity extends ActionBarActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor item = (Cursor)adapter.getItem(position);
                 int count = item.getInt(item.getColumnIndex(PictureProvider.ALBUM_COUNT));
+                String title = item.getString(item.getColumnIndex(PictureProvider.ALBUM_NAME));
                 Intent intent = new Intent(getApplicationContext(), PicturesActivity.class);
                 intent.putExtra(Constants.EXTRA_ID, id);
                 intent.putExtra(Constants.EXTRA_COUNT, count);
+                intent.putExtra(Constants.EXTRA_TITLE, title);
                 startActivity(intent);
             }
         });
