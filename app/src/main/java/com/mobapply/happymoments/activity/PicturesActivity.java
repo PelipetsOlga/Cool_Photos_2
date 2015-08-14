@@ -166,7 +166,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             if (isPlaying == PictureProvider.PLAY) {
                 llIsPlaying.setVisibility(View.VISIBLE);
             } else {
-                llIsPlaying.setVisibility(View.GONE);
+                llIsPlaying.setVisibility(View.INVISIBLE);
             }
             String firstPicturePath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FILE));
             headerPicture.setImageBitmap(BitmapFactory.decodeFile(firstPicturePath));
