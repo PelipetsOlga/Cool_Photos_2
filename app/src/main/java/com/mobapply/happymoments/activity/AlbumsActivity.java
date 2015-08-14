@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.Constants;
@@ -39,6 +41,9 @@ public class AlbumsActivity extends ActionBarActivity
     private FloatingActionButton fab;
     private GridView grid;
     private ActionBar actionBar;
+    private RelativeLayout empty;
+    private Cursor cursor;
+    private ImageView iconEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +71,17 @@ public class AlbumsActivity extends ActionBarActivity
         grid = (GridView) findViewById(R.id.gridAlbums);
         fab = (FloatingActionButton) findViewById(R.id.fab_albums);
         fab.setOnClickListener(this);
+        empty=(RelativeLayout)findViewById(R.id.empty);
+        iconEmpty=(ImageView)findViewById(R.id.eyescream_image);
+        iconEmpty.setOnClickListener(this);
     }
 
     private void fillData() {
         //albums container
-        Cursor cursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null, null,
+        cursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null, null,
                 null, null);
         startManagingCursor(cursor);
+        refreshFAB();
 
         String from[] = {PictureProvider.ALBUM_FILE,
                 PictureProvider.ALBUM_NAME,
@@ -98,6 +107,7 @@ public class AlbumsActivity extends ActionBarActivity
             }
         });
         grid.setAdapter(adapter);
+        grid.setEmptyView(empty);
     }
 
     @Override
@@ -130,6 +140,7 @@ public class AlbumsActivity extends ActionBarActivity
     protected void onResume() {
         super.onResume();
         actionBar.setTitle(mTitle);
+       refreshFAB();
     }
 
     @Override
@@ -156,9 +167,22 @@ public class AlbumsActivity extends ActionBarActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_albums:
+            case R.id.eyescream_image:
                 CreateAlbumDialog dialog = new CreateAlbumDialog();
                 dialog.show(getFragmentManager(), null);
                 break;
         }
+    }
+
+    private void refreshFAB(){
+        if (cursor.getCount()==0){
+            fab.setVisibility(View.INVISIBLE);
+        }else{
+            fab.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setVisibileFAB(){
+        fab.setVisibility(View.VISIBLE);
     }
 }
