@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -37,10 +39,14 @@ import java.util.Calendar;
 
 public class PicturesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Uri uriAlbum;
-    private GridView grid;
-    private ProgressBar progressBar;
     private long idAlbum;
+    private long countPictures;
+    private Uri uriAlbum;
+    private CoordinatorLayout container;
+    private RelativeLayout empty;
+    private GridView grid;
+    private ImageView eyescreamImageView;
+    private ProgressBar progressBar;
     private Uri albumUri;
     private String albumPath, picturePath;
     private boolean selectMenu = false;
@@ -57,11 +63,38 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pictures);
 
-        restoreActionBar();
         initViews();
 
+        parseIntent();
+
+        restoreActionBar();
+
+        updateLayout();
+
+        init();
+
+        fillData();
+
+        updateFAB();
+    }
+
+    private void parseIntent(){
         Intent intent = getIntent();
         idAlbum = intent.getLongExtra(Constants.EXTRA_ID, 0);
+        countPictures = intent.getIntExtra(Constants.EXTRA_COUNT, 0);
+    }
+
+    private void updateLayout(){
+        if(countPictures >0){
+            container.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+        } else{
+            container.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void init(){
         if (idAlbum > 0) {
             uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
         }
@@ -70,12 +103,9 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         if (albumCursor.moveToFirst()) {
             albumPath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FOLDER));
         }
-
-        fillData();
-        refreshFAB();
     }
 
-    private void refreshFAB() {
+    private void updateFAB() {
         if (isPlaying == PictureProvider.PlAY_NOT) {
             fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_play_arrow_white_36dp));
         } else {
@@ -151,7 +181,11 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
+        container = (CoordinatorLayout)findViewById(R.id.container);
+        empty = (RelativeLayout)findViewById(R.id.empty);
         grid = (GridView) findViewById(R.id.gridPictures);
+        eyescreamImageView = (ImageView)findViewById(R.id.eyescream_image);
+        eyescreamImageView.setOnClickListener(this);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         fab = (FloatingActionButton) findViewById(R.id.fab_pictures);
         fab.setOnClickListener(this);
@@ -163,6 +197,47 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         llIsPlaying = (LinearLayout) findViewById(R.id.ll_is_playing);
     }
 
+    private void selectPictute(){
+        // choose photo from gallery
+        Intent intentGallery = new Intent();
+        intentGallery.setType("image/*");
+        intentGallery
+                .setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intentGallery,
+                        getResources().getString(R.string.chooser_gallery)),
+                Constants.REQUEST_CODE_GALLERY);
+    }
+
+    private void capturePicture(){
+        Intent intentCapture = new Intent(
+                MediaStore.ACTION_IMAGE_CAPTURE);
+        File f = HappyMomentsUtils.generateCaptureFile(albumPath);
+        picturePath = f.getAbsolutePath();
+        intentCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+        startActivityForResult(intentCapture, Constants.REQUEST_CODE_PHOTO);
+    };
+
+    private void playPauseAlbum(){
+        if (isPlaying == PictureProvider.PLAY) {
+            isPlaying = PictureProvider.PlAY_NOT;
+        } else {
+            isPlaying = PictureProvider.PLAY;
+        }
+        updateFAB();
+
+        ContentValues cvPlayPause = new ContentValues();
+        if (isPlaying == PictureProvider.PLAY) {
+            cvPlayPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PLAY);
+        } else {
+            cvPlayPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+        }
+        Uri uriAlbumPlayStop = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+        getContentResolver().update(uriAlbumPlayStop, cvPlayPause, null, null);
+
+        refreshHeader();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -170,6 +245,12 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem selectPictures = menu.findItem(R.id.action_select_pictures);
+        selectPictures.setVisible(countPictures>0);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -181,33 +262,20 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             case R.id.action_add_from_gallery:
                 if (!selectMenu) {
                     selectMenu = true;
-                    // choose photo from gallery
-                    Intent intentGallery = new Intent();
-                    intentGallery.setType("image/*");
-                    intentGallery
-                            .setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(
-                            Intent.createChooser(intentGallery,
-                                    getResources().getString(R.string.chooser_gallery)),
-                            Constants.REQUEST_CODE_GALLERY);
+                    selectPictute();
                 }
                 break;
 
             case R.id.action_capture:
                 if (!selectMenu) {
                     selectMenu = true;
-                    Intent intentCapture = new Intent(
-                            MediaStore.ACTION_IMAGE_CAPTURE);
-                    File f = HappyMomentsUtils.generateCaptureFile(albumPath);
-                    picturePath = f.getAbsolutePath();
-                    intentCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                    startActivityForResult(intentCapture, Constants.REQUEST_CODE_PHOTO);
+                    capturePicture();
                 }
                 break;
 
             case R.id.action_select_pictures:
                 if (!selectMenu) {
-                    //TODO
+                    //TODO: Show Select Pictures Page
                 }
                 break;
 
@@ -222,24 +290,10 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_pictures:
-                if (isPlaying == PictureProvider.PLAY) {
-                    isPlaying = PictureProvider.PlAY_NOT;
-                } else {
-                    isPlaying = PictureProvider.PLAY;
-                }
-                refreshFAB();
-
-                ContentValues cvPlayPause = new ContentValues();
-                if (isPlaying == PictureProvider.PLAY) {
-                    cvPlayPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PLAY);
-                } else {
-                    cvPlayPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
-                }
-                Uri uriAlbumPlayStop = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
-                getContentResolver().update(uriAlbumPlayStop, cvPlayPause, null, null);
-
-                refreshHeader();
-                // TODO start or stop service
+                playPauseAlbum();
+                break;
+            case R.id.eyescream_image:
+                selectPictute();
                 break;
         }
     }
@@ -251,8 +305,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             if (resultCode == RESULT_OK) {
                 AddPictureAsyncTask task = new AddPictureAsyncTask();
                 task.execute(picturePath, this, picturePath);
-
-
             }
         } else if (requestCode == Constants.REQUEST_CODE_GALLERY) {
             if (resultCode == RESULT_OK && data != null) {
@@ -320,6 +372,9 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             progressBar.setVisibility(View.GONE);
+            countPictures++;
+            invalidateOptionsMenu();
+            updateLayout();
             refreshHeader();
         }
 

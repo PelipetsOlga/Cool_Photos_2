@@ -1,144 +1,177 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greed_background"
-    android:padding="4dp"
     tools:context="com.mobapply.happymoments.activity.PicturesActivity">
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/greed_background"
+        android:padding="4dp"
+        android:visibility="visible">
 
-
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/header"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true">
+            android:layout_height="match_parent">
 
-            <com.mobapply.happymoments.adapter.HeaderImageView
-                android:id="@+id/header_picture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/empty_folder_button_360dp" />
 
-            <LinearLayout
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@drawable/album_title_background"
-                android:orientation="vertical"
-                android:paddingBottom="12dp"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="24dp">
+                android:layout_alignParentTop="true">
 
-                <TextView
-                    android:id="@+id/tv_album_title"
+                <com.mobapply.happymoments.adapter.HeaderImageView
+                    android:id="@+id/header_picture"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="title"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@android:color/white" />
-
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/empty_folder_button_360dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingTop="6dp">
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/album_title_background"
+                    android:orientation="vertical"
+                    android:paddingBottom="12dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="24dp">
 
                     <TextView
-                        android:id="@+id/tv_album_count"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_album_title"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="CC"
-                        android:textAppearance="?android:attr/textAppearance"
+                        android:text="title"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@android:color/white" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:text="@string/moments_count"
-                        android:textAppearance="?android:attr/textAppearance"
-                        android:textColor="@android:color/white" />
 
                     <LinearLayout
-                        android:id="@+id/ll_is_playing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingTop="6dp"
-                        android:visibility="visible">
+                        android:paddingTop="6dp">
 
-                        <ImageView
+                        <TextView
+                            android:id="@+id/tv_album_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="16dp"
-                            android:src="@drawable/ic_play_circle_fill_white_24dp" />
+                            android:text="CC"
+                            android:textAppearance="?android:attr/textAppearance"
+                            android:textColor="@android:color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
-                            android:text="@string/now_playing"
+                            android:text="@string/moments_count"
                             android:textAppearance="?android:attr/textAppearance"
                             android:textColor="@android:color/white" />
 
+                        <LinearLayout
+                            android:id="@+id/ll_is_playing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingTop="6dp"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="16dp"
+                                android:src="@drawable/ic_play_circle_fill_white_24dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="8dp"
+                                android:text="@string/now_playing"
+                                android:textAppearance="?android:attr/textAppearance"
+                                android:textColor="@android:color/white" />
+
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/selecting_picture_header"
+                <ImageView
+                    android:id="@+id/selecting_picture_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/color_selecting_image"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_check_white_48dp"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+            <GridView
+                android:id="@+id/gridPictures"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/header"
                 android:layout_gravity="center"
-                android:background="@color/color_selecting_image"
-                android:scaleType="center"
-                android:src="@drawable/ic_check_white_48dp"
-                android:visibility="gone" />
+                android:choiceMode="multipleChoice"
+                android:clickable="true"
+                android:horizontalSpacing="4dp"
+                android:numColumns="3"
+                android:paddingTop="4dp"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="4dp" />
 
-        </FrameLayout>
 
-        <GridView
-            android:id="@+id/gridPictures"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/header"
-            android:layout_gravity="center"
-            android:choiceMode="multipleChoice"
-            android:clickable="true"
-            android:horizontalSpacing="4dp"
-            android:numColumns="3"
-            android:paddingTop="4dp"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="4dp" />
+        </RelativeLayout>
 
-        <ProgressBar
-            android:id="@+id/progressbar"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_play_arrow_white_36dp"
+            app:fabSize="normal"
+            app:layout_anchor="@id/header"
+            app:layout_anchorGravity="bottom|right|end" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/repeatable_background_360dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/eyescream_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone" />
+            android:src="@drawable/empty_folder_button_360dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:lineSpacingMultiplier="1.5"
+            android:gravity="center"
+            android:layout_marginBottom="50dp"
+            android:text="@string/empty_album_text" />
 
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_pictures"
+    <ProgressBar
+        android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_play_arrow_white_36dp"
-        app:fabSize="normal"
-        app:layout_anchor="@id/header"
-        app:layout_anchorGravity="bottom|right|end" />
-
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</FrameLayout>

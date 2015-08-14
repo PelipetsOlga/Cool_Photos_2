@@ -80,15 +80,18 @@ public class AlbumsActivity extends ActionBarActivity
                 PictureProvider.ALBUM_IS_PLAY};
         int to[] = {R.id.picture, R.id.tv_album_title,
                 R.id.tv_album_count, R.id.ic_is_playing};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_album, cursor, from, to);
 
         adapter.setViewBinder(new AlbumViewBinder(this));
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor item = (Cursor)adapter.getItem(position);
+                int count = item.getInt(item.getColumnIndex(PictureProvider.ALBUM_COUNT));
                 Intent intent = new Intent(getApplicationContext(), PicturesActivity.class);
                 intent.putExtra(Constants.EXTRA_ID, id);
+                intent.putExtra(Constants.EXTRA_COUNT, count);
                 startActivity(intent);
             }
         });
@@ -133,6 +136,7 @@ public class AlbumsActivity extends ActionBarActivity
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
