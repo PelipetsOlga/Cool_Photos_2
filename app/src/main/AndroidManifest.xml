@@ -42,10 +42,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_settings"></activity>
         <activity
-            android:name=".activity.AddAlbumActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_add_album"></activity>
-        <activity
             android:name=".activity.FullscreenPictureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen_picture"></activity>

@@ -279,7 +279,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.action_select_pictures:
                 if (!selectMenu) {
-                    //TODO: Show Select Pictures Page
+                    //TODO: add show Select Pictures Page
                 }
                 break;
 

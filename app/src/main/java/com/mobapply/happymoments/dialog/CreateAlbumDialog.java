@@ -35,20 +35,9 @@ public class CreateAlbumDialog extends DialogFragment {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String newTitle = view.getText().toString();
-                if (!TextUtils.isEmpty(newTitle)) {
-                    Calendar calendar = Calendar.getInstance();
-                    Long date = calendar.getTimeInMillis();
-                    String folderPath = HappyMomentsUtils.getNewAlbumPath(date);
-                    ContentValues cv = new ContentValues();
-                    cv.put(PictureProvider.ALBUM_NAME, newTitle);
-                    cv.put(PictureProvider.ALBUM_DATE, date);
-                    cv.put(PictureProvider.ALBUM_FOLDER, folderPath);
-                    cv.put(PictureProvider.ALBUM_COUNT, 0);
-                    cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
-                    Uri newUri = getActivity().getContentResolver()
-                            .insert(PictureProvider.ALBUM_CONTENT_URI, cv);
-
+                String title = view.getText().toString();
+                if (!TextUtils.isEmpty(title)) {
+                    createAlbum(title);
                 }
             }
         });
@@ -66,5 +55,19 @@ public class CreateAlbumDialog extends DialogFragment {
 
         return builder.create();
     }
+
+    private void createAlbum(String title){
+        Calendar calendar = Calendar.getInstance();
+        Long date = calendar.getTimeInMillis();
+        String folderPath = HappyMomentsUtils.getNewAlbumPath(date);
+        ContentValues cv = new ContentValues();
+        cv.put(PictureProvider.ALBUM_NAME, title);
+        cv.put(PictureProvider.ALBUM_DATE, date);
+        cv.put(PictureProvider.ALBUM_FOLDER, folderPath);
+        cv.put(PictureProvider.ALBUM_COUNT, 0);
+        cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+        Uri newUri = getActivity().getContentResolver()
+                .insert(PictureProvider.ALBUM_CONTENT_URI, cv);
+    };
 
 }

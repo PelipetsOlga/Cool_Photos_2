@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.mobapply.happymoments.R;
 
@@ -20,6 +21,9 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences sPref;
     public static final String PERIOD_UPDATING = "period";
     public static final String SHUFFLE = "shuffle";
+    private TextView mLabel;
+    private SeekBar mSeekBar;
+    private SwitchCompat mSwitchShuffle;
     private int period;
     private boolean shuffle;
 
@@ -28,10 +32,16 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        sPref = getPreferences(MODE_PRIVATE);
-        period = sPref.getInt(PERIOD_UPDATING, 1);
-        shuffle = sPref.getBoolean(SHUFFLE, false);
+        setupActionBar();
 
+        initViews();
+
+        loadSettings();
+
+        init();
+    }
+
+    private void setupActionBar(){
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
@@ -40,13 +50,31 @@ public class SettingsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        SeekBar mSeekBar = (SeekBar) findViewById(R.id.seekbar);
+    }
+
+    private void loadSettings(){
+        sPref = getPreferences(MODE_PRIVATE);
+        period = sPref.getInt(PERIOD_UPDATING, 0);
+        shuffle = sPref.getBoolean(SHUFFLE, false);
+    }
+
+    private void initViews(){
+        mLabel = (TextView) findViewById(R.id.label);
+        mSeekBar = (SeekBar) findViewById(R.id.seekbar);
+        mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
+    }
+
+    private void init(){
         mSeekBar.setProgressDrawable(getResources()
                 .getDrawable(R.drawable.progress_bar));
         mSeekBar.setProgress(period);
+        mLabel.setText(period + "");
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                mLabel.setText(progress+"");
+
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putInt(PERIOD_UPDATING, progress);
                 period = progress;
@@ -65,9 +93,8 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        SwitchCompat switchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
-        switchShuffle.setChecked(shuffle);
-        switchShuffle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mSwitchShuffle.setChecked(shuffle);
+        mSwitchShuffle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor ed = sPref.edit();
@@ -88,6 +115,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
+            // TODO: add notify service
             setResult(Activity.RESULT_OK);
             finish();
             return true;

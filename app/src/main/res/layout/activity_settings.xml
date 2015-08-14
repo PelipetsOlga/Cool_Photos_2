@@ -6,27 +6,47 @@
     android:padding="16dp"
     tools:context="com.mobapply.happymoments.activity.SettingsActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
 
-        <SeekBar
-            android:id="@+id/seekbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:max="60" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:text="@string/tv_min"
-            android:paddingLeft="32dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/color_selected_menu" />
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <SeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="60" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:paddingLeft="16dp"
+                android:text="@string/tv_min"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/color_selected_menu" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
@@ -59,8 +79,8 @@
             style="@style/Widget.AppCompat.CompoundButton.Switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="32dp"
             android:layout_gravity="center_horizontal"
+            android:paddingLeft="32dp"
             android:textOff=""
             android:textOn="" />
     </LinearLayout>

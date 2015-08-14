@@ -13,14 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.adapter.AlbumViewBinder;
-import com.mobapply.happymoments.adapter.PicturesViewBinder;
 import com.mobapply.happymoments.dialog.CreateAlbumDialog;
 import com.mobapply.happymoments.menu.NavigationDrawerFragment;
 import com.mobapply.happymoments.provider.PictureProvider;
@@ -38,8 +35,8 @@ public class AlbumsActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    private FloatingActionButton fab;
-    private GridView grid;
+    private FloatingActionButton mFab;
+    private GridView mGrid;
     private ActionBar actionBar;
 
     @Override
@@ -48,7 +45,9 @@ public class AlbumsActivity extends ActionBarActivity
         setContentView(R.layout.activity_albums);
 
         setupNavigationDrawer();
+
         initViews();
+
         fillData();
     }
 
@@ -65,9 +64,9 @@ public class AlbumsActivity extends ActionBarActivity
     }
 
     private void initViews() {
-        grid = (GridView) findViewById(R.id.gridAlbums);
-        fab = (FloatingActionButton) findViewById(R.id.fab_albums);
-        fab.setOnClickListener(this);
+        mGrid = (GridView) findViewById(R.id.gridAlbums);
+        mFab = (FloatingActionButton) findViewById(R.id.fab_albums);
+        mFab.setOnClickListener(this);
     }
 
     private void fillData() {
@@ -86,10 +85,10 @@ public class AlbumsActivity extends ActionBarActivity
                 R.layout.item_album, cursor, from, to);
 
         adapter.setViewBinder(new AlbumViewBinder(this));
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor item = (Cursor)adapter.getItem(position);
+                Cursor item = (Cursor) adapter.getItem(position);
                 int count = item.getInt(item.getColumnIndex(PictureProvider.ALBUM_COUNT));
                 String title = item.getString(item.getColumnIndex(PictureProvider.ALBUM_NAME));
                 Intent intent = new Intent(getApplicationContext(), PicturesActivity.class);
@@ -99,7 +98,7 @@ public class AlbumsActivity extends ActionBarActivity
                 startActivity(intent);
             }
         });
-        grid.setAdapter(adapter);
+        mGrid.setAdapter(adapter);
     }
 
     @Override
@@ -109,13 +108,11 @@ public class AlbumsActivity extends ActionBarActivity
                 getSupportActionBar().setTitle(mTitle);
                 break;
             case 1:
-                Intent settingIntent = new Intent();
-                settingIntent.setClass(this, SettingsActivity.class);
-                startActivity(settingIntent);
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case 2:
                 finish();
-                // TODO stop Servise
+                // TODO: add stop Servise
                 break;
         }
     }
@@ -141,12 +138,18 @@ public class AlbumsActivity extends ActionBarActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem selectAlbum = menu.findItem(R.id.action_select_albums);
+        selectAlbum.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_select_albums:
-                //TODO
+                //TODO: add shoe select albums page
                 return true;
 
             default:
