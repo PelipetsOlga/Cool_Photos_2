@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -21,6 +22,9 @@ import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.adapter.AlbumViewBinder;
 import com.mobapply.happymoments.provider.PictureProvider;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SelectAlbumsActivity extends AppCompatActivity {
 
     private ActionBar actionBar;
@@ -28,8 +32,9 @@ public class SelectAlbumsActivity extends AppCompatActivity {
     private GridView mGrid;
     private Cursor cursor;
     private TextView tvTitle;
-    private boolean showActions=false;
-    private int counter=0;
+    private boolean showActions = false;
+    private int counter = 0;
+    private Set<Long> setAlbums = new HashSet<Long>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +75,9 @@ public class SelectAlbumsActivity extends AppCompatActivity {
         String from[] = {PictureProvider.ALBUM_FILE,
                 PictureProvider.ALBUM_NAME,
                 PictureProvider.ALBUM_COUNT,
-                PictureProvider.ALBUM_IS_PLAY, PictureProvider.ALBUM_IS_PLAY};
+                PictureProvider.ALBUM_IS_PLAY};
         int to[] = {R.id.picture, R.id.tv_album_title,
-                R.id.tv_album_count, R.id.ic_is_playing, R.id.selecting_album};
+                R.id.tv_album_count, R.id.ic_is_playing};
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_album, cursor, from, to);
 
@@ -80,14 +85,27 @@ public class SelectAlbumsActivity extends AppCompatActivity {
         mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              /*  Cursor item = (Cursor) adapter.getItem(position);
+                Cursor item = (Cursor) adapter.getItem(position);
+               // ImageView selecting = (ImageView) view.findViewById(R.id.selecting_picture);
                 int count = item.getInt(item.getColumnIndex(PictureProvider.ALBUM_COUNT));
-                String title = item.getString(item.getColumnIndex(PictureProvider.ALBUM_NAME));
-                Intent intent = new Intent(getApplicationContext(), PicturesActivity.class);
-                intent.putExtra(Constants.EXTRA_ID, id);
-                intent.putExtra(Constants.EXTRA_COUNT, count);
-                intent.putExtra(Constants.EXTRA_TITLE, title);
-                startActivity(intent);*/
+                if (count != 0) {
+                    if (setAlbums.contains(id)) {
+                        //remove from set and decrease counter, deselect item
+                        setAlbums.remove(id);
+                        counter = counter - count;
+                   //     selecting.setVisibility(View.GONE);
+                    } else {
+                        //add to set and increase counter, select item
+                        counter = counter + count;
+                        setAlbums.add(id);
+                  //      selecting.setVisibility(View.VISIBLE);
+                    }
+                    if (counter == 0) {
+                        tvTitle.setText(titleActivity);
+                    } else {
+                        tvTitle.setText("(" + counter + ")");
+                    }
+                }
             }
         });
         mGrid.setAdapter(adapter);
