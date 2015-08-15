@@ -38,6 +38,7 @@ public class AlbumsActivity extends ActionBarActivity
     private FloatingActionButton mFab;
     private GridView mGrid;
     private ActionBar actionBar;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class AlbumsActivity extends ActionBarActivity
 
     private void fillData() {
         //albums container
-        Cursor cursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null, null,
+        cursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null, null,
                 null, null);
         startManagingCursor(cursor);
 
@@ -149,7 +150,10 @@ public class AlbumsActivity extends ActionBarActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_select_albums:
-                //TODO: add shoe select albums page
+                if (cursor.getCount()!=0) {
+                    Intent intentSelect = new Intent(this, SelectAlbumsActivity.class);
+                    startActivity(intentSelect);
+                }
                 return true;
 
             default:

@@ -2,9 +2,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.mobapply.happymoments.activity.SelectAlbumsActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    <group
+        android:id="@+id/select_albums_menu_group">
+        <item
+            android:id="@+id/ab_play_albums"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_play_circle_fill_white_24dp"
+            android:title="@string/ab_play_selected_albums"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/ab_pause_albums"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_pause_circle_fill_white_24dp"
+            android:title="@string/ab_pause_selected_albums"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/ab_delete_albums"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_delete_white_24dp"
+            android:title="@string/ab_delete_selected_albums"
+            app:showAsAction="always" />
+
+    </group>
+
 </menu>

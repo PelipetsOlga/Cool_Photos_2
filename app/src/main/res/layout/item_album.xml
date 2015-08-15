@@ -74,5 +74,14 @@
             android:visibility="visible" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/selecting_album"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_selecting_image"
+        android:src="@drawable/ic_check_white_48dp"
+        android:visibility="gone"
+        android:scaleType="center" />
+
 
 </FrameLayout>
