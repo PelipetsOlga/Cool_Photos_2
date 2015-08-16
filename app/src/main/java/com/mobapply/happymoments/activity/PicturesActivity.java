@@ -134,7 +134,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 R.layout.item_picture, cursor, from, to);
 
 
-        adapter.setViewBinder(new PicturesViewBinder());
+        adapter.setViewBinder(new PicturesViewBinder(this));
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -307,6 +307,12 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 selectPictute();
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshHeader();
     }
 
     @Override

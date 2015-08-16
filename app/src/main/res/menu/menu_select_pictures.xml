@@ -1,7 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.mobapply.happymoments.activity.SelectPicturesActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    tools:context="com.mobapply.happymoments.activity.SelectAlbumsActivity">
+    <group
+        android:id="@+id/select_pictures_menu_group">
+
+        <item
+            android:id="@+id/ab_delete_pictures"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_delete_white_24dp"
+            android:title="@string/ab_delete_selected_pictures"
+            app:showAsAction="always" />
+
+    </group>
+
 </menu>

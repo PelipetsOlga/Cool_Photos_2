@@ -1,10 +1,8 @@
 package com.mobapply.happymoments.activity;
 
 import android.content.ContentUris;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.adapter.AlbumViewBinder;
 import com.mobapply.happymoments.provider.PictureProvider;
@@ -62,7 +59,7 @@ public class SelectAlbumsActivity extends AppCompatActivity {
         titleActivity = getResources().getString(R.string.title_select_albums_activity);
 
         LayoutInflater mInflater = LayoutInflater.from(this);
-        View mCustomView = mInflater.inflate(R.layout.actionbar_select_albums, null);
+        View mCustomView = mInflater.inflate(R.layout.actionbar_select, null);
         tvTitle = (TextView) mCustomView.findViewById(R.id.title_text);
         tvTitle.setText(titleActivity);
         actionBar.setCustomView(mCustomView);

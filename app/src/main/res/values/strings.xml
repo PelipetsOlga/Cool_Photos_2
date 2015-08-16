@@ -32,7 +32,8 @@
     <string name="ab_pause_selected_albums">Pause</string>
     <string name="ab_delete_selected_albums">Delete</string>
 
-        
+    <string name="title_select_pictures_activity">Select moments</string>
+    <string name="ab_delete_selected_pictures">Delete</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_pictures">PicturesActivity</string>
