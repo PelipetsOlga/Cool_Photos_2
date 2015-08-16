@@ -1,7 +1,9 @@
 package com.mobapply.happymoments.activity;
 
+import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -102,12 +104,12 @@ public class SelectAlbumsActivity extends AppCompatActivity {
                     setAlbums.add(id);
                     selecting.setVisibility(View.VISIBLE);
                 }
-                if (setAlbums.size()==0) {
+                if (setAlbums.size() == 0) {
                     tvTitle.setText(titleActivity);
-                    showActions=false;
+                    showActions = false;
                 } else {
                     tvTitle.setText("(" + counter + ")");
-                    showActions=true;
+                    showActions = true;
                 }
                 invalidateOptionsMenu();
             }
@@ -147,7 +149,23 @@ public class SelectAlbumsActivity extends AppCompatActivity {
                 break;
 
             case R.id.ab_delete_albums:
-                //TODO
+                for (long id : setAlbums) {
+                    Uri uriDeletedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, id);
+                    getContentResolver().delete(uriDeletedAlbum, null, null);
+                    Cursor cursorDeletedPictures = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,
+                            PictureProvider.PICTURE_ALBUM_ID + "=" + id, null, null);
+                    while (cursorDeletedPictures.moveToNext()){
+                        int idDeletedPicture=cursorDeletedPictures.getInt(cursorDeletedPictures.getColumnIndex(PictureProvider.PICTURE_ID));
+                        Uri uriDeletedPicture=ContentUris.withAppendedId(PictureProvider.PICTURE_CONTENT_URI,idDeletedPicture);
+                        getContentResolver().delete(uriDeletedPicture, null, null);
+                    }
+
+                }
+                counter=0;
+                setAlbums.clear();
+                showActions=false;
+                invalidateOptionsMenu();
+                tvTitle.setText(titleActivity);
                 break;
 
             default:
