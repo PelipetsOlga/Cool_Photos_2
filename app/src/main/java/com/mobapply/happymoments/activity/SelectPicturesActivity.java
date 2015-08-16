@@ -123,7 +123,7 @@ public class SelectPicturesActivity extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor item = (Cursor) adapter.getItem(position);
+               // Cursor item = (Cursor) adapter.getItem(position);
                 ImageView selecting = (ImageView) view.findViewById(R.id.selecting_picture);
 
                 if (setPictures.contains(id)) {
