@@ -23,6 +23,7 @@ import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.adapter.AlbumViewBinder;
 import com.mobapply.happymoments.provider.PictureProvider;
+import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -151,19 +152,25 @@ public class SelectAlbumsActivity extends AppCompatActivity {
             case R.id.ab_delete_albums:
                 for (long id : setAlbums) {
                     Uri uriDeletedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, id);
-                    getContentResolver().delete(uriDeletedAlbum, null, null);
-                    Cursor cursorDeletedPictures = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,
-                            PictureProvider.PICTURE_ALBUM_ID + "=" + id, null, null);
-                    while (cursorDeletedPictures.moveToNext()){
-                        int idDeletedPicture=cursorDeletedPictures.getInt(cursorDeletedPictures.getColumnIndex(PictureProvider.PICTURE_ID));
-                        Uri uriDeletedPicture=ContentUris.withAppendedId(PictureProvider.PICTURE_CONTENT_URI,idDeletedPicture);
-                        getContentResolver().delete(uriDeletedPicture, null, null);
+                    Cursor albumCursor = getContentResolver().query(uriDeletedAlbum, null, null, null, null);
+                    albumCursor.moveToFirst();
+                    String albumPath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FOLDER));
+                    if (HappyMomentsUtils.deleteDirectory(albumPath)) {
+
+                        getContentResolver().delete(uriDeletedAlbum, null, null);
+                        Cursor cursorDeletedPictures = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,
+                                PictureProvider.PICTURE_ALBUM_ID + "=" + id, null, null);
+                        while (cursorDeletedPictures.moveToNext()) {
+                            int idDeletedPicture = cursorDeletedPictures.getInt(cursorDeletedPictures.getColumnIndex(PictureProvider.PICTURE_ID));
+                            Uri uriDeletedPicture = ContentUris.withAppendedId(PictureProvider.PICTURE_CONTENT_URI, idDeletedPicture);
+                            getContentResolver().delete(uriDeletedPicture, null, null);
+                        }
                     }
 
                 }
-                counter=0;
+                counter = 0;
                 setAlbums.clear();
-                showActions=false;
+                showActions = false;
                 invalidateOptionsMenu();
                 tvTitle.setText(titleActivity);
                 break;

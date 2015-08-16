@@ -79,26 +79,26 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         updateFAB();
     }
 
-    private void parseIntent(){
+    private void parseIntent() {
         Intent intent = getIntent();
         idAlbum = intent.getLongExtra(Constants.EXTRA_ID, 0);
         countPictures = intent.getIntExtra(Constants.EXTRA_COUNT, 0);
         titleAlbum = intent.getStringExtra(Constants.EXTRA_TITLE);
     }
 
-    private void updateLayout(){
-        if(countPictures >0){
+    private void updateLayout() {
+        if (countPictures > 0) {
             getSupportActionBar().setTitle("");
             container.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);
-        } else{
+        } else {
             getSupportActionBar().setTitle(titleAlbum);
             container.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
         }
     }
 
-    private void init(){
+    private void init() {
         if (idAlbum > 0) {
             uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
         }
@@ -185,10 +185,10 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
-        container = (CoordinatorLayout)findViewById(R.id.container);
-        empty = (RelativeLayout)findViewById(R.id.empty);
+        container = (CoordinatorLayout) findViewById(R.id.container);
+        empty = (RelativeLayout) findViewById(R.id.empty);
         grid = (GridView) findViewById(R.id.gridPictures);
-        eyescreamImageView = (ImageView)findViewById(R.id.eyescream_image);
+        eyescreamImageView = (ImageView) findViewById(R.id.eyescream_image);
         eyescreamImageView.setOnClickListener(this);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         fab = (FloatingActionButton) findViewById(R.id.fab_pictures);
@@ -201,7 +201,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         llIsPlaying = (LinearLayout) findViewById(R.id.ll_is_playing);
     }
 
-    private void selectPictute(){
+    private void selectPictute() {
         // choose photo from gallery
         Intent intentGallery = new Intent();
         intentGallery.setType("image/*");
@@ -213,16 +213,18 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 Constants.REQUEST_CODE_GALLERY);
     }
 
-    private void capturePicture(){
+    private void capturePicture() {
         Intent intentCapture = new Intent(
                 MediaStore.ACTION_IMAGE_CAPTURE);
         File f = HappyMomentsUtils.generateCaptureFile(albumPath);
         picturePath = f.getAbsolutePath();
         intentCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
         startActivityForResult(intentCapture, Constants.REQUEST_CODE_PHOTO);
-    };
+    }
 
-    private void playPauseAlbum(){
+    ;
+
+    private void playPauseAlbum() {
         if (isPlaying == PictureProvider.PLAY) {
             isPlaying = PictureProvider.PlAY_NOT;
         } else {
@@ -252,7 +254,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem selectPictures = menu.findItem(R.id.action_select_pictures);
-        selectPictures.setVisible(countPictures>0);
+        selectPictures.setVisible(countPictures > 0);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -279,7 +281,12 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.action_select_pictures:
                 if (!selectMenu) {
-                    //TODO: add show Select Pictures Page
+                    Intent intentSelectPictures = new Intent(this, SelectPicturesActivity.class);
+                    intentSelectPictures.putExtra(Constants.EXTRA_ID, idAlbum);
+                    intentSelectPictures.putExtra(Constants.EXTRA_COUNT, countPictures);
+                    intentSelectPictures.putExtra(Constants.EXTRA_TITLE, titleAlbum);
+
+                    startActivity(intentSelectPictures);
                 }
                 break;
 

@@ -134,6 +134,25 @@ public class HappyMomentsUtils {
         return uri.getPath();
     }
 
+    public static boolean deleteDirectory(String path) {
+        File folder=new File(path);
+        if( folder.exists() ) {
+            File[] files = folder.listFiles();
+            if (files == null) {
+                return true;
+            }
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteDirectory(files[i].getAbsolutePath());
+                }
+                else {
+                    files[i].delete();
+                }
+            }
+        }
+        return(folder.delete() );
+    }
+
 
 }
 
