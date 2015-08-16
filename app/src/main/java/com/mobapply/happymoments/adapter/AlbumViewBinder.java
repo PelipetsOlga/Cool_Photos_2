@@ -12,13 +12,23 @@ import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.provider.PictureProvider;
 
 import java.io.File;
+import java.util.Set;
 
 
 public class AlbumViewBinder implements SimpleCursorAdapter.ViewBinder {
     private Context ctx;
+    private Set<Long> setAlbums;
 
     public AlbumViewBinder(Context ctx) {
         this.ctx = ctx;
+    }
+
+    public Set<Long> getSetAlbums() {
+        return setAlbums;
+    }
+
+    public void setSetAlbums(Set<Long> setAlbums) {
+        this.setAlbums = setAlbums;
     }
 
     @Override
@@ -46,17 +56,26 @@ public class AlbumViewBinder implements SimpleCursorAdapter.ViewBinder {
 
             case R.id.ic_is_playing:
                 ImageView icon = (ImageView) view;
-                int isPlay=cursor.getInt(cursor.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
-                if (isPlay==PictureProvider.PLAY){
+                int isPlay = cursor.getInt(cursor.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
+                if (isPlay == PictureProvider.PLAY) {
                     icon.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     icon.setVisibility(View.GONE);
                 }
-                return true;
 
+            case R.id.selecting_album:
+                if (setAlbums == null)
+                    return true;
+                ImageView selecting = (ImageView) view;
+                long id = cursor.getLong(columnIndex);
+                if (setAlbums.contains(id)) {
+                    selecting.setVisibility(View.VISIBLE);
+                } else {
+                    selecting.setVisibility(View.GONE);
+                }
+                return true;
             default:
                 return false;
         }
-
     }
 }

@@ -75,38 +75,43 @@ public class SelectAlbumsActivity extends AppCompatActivity {
         String from[] = {PictureProvider.ALBUM_FILE,
                 PictureProvider.ALBUM_NAME,
                 PictureProvider.ALBUM_COUNT,
-                PictureProvider.ALBUM_IS_PLAY};
+                PictureProvider.ALBUM_IS_PLAY,
+                PictureProvider.ALBUM_ID};
         int to[] = {R.id.picture, R.id.tv_album_title,
-                R.id.tv_album_count, R.id.ic_is_playing};
+                R.id.tv_album_count, R.id.ic_is_playing, R.id.selecting_album};
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_album, cursor, from, to);
-
-        adapter.setViewBinder(new AlbumViewBinder(this));
+        AlbumViewBinder binder = new AlbumViewBinder(this);
+        binder.setSetAlbums(setAlbums);
+        adapter.setViewBinder(binder);
         mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor item = (Cursor) adapter.getItem(position);
-               // ImageView selecting = (ImageView) view.findViewById(R.id.selecting_picture);
+                ImageView selecting = (ImageView) view.findViewById(R.id.selecting_album);
                 int count = item.getInt(item.getColumnIndex(PictureProvider.ALBUM_COUNT));
-                if (count != 0) {
-                    if (setAlbums.contains(id)) {
-                        //remove from set and decrease counter, deselect item
-                        setAlbums.remove(id);
-                        counter = counter - count;
-                   //     selecting.setVisibility(View.GONE);
-                    } else {
-                        //add to set and increase counter, select item
-                        counter = counter + count;
-                        setAlbums.add(id);
-                  //      selecting.setVisibility(View.VISIBLE);
-                    }
-                    if (counter == 0) {
-                        tvTitle.setText(titleActivity);
-                    } else {
-                        tvTitle.setText("(" + counter + ")");
-                    }
+
+                if (setAlbums.contains(id)) {
+                    //remove from set and decrease counter, deselect item
+                    setAlbums.remove(id);
+                    counter = counter - count;
+                    selecting.setVisibility(View.GONE);
+                } else {
+                    //add to set and increase counter, select item
+                    counter = counter + count;
+                    setAlbums.add(id);
+                    selecting.setVisibility(View.VISIBLE);
                 }
+                if (setAlbums.size()==0) {
+                    tvTitle.setText(titleActivity);
+                    showActions=false;
+                } else {
+                    tvTitle.setText("(" + counter + ")");
+                    showActions=true;
+                }
+                invalidateOptionsMenu();
             }
+
         });
         mGrid.setAdapter(adapter);
     }
