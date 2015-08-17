@@ -197,9 +197,9 @@ public class PictureProvider extends ContentProvider {
                 if (TextUtils.isEmpty(selection)) {
                     selection = PICTURE_ID + " = " + pictureId;
                 } else {
-                    selection = selection + " AND " + ALBUM_ID + " = " + pictureId;
+                    selection = selection + " AND " + PICTURE_ID + " = " + pictureId;
                 }
-                cnt = db.delete(ALBUM_TABLE, selection, selectionArgs);
+                cnt = db.delete(PICTURE_TABLE, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Wrong URI: " + uri);
@@ -233,9 +233,9 @@ public class PictureProvider extends ContentProvider {
                 if (TextUtils.isEmpty(selection)) {
                     selection = PICTURE_ID + " = " + pictureId;
                 } else {
-                    selection = selection + " AND " + ALBUM_ID + " = " + pictureId;
+                    selection = selection + " AND " + PICTURE_ID + " = " + pictureId;
                 }
-                cnt = db.update(ALBUM_TABLE, values, selection, selectionArgs);
+                cnt = db.update(PICTURE_TABLE, values, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Wrong URI: " + uri);
