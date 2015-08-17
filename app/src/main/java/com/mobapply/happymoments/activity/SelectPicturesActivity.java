@@ -113,7 +113,7 @@ public class SelectPicturesActivity extends AppCompatActivity {
                 null, null);
         startManagingCursor(cursor);
 
-        String from[] = {PictureProvider.PICTURE_FILE, PictureProvider.PICTURE_ID};
+        String from[] = {PictureProvider.PICTURE_FILE_PREVIEW, PictureProvider.PICTURE_ID};
         int to[] = {R.id.picture, R.id.selecting_picture};
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
@@ -206,6 +206,8 @@ public class SelectPicturesActivity extends AppCompatActivity {
                     pictureCursor.moveToFirst();
                     String picturePath = pictureCursor.getString(pictureCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
                     new File(picturePath).delete();
+                    String previewPath = pictureCursor.getString(pictureCursor.getColumnIndex(PictureProvider.PICTURE_FILE_PREVIEW));
+                    new File(previewPath).delete();
                     getContentResolver().delete(uriDeletedPicture, null, null);
                     countPictures = countPictures - 1;
                 }

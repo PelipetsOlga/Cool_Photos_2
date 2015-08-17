@@ -72,7 +72,7 @@ public class SelectAlbumsActivity extends AppCompatActivity {
                 null, null);
         startManagingCursor(cursor);
 
-        String from[] = {PictureProvider.ALBUM_FILE,
+        String from[] = {PictureProvider.ALBUM_FILE_PREVIEW,
                 PictureProvider.ALBUM_NAME,
                 PictureProvider.ALBUM_COUNT,
                 PictureProvider.ALBUM_IS_PLAY,

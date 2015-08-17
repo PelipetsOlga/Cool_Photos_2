@@ -39,6 +39,12 @@ public class HappyMomentsUtils {
         return f;
     }
 
+    public static File generatePreviewFile(String albumPath) {
+        File f = new File(getAlbumDirectory(albumPath), "preview_"
+                + System.currentTimeMillis() + ".jpg");
+        return f;
+    }
+
     public static File getAlbumDirectory(String albumPath) {
         File dir = new File(albumPath);
         if (!dir.exists()) {
@@ -108,6 +114,35 @@ public class HappyMomentsUtils {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(newFilepath);
+            b.compress(Bitmap.CompressFormat.PNG, 100, out);
+            if (out != null)
+                out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void generatePreview(String bifFilePath, String previewPath) {
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inJustDecodeBounds = true;
+        Bitmap b = BitmapFactory.decodeFile(bifFilePath, opt);
+
+        // Determine how much to scale down the image
+        int scaleFactor = 2;
+
+        // Decode the image file into a Bitmap sized to fill the View
+        opt.inJustDecodeBounds = false;
+        opt.inSampleSize = scaleFactor;
+        opt.inPurgeable = true;
+        b = BitmapFactory.decodeFile(bifFilePath, opt);
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(previewPath);
             b.compress(Bitmap.CompressFormat.PNG, 100, out);
             if (out != null)
                 out.close();

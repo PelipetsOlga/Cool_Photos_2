@@ -128,7 +128,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 null, null);
         startManagingCursor(cursor);
 
-        String from[] = {PictureProvider.PICTURE_FILE};
+        String from[] = {PictureProvider.PICTURE_FILE_PREVIEW};
         int to[] = {R.id.picture};
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
@@ -138,7 +138,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO
                 View cell = adapter.getView(position, null, null);
                 ImageView selecting = (ImageView) cell.findViewById(R.id.selecting_picture);
                 selecting.setVisibility(View.INVISIBLE);
@@ -201,7 +200,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         llIsPlaying = (LinearLayout) findViewById(R.id.ll_is_playing);
     }
 
-    private void selectPictute() {
+    private void selectPicture() {
         // choose photo from gallery
         Intent intentGallery = new Intent();
         intentGallery.setType("image/*");
@@ -268,7 +267,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             case R.id.action_add_from_gallery:
                 if (!selectMenu) {
                     selectMenu = true;
-                    selectPictute();
+                    selectPicture();
                 }
                 break;
 
@@ -304,7 +303,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 playPauseAlbum();
                 break;
             case R.id.eyescream_image:
-                selectPictute();
+                selectPicture();
                 break;
         }
     }
@@ -320,17 +319,19 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         selectMenu = false;
         if (requestCode == Constants.REQUEST_CODE_PHOTO) {
             if (resultCode == RESULT_OK) {
+                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
                 AddPictureAsyncTask task = new AddPictureAsyncTask();
-                task.execute(picturePath, this, picturePath);
+                task.execute(picturePath, this, picturePath, previewFile.getAbsolutePath());
             }
         } else if (requestCode == Constants.REQUEST_CODE_GALLERY) {
             if (resultCode == RESULT_OK && data != null) {
                 Uri selectedImageUri = data.getData();
                 String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
                 File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
+                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
 
                 AddPictureAsyncTask task = new AddPictureAsyncTask();
-                task.execute(selectedImagePath, this, pictureFile.getAbsolutePath());
+                task.execute(selectedImagePath, this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -348,8 +349,10 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             String oldPicturePath = (String) param[0];
             AppCompatActivity ctx = (AppCompatActivity) param[1];
             String newPicturePath = (String) param[2];
+            String previewPath = (String) param[3];
 
             HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+            HappyMomentsUtils.generatePreview(newPicturePath, previewPath);
 
             Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
             Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);
@@ -361,6 +364,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 if (countAlbum == 0) {
                     // add first picture to empty album
                     cvAlbum.put(PictureProvider.ALBUM_FILE, newPicturePath);
+                    cvAlbum.put(PictureProvider.ALBUM_FILE_PREVIEW, previewPath);
                     isFirstPicture = true;
                 }
                 // change count of pictures in the album
@@ -374,6 +378,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
             cv.put(PictureProvider.PICTURE_DATE, date);
             cv.put(PictureProvider.PICTURE_FILE, newPicturePath);
+            cv.put(PictureProvider.PICTURE_FILE_PREVIEW, previewPath);
             if (isFirstPicture) {
                 cv.put(PictureProvider.PICTURE_IS_MAIN, PictureProvider.MAIN);
             } else {
