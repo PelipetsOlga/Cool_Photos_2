@@ -150,10 +150,8 @@ public class AlbumsActivity extends ActionBarActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_select_albums:
-                if (cursor.getCount()!=0) {
-                    Intent intentSelect = new Intent(this, SelectAlbumsActivity.class);
-                    startActivity(intentSelect);
-                }
+                Intent intentSelect = new Intent(this, SelectAlbumsActivity.class);
+                startActivity(intentSelect);
                 return true;
 
             default:

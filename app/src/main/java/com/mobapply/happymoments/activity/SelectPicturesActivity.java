@@ -77,8 +77,8 @@ public class SelectPicturesActivity extends AppCompatActivity {
     private void parseIntent() {
         Intent intent = getIntent();
         idAlbum = intent.getLongExtra(Constants.EXTRA_ID, 0);
-        Uri albumUri=ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI,idAlbum);
-        Cursor c=getContentResolver().query(albumUri,null, null, null, null);
+        Uri albumUri = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+        Cursor c = getContentResolver().query(albumUri, null, null, null, null);
         c.moveToFirst();
         countPictures = c.getInt(c.getColumnIndex(PictureProvider.ALBUM_COUNT));
         titleAlbum = intent.getStringExtra(Constants.EXTRA_TITLE);
@@ -118,12 +118,14 @@ public class SelectPicturesActivity extends AppCompatActivity {
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
 
+        PicturesViewBinder binder=new PicturesViewBinder(this);
+        binder.setSetPictures(setPictures);
+        adapter.setViewBinder(binder);
 
-        adapter.setViewBinder(new PicturesViewBinder(this));
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               // Cursor item = (Cursor) adapter.getItem(position);
+                // Cursor item = (Cursor) adapter.getItem(position);
                 ImageView selecting = (ImageView) view.findViewById(R.id.selecting_picture);
 
                 if (setPictures.contains(id)) {
@@ -205,19 +207,21 @@ public class SelectPicturesActivity extends AppCompatActivity {
                     String picturePath = pictureCursor.getString(pictureCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
                     new File(picturePath).delete();
                     getContentResolver().delete(uriDeletedPicture, null, null);
-                    countPictures=countPictures-1;
+                    countPictures = countPictures - 1;
                 }
-
-                Uri updatedAlbum=ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
-                ContentValues cvAlbum=new ContentValues();
-                cvAlbum.put(PictureProvider.ALBUM_COUNT, countPictures);
-                getContentResolver().update(updatedAlbum, cvAlbum, null, null);
 
                 setPictures.clear();
                 showActions = false;
                 invalidateOptionsMenu();
+
                 tvTitle.setText(titleActivity);
                 albumTvCount.setText(Integer.toString(countPictures));
+
+                Uri updatedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+                ContentValues cvAlbum = new ContentValues();
+                cvAlbum.put(PictureProvider.ALBUM_COUNT, countPictures);
+                getContentResolver().update(updatedAlbum, cvAlbum, null, null);
+
                 break;
 
             default:
