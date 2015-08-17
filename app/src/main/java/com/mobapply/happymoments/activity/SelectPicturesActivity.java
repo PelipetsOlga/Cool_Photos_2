@@ -51,6 +51,8 @@ public class SelectPicturesActivity extends AppCompatActivity {
     private int albumCount;
     private int isPlaying;
     private Cursor cursor;
+    private long idHeaderPicture = 0;
+    private ImageView selectingHeader;
 
 
     @Override
@@ -68,6 +70,7 @@ public class SelectPicturesActivity extends AppCompatActivity {
         grid = (GridView) findViewById(R.id.gridPictures);
 
         frameHeader = (FrameLayout) findViewById(R.id.header);
+        selectingHeader = (ImageView) findViewById(R.id.selecting_header);
         headerPicture = (HeaderImageView) findViewById(R.id.header_picture);
         albumTitle = (TextView) findViewById(R.id.tv_album_title);
         albumTvCount = (TextView) findViewById(R.id.tv_album_count);
@@ -118,7 +121,7 @@ public class SelectPicturesActivity extends AppCompatActivity {
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
 
-        PicturesViewBinder binder=new PicturesViewBinder(this);
+        PicturesViewBinder binder = new PicturesViewBinder(this);
         binder.setSetPictures(setPictures);
         adapter.setViewBinder(binder);
 
@@ -162,7 +165,28 @@ public class SelectPicturesActivity extends AppCompatActivity {
 
         } else {
             frameHeader.setVisibility(View.VISIBLE);
-
+            frameHeader.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (setPictures.contains(idHeaderPicture)) {
+                        //remove from set and decrease counter, deselect item
+                        setPictures.remove(idHeaderPicture);
+                        selectingHeader.setVisibility(View.GONE);
+                    } else {
+                        //add to set and increase counter, select item
+                        setPictures.add(idHeaderPicture);
+                        selectingHeader.setVisibility(View.VISIBLE);
+                    }
+                    if (setPictures.size() == 0) {
+                        tvTitle.setText(titleActivity);
+                        showActions = false;
+                    } else {
+                        tvTitle.setText("(" + setPictures.size() + ")");
+                        showActions = true;
+                    }
+                    invalidateOptionsMenu();
+                }
+            });
             //albumCursor.moveToFirst();
             albumTitle.setText(albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_NAME)));
             albumTvCount.setText(new Integer(albumCount).toString());
@@ -174,6 +198,15 @@ public class SelectPicturesActivity extends AppCompatActivity {
             }
             String firstPicturePath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FILE));
             headerPicture.setImageBitmap(BitmapFactory.decodeFile(firstPicturePath));
+
+            Cursor pictureHeaderCursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,
+                    PictureProvider.PICTURE_ALBUM_ID + "=" + idAlbum + " and "
+                            + PictureProvider.PICTURE_IS_MAIN + "=" + PictureProvider.MAIN,
+                    null, null);
+            if (pictureHeaderCursor.moveToFirst()) {
+                idHeaderPicture = pictureHeaderCursor.getLong(pictureHeaderCursor.getColumnIndex(PictureProvider.PICTURE_ID));
+
+            }
         }
     }
 
@@ -200,6 +233,8 @@ public class SelectPicturesActivity extends AppCompatActivity {
                 return true;
 
             case R.id.ab_delete_pictures:
+                boolean refactorHeader = setPictures.contains(idHeaderPicture);
+
                 for (long id : setPictures) {
                     Uri uriDeletedPicture = ContentUris.withAppendedId(PictureProvider.PICTURE_CONTENT_URI, id);
                     Cursor pictureCursor = getContentResolver().query(uriDeletedPicture, null, null, null, null);
@@ -222,7 +257,31 @@ public class SelectPicturesActivity extends AppCompatActivity {
                 Uri updatedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
                 ContentValues cvAlbum = new ContentValues();
                 cvAlbum.put(PictureProvider.ALBUM_COUNT, countPictures);
+
+                if (refactorHeader) {
+                    //get first picture, set it as main
+                    Cursor lastPictures = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,
+                            PictureProvider.PICTURE_ALBUM_ID + "=" + idAlbum,
+                            null, null);
+                    if (lastPictures.moveToLast()) {
+                        int idNewMainPicture = lastPictures.getInt(lastPictures.getColumnIndex(PictureProvider.PICTURE_ID));
+                        ContentValues newMainCV = new ContentValues();
+                        newMainCV.put(PictureProvider.PICTURE_IS_MAIN, PictureProvider.MAIN);
+                        Uri uriNewMainPicture = ContentUris.withAppendedId(PictureProvider.PICTURE_CONTENT_URI, idNewMainPicture);
+                        getContentResolver().update(uriNewMainPicture, newMainCV, null, null);
+
+                        //write new file_name to album
+                        String newBigFile = lastPictures.getString(lastPictures.getColumnIndex(PictureProvider.PICTURE_FILE));
+                        String newPreviewFile = lastPictures.getString(lastPictures.getColumnIndex(PictureProvider.PICTURE_FILE_PREVIEW));
+                        cvAlbum.put(PictureProvider.ALBUM_FILE, newBigFile);
+                        cvAlbum.put(PictureProvider.ALBUM_FILE_PREVIEW, newPreviewFile);
+                    }
+                }
                 getContentResolver().update(updatedAlbum, cvAlbum, null, null);
+                if (refactorHeader){
+                    refreshHeader();
+                    selectingHeader.setVisibility(View.GONE);
+                }
 
                 break;
 

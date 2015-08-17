@@ -98,6 +98,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+
+
     private void init() {
         if (idAlbum > 0) {
             uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
@@ -311,7 +313,14 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
+
+        Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+        Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);
+        if (albumQuery.moveToFirst()) {
+            countPictures = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
+        }
         refreshHeader();
+        updateLayout();
     }
 
     @Override
