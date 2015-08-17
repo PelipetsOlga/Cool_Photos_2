@@ -11,7 +11,9 @@ import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.provider.PictureProvider;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.Set;
 
 
@@ -40,7 +42,9 @@ public class PicturesViewBinder implements SimpleCursorAdapter.ViewBinder {
         switch (view.getId()){
             case R.id.picture:
                 SquireImageView picture = (SquireImageView) view;
-                picture.setImageBitmap(BitmapFactory.decodeFile(cursor.getString(cursor.getColumnIndex(PictureProvider.PICTURE_FILE))));
+                String pathName = cursor.getString(cursor.getColumnIndex(PictureProvider.PICTURE_FILE));
+                Picasso.with(ctx).load(new File(pathName)).into(picture);
+              //  picture.setImageBitmap(BitmapFactory.decodeFile(pathName));
                 return true;
             case R.id.selecting_picture:
                 if (setPictures == null)

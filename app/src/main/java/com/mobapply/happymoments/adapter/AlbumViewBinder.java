@@ -10,6 +10,7 @@ import android.widget.SimpleCursorAdapter;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.provider.PictureProvider;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.Set;
@@ -44,7 +45,8 @@ public class AlbumViewBinder implements SimpleCursorAdapter.ViewBinder {
                 if (!TextUtils.isEmpty(fileFirstPicturePath)) {
                     File firstPicture = new File(fileFirstPicturePath);
                     if (firstPicture.exists()) {
-                        picture.setImageBitmap(BitmapFactory.decodeFile(fileFirstPicturePath));
+                        Picasso.with(ctx).load(firstPicture).into(picture);
+                      //  picture.setImageBitmap(BitmapFactory.decodeFile(fileFirstPicturePath));
                     } else {
                         picture.setImageDrawable(ctx.getResources().getDrawable(R.drawable.empty_folder_thumbnai_174dp));
                     }

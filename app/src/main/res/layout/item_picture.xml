@@ -8,7 +8,8 @@
         android:id="@+id/picture"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:src="@drawable/empty_folder_thumbnai_174dp"/>
 
     <ImageView
         android:id="@+id/selecting_picture"

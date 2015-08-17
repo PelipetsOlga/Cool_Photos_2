@@ -33,6 +33,7 @@ import com.mobapply.happymoments.adapter.HeaderImageView;
 import com.mobapply.happymoments.adapter.PicturesViewBinder;
 import com.mobapply.happymoments.provider.PictureProvider;
 import com.mobapply.happymoments.utils.HappyMomentsUtils;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.Calendar;
@@ -170,7 +171,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 llIsPlaying.setVisibility(View.INVISIBLE);
             }
             String firstPicturePath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FILE));
-            headerPicture.setImageBitmap(BitmapFactory.decodeFile(firstPicturePath));
+            Picasso.with(this).load(new File(firstPicturePath)).into(headerPicture);
+            //headerPicture.setImageBitmap(BitmapFactory.decodeFile(firstPicturePath));
         }
     }
 
