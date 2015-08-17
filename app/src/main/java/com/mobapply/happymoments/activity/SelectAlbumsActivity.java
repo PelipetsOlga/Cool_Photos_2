@@ -1,6 +1,7 @@
 package com.mobapply.happymoments.activity;
 
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
@@ -139,13 +140,23 @@ public class SelectAlbumsActivity extends AppCompatActivity {
                 return true;
 
             case R.id.ab_play_albums:
-                //TODO
+                for (long id : setAlbums) {
+                    Uri uriPlayedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, id);
+                    ContentValues cvPlay = new ContentValues();
+                    cvPlay.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PLAY);
+                    getContentResolver().update(uriPlayedAlbum, cvPlay, null, null);
+                }
                 break;
 
             case R.id.ab_pause_albums:
-                //TODO
+                for (long id : setAlbums) {
+                    Uri uriPausedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, id);
+                    ContentValues cvPause = new ContentValues();
+                    cvPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+                    getContentResolver().update(uriPausedAlbum, cvPause, null, null);
+                }
                 break;
-
+                
             case R.id.ab_delete_albums:
                 for (long id : setAlbums) {
                     Uri uriDeletedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, id);
