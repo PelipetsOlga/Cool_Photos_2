@@ -62,6 +62,7 @@ public class AlbumViewBinder implements SimpleCursorAdapter.ViewBinder {
                 } else {
                     icon.setVisibility(View.GONE);
                 }
+                return true;
 
             case R.id.selecting_album:
                 if (setAlbums == null)
