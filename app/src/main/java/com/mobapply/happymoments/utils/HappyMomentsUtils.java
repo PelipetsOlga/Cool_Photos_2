@@ -53,7 +53,8 @@ public class HappyMomentsUtils {
         return dir;
     }
 
-    public static void rotateAndSaveCapture(String filePath, Activity ctx, String newFilepath) {
+    public static boolean rotateAndSaveCapture(String filePath, Activity ctx, String newFilepath) {
+        boolean result = true;
         Display display = ctx.getWindowManager().getDefaultDisplay();
         DisplayMetrics metricsB = new DisplayMetrics();
         display.getMetrics(metricsB);
@@ -97,6 +98,7 @@ public class HappyMomentsUtils {
                     break;
             }
         } catch (IOException e1) {
+            e1.printStackTrace();
         }
 
         if (rotate != 0) {
@@ -109,20 +111,28 @@ public class HappyMomentsUtils {
                 b = Bitmap.createBitmap(b, 0, 0, w, h, mtx, false);
                 b = b.copy(Bitmap.Config.ARGB_8888, true);
             } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                result = false;
             }
         }
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(newFilepath);
-            b.compress(Bitmap.CompressFormat.PNG, 100, out);
+            if(b != null) {
+                b.compress(Bitmap.CompressFormat.PNG, 100, out);
+            }else{
+                result = false;
+            }
             if (out != null)
                 out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            result = false;
         } catch (IOException e) {
             e.printStackTrace();
+            result = false;
         }
-
+        return  result;
     }
 
     public static void generatePreview(String bifFilePath, String previewPath) {
