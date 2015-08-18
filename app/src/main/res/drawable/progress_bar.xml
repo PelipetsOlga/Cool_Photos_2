@@ -6,18 +6,11 @@
         </shape>
     </item>
     <item android:id="@android:id/progress">
-
+        <clip>
             <shape>
                 <solid android:color="@color/color_selected_menu" />
             </shape>
+        </clip>
+    </item>
 
-    </item>
-    <item
-        android:id="@+id/pattern"
-        >
-        <bitmap
-            android:src="@drawable/circle"
-            android:tileMode="repeat"
-            />
-    </item>
 </layer-list>

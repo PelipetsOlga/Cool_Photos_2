@@ -6,15 +6,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
-import android.widget.SeekBar;
-import android.widget.Switch;
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import android.widget.TextView;
 
+
 import com.mobapply.happymoments.R;
-import com.mobapply.happymoments.utils.HappySeekBar;
+
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String PERIOD_UPDATING = "period";
     public static final String SHUFFLE = "shuffle";
     private TextView mLabel;
-    private HappySeekBar mSeekBar;
+    private DiscreteSeekBar mSeekBar;
     private SwitchCompat mSwitchShuffle;
     private int period;
     private boolean shuffle;
@@ -61,16 +61,16 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initViews(){
         mLabel = (TextView) findViewById(R.id.label);
-        mSeekBar = (HappySeekBar) findViewById(R.id.seekbar);
+        mSeekBar = (DiscreteSeekBar) findViewById(R.id.seekbar);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
     }
 
     private void init(){
       //  mSeekBar.setProgressDrawable(getResources()
-        //        .getDrawable(R.drawable.progress_bar));
+            //    .getDrawable(R.drawable.progress_bar));
         mSeekBar.setProgress(period);
-        mLabel.setText(period + "");
-        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+       // mLabel.setText(period + "");
+     /*   mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -92,7 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
-
+*/
 
         mSwitchShuffle.setChecked(shuffle);
         mSwitchShuffle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
