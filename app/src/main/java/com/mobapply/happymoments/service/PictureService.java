@@ -71,6 +71,7 @@ public class PictureService extends Service {
         mTimerTask = new PictureTimerTask();
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         mCursor= getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " +  PictureProvider.PLAY, null, null);
+
     }
 
     private void loadSettings(){
