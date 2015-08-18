@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.mobapply.happymoments.R;
+import com.mobapply.happymoments.utils.HappySeekBar;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String PERIOD_UPDATING = "period";
     public static final String SHUFFLE = "shuffle";
     private TextView mLabel;
-    private SeekBar mSeekBar;
+    private HappySeekBar mSeekBar;
     private SwitchCompat mSwitchShuffle;
     private int period;
     private boolean shuffle;
@@ -60,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initViews(){
         mLabel = (TextView) findViewById(R.id.label);
-        mSeekBar = (SeekBar) findViewById(R.id.seekbar);
+        mSeekBar = (HappySeekBar) findViewById(R.id.seekbar);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
     }
 
