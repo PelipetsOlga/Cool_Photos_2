@@ -65,8 +65,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void init(){
-        mSeekBar.setProgressDrawable(getResources()
-                .getDrawable(R.drawable.progress_bar));
+      //  mSeekBar.setProgressDrawable(getResources()
+        //        .getDrawable(R.drawable.progress_bar));
         mSeekBar.setProgress(period);
         mLabel.setText(period + "");
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
