@@ -21,6 +21,7 @@ import com.mobapply.happymoments.adapter.AlbumViewBinder;
 import com.mobapply.happymoments.dialog.CreateAlbumDialog;
 import com.mobapply.happymoments.menu.NavigationDrawerFragment;
 import com.mobapply.happymoments.provider.PictureProvider;
+import com.mobapply.happymoments.service.PictuteService;
 
 public class AlbumsActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
@@ -44,6 +45,8 @@ public class AlbumsActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums);
+
+        startService();
 
         setupNavigationDrawer();
 
@@ -112,8 +115,8 @@ public class AlbumsActivity extends ActionBarActivity
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case 2:
+                stoptService();
                 finish();
-                // TODO: add stop Servise
                 break;
         }
     }
@@ -167,6 +170,14 @@ public class AlbumsActivity extends ActionBarActivity
                 dialog.show(getFragmentManager(), null);
                 break;
         }
+    }
+
+    private void startService(){
+        startService(new Intent(this, PictuteService.class));
+    }
+
+    private void stoptService(){
+        stopService(new Intent(this, PictuteService.class));
     }
 
 }

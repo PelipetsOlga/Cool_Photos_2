@@ -12,6 +12,7 @@ import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import android.widget.TextView;
 
 
+import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
@@ -19,9 +20,8 @@ import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    SharedPreferences sPref;
-    public static final String PERIOD_UPDATING = "period";
-    public static final String SHUFFLE = "shuffle";
+
+    private SharedPreferences sPref;
     private DiscreteSeekBar mSeekBar;
     private SwitchCompat mSwitchShuffle;
     private int period;
@@ -53,9 +53,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void loadSettings(){
-        sPref = getPreferences(MODE_PRIVATE);
-        period = sPref.getInt(PERIOD_UPDATING, 0);
-        shuffle = sPref.getBoolean(SHUFFLE, false);
+        sPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+        period = sPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
+        shuffle = sPref.getBoolean(Constants.SHUFFLE, false);
     }
 
     private void initViews(){
@@ -69,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(DiscreteSeekBar discreteSeekBar, int i, boolean b) {
                 SharedPreferences.Editor ed = sPref.edit();
-                ed.putInt(PERIOD_UPDATING, i);
+                ed.putInt(Constants.PERIOD_UPDATING, i);
                 period = i;
                 ed.commit();
             }
@@ -90,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor ed = sPref.edit();
-                ed.putBoolean(SHUFFLE, isChecked);
+                ed.putBoolean(Constants.SHUFFLE, isChecked);
                 shuffle = isChecked;
                 ed.commit();
             }

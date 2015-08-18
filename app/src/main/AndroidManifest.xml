@@ -51,6 +51,11 @@
             android:name=".provider.PictureProvider"
             android:authorities="com.mobapply.happymoments.providers.HappyMoments"
             android:exported="false"></provider>
+
+        <service
+            android:name=".service.PictuteService"
+            android:exported="false"></service>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="c9cbd0456fcb6fd13236ade58090a96cf32d0db7" />
