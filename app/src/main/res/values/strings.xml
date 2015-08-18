@@ -46,4 +46,6 @@
     <string name="moments_count">moments</string>
     <string name="now_playing">Now playing</string>
 
+    <string name="error_picture">Loading picture error</string>
+
 </resources>

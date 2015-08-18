@@ -26,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
@@ -362,7 +363,12 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             String newPicturePath = (String) param[2];
             String previewPath = (String) param[3];
 
-            HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+            boolean done =  HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+
+            if (!done){
+                return false;
+            }
+
             HappyMomentsUtils.generatePreview(newPicturePath, previewPath);
 
             Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
@@ -405,10 +411,14 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             progressBar.setVisibility(View.GONE);
-            countPictures++;
-            invalidateOptionsMenu();
-            updateLayout();
-            refreshHeader();
+            if (aBoolean) {
+                countPictures++;
+                invalidateOptionsMenu();
+                updateLayout();
+                refreshHeader();
+            }else{
+                Toast.makeText(PicturesActivity.this, R.string.error_picture, Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
