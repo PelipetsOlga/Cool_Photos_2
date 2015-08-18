@@ -22,7 +22,6 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences sPref;
     public static final String PERIOD_UPDATING = "period";
     public static final String SHUFFLE = "shuffle";
-    private TextView mLabel;
     private DiscreteSeekBar mSeekBar;
     private SwitchCompat mSwitchShuffle;
     private int period;
@@ -60,14 +59,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        mLabel = (TextView) findViewById(R.id.label);
         mSeekBar = (DiscreteSeekBar) findViewById(R.id.seekbar);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
     }
 
     private void init(){
-      //  mSeekBar.setProgressDrawable(getResources()
-            //    .getDrawable(R.drawable.progress_bar));
         mSeekBar.setProgress(period);
         mSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
@@ -88,30 +84,6 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
-       // mLabel.setText(period + "");
-     /*   mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                mLabel.setText(progress+"");
-
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.putInt(PERIOD_UPDATING, progress);
-                period = progress;
-                ed.commit();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-*/
 
         mSwitchShuffle.setChecked(shuffle);
         mSwitchShuffle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
