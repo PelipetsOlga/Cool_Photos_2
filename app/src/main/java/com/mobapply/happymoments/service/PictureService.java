@@ -16,13 +16,11 @@ import com.mobapply.happymoments.provider.PictureProvider;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by apelipets on 8/10/15.
- */
-public class PictuteService extends Service {
+
+public class PictureService extends Service {
 
 
-    public final static String TAG = "PictuteService";
+    public final static String TAG = "PictureService";
     private Handler mHadler;
     private Timer mTimer;
     private PictureTimerTask mTimerTask;

@@ -100,7 +100,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
     private void init() {
         if (idAlbum > 0) {
             uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
@@ -235,6 +234,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         }
         updateFAB();
 
+        //update album
         ContentValues cvPlayPause = new ContentValues();
         if (isPlaying == PictureProvider.PLAY) {
             cvPlayPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PLAY);
@@ -243,6 +243,18 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         }
         Uri uriAlbumPlayStop = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
         getContentResolver().update(uriAlbumPlayStop, cvPlayPause, null, null);
+
+        //update album's pictures
+        cvPlayPause = new ContentValues();
+        if (isPlaying == PictureProvider.PLAY) {
+            cvPlayPause.put(PictureProvider.PICTURE_IS_PLAY, PictureProvider.PLAY);
+        } else {
+            cvPlayPause.put(PictureProvider.PICTURE_IS_PLAY, PictureProvider.PlAY_NOT);
+        }
+        getContentResolver().
+                update(PictureProvider.PICTURE_CONTENT_URI, cvPlayPause,
+                        PictureProvider.PICTURE_ALBUM_ID + " = " + idAlbum, null);
+
 
         refreshHeader();
     }
@@ -368,8 +380,10 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
             Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);
             int countAlbum = 0;
+            int isPlayingAlbum=PictureProvider.PlAY_NOT;
             boolean isFirstPicture = false;
             if (albumQuery.moveToFirst()) {
+                isPlayingAlbum=albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
                 countAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
                 ContentValues cvAlbum = new ContentValues();
                 if (countAlbum == 0) {
@@ -388,6 +402,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             ContentValues cv = new ContentValues();
             cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
             cv.put(PictureProvider.PICTURE_DATE, date);
+            cv.put(PictureProvider.PICTURE_IS_PLAY, isPlayingAlbum);
             cv.put(PictureProvider.PICTURE_FILE, newPicturePath);
             cv.put(PictureProvider.PICTURE_FILE_PREVIEW, previewPath);
             if (isFirstPicture) {

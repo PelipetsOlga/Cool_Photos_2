@@ -145,6 +145,10 @@ public class SelectAlbumsActivity extends AppCompatActivity {
                     ContentValues cvPlay = new ContentValues();
                     cvPlay.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PLAY);
                     getContentResolver().update(uriPlayedAlbum, cvPlay, null, null);
+
+                    cvPlay=new ContentValues();
+                    cvPlay.put(PictureProvider.PICTURE_IS_PLAY, PictureProvider.PLAY);
+                    getContentResolver().update(PictureProvider.PICTURE_CONTENT_URI,cvPlay, null, null);
                 }
                 break;
 
@@ -154,6 +158,10 @@ public class SelectAlbumsActivity extends AppCompatActivity {
                     ContentValues cvPause = new ContentValues();
                     cvPause.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
                     getContentResolver().update(uriPausedAlbum, cvPause, null, null);
+
+                    cvPause=new ContentValues();
+                    cvPause.put(PictureProvider.PICTURE_IS_PLAY, PictureProvider.PlAY_NOT);
+                    getContentResolver().update(PictureProvider.PICTURE_CONTENT_URI,cvPause, null, null);
                 }
                 break;
                 

@@ -53,7 +53,7 @@
             android:exported="false"></provider>
 
         <service
-            android:name=".service.PictuteService"
+            android:name=".service.PictureService"
             android:exported="false"></service>
 
         <meta-data
