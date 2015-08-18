@@ -16,7 +16,7 @@ public class PictureProvider extends ContentProvider {
 
 
     private static final String DB_NAME = "happymoments";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     public static final String ALBUM_TABLE = "album";
 
@@ -276,6 +276,10 @@ public class PictureProvider extends ContentProvider {
             db.execSQL(CREATE_TABLE_PICTURE);
         }
 
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {  }
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " + PICTURE_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + ALBUM_TABLE);
+            onCreate(db);
+        }
     }
 }
