@@ -41,7 +41,8 @@
                 app:dsb_max="60"
                 app:dsb_min="0"
                 app:dsb_progressColor="@color/color_selected_menu"
-                app:dsb_trackColor="@color/seekbar_background" />
+                app:dsb_trackColor="@color/seekbar_background"
+                app:dsb_indicatorColor="@color/color_selected_menu" />
 
 
             <TextView
