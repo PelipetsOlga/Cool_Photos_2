@@ -1,39 +1,91 @@
 package com.mobapply.happymoments.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
+import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.TimeUnit;
 
 public class FullscreenPictureActivity extends AppCompatActivity {
+    private Handler handler;
+
+    private Activity ctx;
+    private String picturePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fullscreen_picture);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_fullscreen_picture, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
-        return super.onOptionsItemSelected(item);
+        hideNavigationBar();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        setContentView(R.layout.activity_fullscreen_picture);
+
+        parseIntent();
+
+        ImageView fullPicture = (ImageView) findViewById(R.id.full_picture);
+       // picturePath="/mnt/extSdCard/lalalupsi/140220-1953-6046.jpg";
+        fullPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+        ctx = this;
+        handler = new Handler() {
+            public void handleMessage(android.os.Message msg) {
+                ctx.finish();
+            }
+        };
+    }
+
+    private void parseIntent() {
+        Intent intent = getIntent();
+        picturePath = intent.getStringExtra(Constants.EXTRA_FILE_NAME);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(Constants.SHOW_TIME);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(0);
+
+
+            }
+        });
+        t.start();
+    }
+
+    private void hideNavigationBar() {
+        View decorView = getWindow().getDecorView();
+        // Hide both the navigation bar and the status bar.
+        // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+        // a general rule, you should design your app to hide the status bar whenever you
+        // hide the navigation bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 }

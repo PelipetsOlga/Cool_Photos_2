@@ -14,8 +14,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.AlbumsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -45,7 +45,9 @@
         <activity
             android:name=".activity.FullscreenPictureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen_picture"></activity>
+            android:label="@string/title_activity_fullscreen_picture">
+
+        </activity>
 
         <provider
             android:name=".provider.PictureProvider"
