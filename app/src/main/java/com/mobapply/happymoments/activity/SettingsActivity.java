@@ -69,6 +69,25 @@ public class SettingsActivity extends AppCompatActivity {
       //  mSeekBar.setProgressDrawable(getResources()
             //    .getDrawable(R.drawable.progress_bar));
         mSeekBar.setProgress(period);
+        mSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar discreteSeekBar, int i, boolean b) {
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putInt(PERIOD_UPDATING, i);
+                period = i;
+                ed.commit();
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar discreteSeekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar discreteSeekBar) {
+
+            }
+        });
        // mLabel.setText(period + "");
      /*   mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
