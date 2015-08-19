@@ -112,13 +112,13 @@ public class PictureService extends Service {
             Log.d(TAG, "service run task");
 
             loadSettings();
-            //onContentChanged();
 
             if (!mDataValid){
                 onContentChanged();
             }
 
             if (mCursor == null || mCursor.getCount() == 0||!mDataValid ){
+                mHandler.postDelayed(mPictureRunnable, period*60*100);
                 return;
             }
 
@@ -128,6 +128,7 @@ public class PictureService extends Service {
             }else {
                 if (!mCursor.moveToNext()) {
                     if (!mCursor.moveToFirst()) {
+                        mHandler.postDelayed(mPictureRunnable, period*60*100);
                         return;
                     }
                 };
