@@ -89,7 +89,7 @@ public class PictureService extends Service {
     private void loadSettings() {
         period = mPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
         shuffle = mPref.getBoolean(Constants.SHUFFLE, false);
-        periodMinutes = period * 60 * 1000;
+        periodMinutes = period * 60 * 100;
     }
 
     private void process() {
