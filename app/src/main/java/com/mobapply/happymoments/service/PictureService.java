@@ -32,9 +32,10 @@ public class PictureService extends Service {
     private SharedPreferences mPref;
     private boolean mDataValid;
     private int period;
+    private int periodMinutes;
     private boolean shuffle;
     private boolean started = false;
-    private final  ChangeObserver mChangeObserver = new ChangeObserver();
+    private final ChangeObserver mChangeObserver = new ChangeObserver();
 
 
     public void onCreate() {
@@ -46,7 +47,7 @@ public class PictureService extends Service {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "service start command");
-        if(!started){
+        if (!started) {
             process();
             started = true;
         }
@@ -58,10 +59,10 @@ public class PictureService extends Service {
 //        if(mTimer != null) {
 //            mTimer.cancel();
 //        }
-        if(mHandler!= null) {
+        if (mHandler != null) {
             mHandler.removeCallbacks(mPictureRunnable);
         }
-        if(mCursor!= null && !mCursor.isClosed()) {
+        if (mCursor != null && !mCursor.isClosed()) {
             mCursor.close();
         }
         super.onDestroy();
@@ -74,35 +75,33 @@ public class PictureService extends Service {
         return null;
     }
 
-    private void init(){
+    private void init() {
         mRandom = new Random();
         mHandler = new Handler();
         //mTimer = new Timer();
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
-        mCursor= getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " + PictureProvider.PLAY, null, null);
+        mCursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " + PictureProvider.PLAY, null, null);
         if (mChangeObserver != null) mCursor.registerContentObserver(mChangeObserver);
         mDataValid = true;
 
     }
 
-    private void loadSettings(){
+    private void loadSettings() {
         period = mPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
         shuffle = mPref.getBoolean(Constants.SHUFFLE, false);
+        periodMinutes = period * 60 * 1000;
     }
 
-    private void process(){
-        //mTimer.schedule(mTimerTask, period*60*1000 , period*60*1000);
-        //TODO
-        mHandler.postDelayed(mPictureRunnable, period*60*100);
+    private void process() {
+        mHandler.postDelayed(mPictureRunnable, periodMinutes);
     }
 
-    private void showFullscreenPicture(String fileName){
+    private void showFullscreenPicture(String fileName) {
         Intent intent = new Intent(this, FullscreenPictureActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constants.EXTRA_FILE_NAME, fileName);
         startActivity(intent);
     }
-
 
 
     private Runnable mPictureRunnable = new Runnable() {
@@ -113,38 +112,36 @@ public class PictureService extends Service {
 
             loadSettings();
 
-            if (!mDataValid){
+            if (!mDataValid) {
                 onContentChanged();
             }
 
-            if (mCursor == null || mCursor.getCount() == 0||!mDataValid ){
-                //TODO
-                mHandler.postDelayed(mPictureRunnable, period*60*100);
+            if (mCursor == null || mCursor.getCount() == 0 || !mDataValid) {
+                mHandler.postDelayed(mPictureRunnable, periodMinutes);
                 return;
             }
 
-            if (shuffle){
+            if (shuffle) {
                 int position = mRandom.nextInt(mCursor.getCount());
                 mCursor.moveToPosition(position);
-            }else {
+            } else {
                 if (!mCursor.moveToNext()) {
                     if (!mCursor.moveToFirst()) {
-                        mHandler.postDelayed(mPictureRunnable, period*60*100);
+                        mHandler.postDelayed(mPictureRunnable, periodMinutes);
                         return;
                     }
-                };
+                }
+                ;
             }
 
             final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
             showFullscreenPicture(fileName);
-
-            //TODO
-            mHandler.postDelayed(mPictureRunnable, period*60*100);
+            mHandler.postDelayed(mPictureRunnable, periodMinutes);
         }
     };
 
     protected void onContentChanged() {
-        if ( mCursor != null && !mCursor.isClosed()) {
+        if (mCursor != null && !mCursor.isClosed()) {
             mDataValid = mCursor.requery();
         }
     }
