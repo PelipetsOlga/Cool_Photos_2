@@ -13,6 +13,7 @@ import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.activity.FullscreenPictureActivity;
 import com.mobapply.happymoments.provider.PictureProvider;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +25,7 @@ public class PictureService extends Service {
     private Handler mHandler;
     //private Timer mTimer;
     private Cursor mCursor;
+    private Random mRandom;
     private SharedPreferences mPref;
     private int period;
     private boolean shuffle;
@@ -68,6 +70,7 @@ public class PictureService extends Service {
     }
 
     private void init(){
+        mRandom = new Random();
         mHandler = new Handler();
         //mTimer = new Timer();
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
@@ -124,11 +127,16 @@ public class PictureService extends Service {
                 return;
             }
 
-            if (!mCursor.moveToNext()){
-                if (!mCursor.moveToFirst()){
-                    return;
-                }
-            };
+            if (shuffle){
+                int position = mRandom.nextInt(mCursor.getCount());
+                mCursor.moveToPosition(position);
+            }else {
+                if (!mCursor.moveToNext()) {
+                    if (!mCursor.moveToFirst()) {
+                        return;
+                    }
+                };
+            }
 
             final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
             showFullscreenPicture(fileName);
