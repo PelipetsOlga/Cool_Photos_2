@@ -118,6 +118,7 @@ public class PictureService extends Service {
             }
 
             if (mCursor == null || mCursor.getCount() == 0||!mDataValid ){
+                //TODO
                 mHandler.postDelayed(mPictureRunnable, period*60*100);
                 return;
             }
