@@ -22,8 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 public class FullscreenPictureActivity extends AppCompatActivity {
     private Handler handler;
-
-    private Activity ctx;
+    private ImageView fullPicture;
     private String picturePath;
 
     @Override
@@ -43,11 +42,15 @@ public class FullscreenPictureActivity extends AppCompatActivity {
 
         parseIntent();
 
-        ctx = this;
         handler = new Handler();
 
-        ImageView fullPicture = (ImageView) findViewById(R.id.full_picture);
-        fullPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        fullPicture = (ImageView) findViewById(R.id.full_picture);
+        try {
+            fullPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }catch(Throwable t){
+            t.printStackTrace();
+            finish();
+        }
     }
 
     private void parseIntent() {
@@ -64,6 +67,12 @@ public class FullscreenPictureActivity extends AppCompatActivity {
                 FullscreenPictureActivity.this.finish();
             }
         }, Constants.SHOW_TIME);
+    }
+
+    @Override
+    protected void onDestroy() {
+        fullPicture.setImageBitmap(null);
+        super.onDestroy();
     }
 
     private void hideNavigationBar() {
