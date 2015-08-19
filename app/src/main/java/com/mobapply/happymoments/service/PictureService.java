@@ -79,7 +79,7 @@ public class PictureService extends Service {
         mHandler = new Handler();
         //mTimer = new Timer();
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
-        mCursor= getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " +  PictureProvider.PLAY, null, null);
+        mCursor= getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " + PictureProvider.PLAY, null, null);
         if (mChangeObserver != null) mCursor.registerContentObserver(mChangeObserver);
         mDataValid = true;
 
@@ -92,7 +92,8 @@ public class PictureService extends Service {
 
     private void process(){
         //mTimer.schedule(mTimerTask, period*60*1000 , period*60*1000);
-        mHandler.postDelayed(mPictureRunnable, period*60*1000);
+        //TODO
+        mHandler.postDelayed(mPictureRunnable, period*60*100);
     }
 
     private void showFullscreenPicture(String fileName){
@@ -102,25 +103,7 @@ public class PictureService extends Service {
         startActivity(intent);
     }
 
-//    private TimerTask mTimerTask = new TimerTask() {
-//
-//        @Override
-//        public void run() {
-//            Log.d(TAG, "service run task");
-//            if (mCursor == null || mCursor.getCount() == 0){
-//                return;
-//            }
-//
-//            if (!mCursor.moveToNext()){
-//                if (!mCursor.moveToFirst()){
-//                  return;
-//                }
-//            };
-//
-//            final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
-//            showFullscreenPicture(fileName);
-//        }
-//    };
+
 
     private Runnable mPictureRunnable = new Runnable() {
 
@@ -129,8 +112,13 @@ public class PictureService extends Service {
             Log.d(TAG, "service run task");
 
             loadSettings();
+            //onContentChanged();
 
-            if (mCursor == null || mCursor.getCount() == 0 || !mDataValid){
+            if (!mDataValid){
+                onContentChanged();
+            }
+
+            if (mCursor == null || mCursor.getCount() == 0||!mDataValid ){
                 return;
             }
 
@@ -148,7 +136,8 @@ public class PictureService extends Service {
             final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
             showFullscreenPicture(fileName);
 
-            mHandler.postDelayed(mPictureRunnable, period*60*1000);
+            //TODO
+            mHandler.postDelayed(mPictureRunnable, period*60*100);
         }
     };
 
