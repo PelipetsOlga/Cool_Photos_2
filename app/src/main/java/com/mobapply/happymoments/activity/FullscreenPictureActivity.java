@@ -94,10 +94,11 @@ public class FullscreenPictureActivity extends AppCompatActivity {
     }
 
     private void hide(){
-        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+
             int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION// hide nav bar
                     | View.SYSTEM_UI_FLAG_FULLSCREEN; // hide status bar
 
