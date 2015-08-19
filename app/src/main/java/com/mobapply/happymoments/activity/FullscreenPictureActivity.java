@@ -43,16 +43,11 @@ public class FullscreenPictureActivity extends AppCompatActivity {
 
         parseIntent();
 
-        ImageView fullPicture = (ImageView) findViewById(R.id.full_picture);
-       // picturePath="/mnt/extSdCard/lalalupsi/140220-1953-6046.jpg";
-        fullPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
         ctx = this;
-        handler = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-                ctx.finish();
-            }
-        };
+        handler = new Handler();
+
+        ImageView fullPicture = (ImageView) findViewById(R.id.full_picture);
+        fullPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
     }
 
     private void parseIntent() {
@@ -63,19 +58,12 @@ public class FullscreenPictureActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Thread t = new Thread(new Runnable() {
+        handler.postDelayed(new Runnable() {
+            @Override
             public void run() {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(Constants.SHOW_TIME);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(0);
-
-
+                FullscreenPictureActivity.this.finish();
             }
-        });
-        t.start();
+        }, Constants.SHOW_TIME);
     }
 
     private void hideNavigationBar() {

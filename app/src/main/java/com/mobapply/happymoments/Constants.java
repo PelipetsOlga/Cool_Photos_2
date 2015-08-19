@@ -9,7 +9,7 @@ public final class Constants {
     public static final String SHUFFLE = "shuffle";
 
     public static final int DEFAULT_PERIOD_UPDATING = 24;
-    public static final long SHOW_TIME=300;
+    public static final long SHOW_TIME=1000;
 
 
     public static final String EXTRA_ID="extra_id";

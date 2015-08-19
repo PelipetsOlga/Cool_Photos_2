@@ -21,9 +21,8 @@ public class PictureService extends Service {
 
 
     public final static String TAG = "PictureService";
-    private Handler mHadler;
-    private Timer mTimer;
-    private PictureTimerTask mTimerTask;
+    private Handler mHandler;
+    //private Timer mTimer;
     private Cursor mCursor;
     private SharedPreferences mPref;
     private int period;
@@ -49,8 +48,11 @@ public class PictureService extends Service {
 
     public void onDestroy() {
         Log.d(TAG, "service stoped");
-        if(mTimer != null) {
-            mTimer.cancel();
+//        if(mTimer != null) {
+//            mTimer.cancel();
+//        }
+        if(mHandler!= null) {
+            mHandler.removeCallbacks(mPictureRunnable);
         }
         if(mCursor!= null && !mCursor.isClosed()) {
             mCursor.close();
@@ -66,9 +68,8 @@ public class PictureService extends Service {
     }
 
     private void init(){
-        mHadler = new Handler();
-        mTimer = new Timer();
-        mTimerTask = new PictureTimerTask();
+        mHandler = new Handler();
+        //mTimer = new Timer();
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         mCursor= getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " +  PictureProvider.PLAY, null, null);
 
@@ -80,7 +81,8 @@ public class PictureService extends Service {
     }
 
     private void process(){
-        mTimer.schedule(mTimerTask, period*60*1000 , period*60*1000);
+        //mTimer.schedule(mTimerTask, period*60*1000 , period*60*1000);
+        mHandler.postDelayed(mPictureRunnable, period*60*1000);
     }
 
     private void showFullscreenPicture(String fileName){
@@ -90,25 +92,50 @@ public class PictureService extends Service {
         startActivity(intent);
     }
 
-    class PictureTimerTask extends TimerTask {
+//    private TimerTask mTimerTask = new TimerTask() {
+//
+//        @Override
+//        public void run() {
+//            Log.d(TAG, "service run task");
+//            if (mCursor == null || mCursor.getCount() == 0){
+//                return;
+//            }
+//
+//            if (!mCursor.moveToNext()){
+//                if (!mCursor.moveToFirst()){
+//                  return;
+//                }
+//            };
+//
+//            final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
+//            showFullscreenPicture(fileName);
+//        }
+//    };
+
+    private Runnable mPictureRunnable = new Runnable() {
 
         @Override
         public void run() {
             Log.d(TAG, "service run task");
+
+            loadSettings();
+
             if (mCursor == null || mCursor.getCount() == 0){
                 return;
             }
 
             if (!mCursor.moveToNext()){
                 if (!mCursor.moveToFirst()){
-                  return;
+                    return;
                 }
             };
 
             final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
             showFullscreenPicture(fileName);
+
+            mHandler.postDelayed(mPictureRunnable, period*60*1000);
         }
-    }
+    };
 
 
 }
