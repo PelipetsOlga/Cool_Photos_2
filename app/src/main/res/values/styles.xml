@@ -18,7 +18,9 @@
     </style>
 
     <style name="AppThemeNoBar" parent="Theme.AppCompat.Light">
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">

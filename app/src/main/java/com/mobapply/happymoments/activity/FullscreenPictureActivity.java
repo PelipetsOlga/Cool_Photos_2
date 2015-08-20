@@ -30,6 +30,8 @@ public class FullscreenPictureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().setBackgroundDrawable(null);
+
         //hideBars();
         hide();
 
