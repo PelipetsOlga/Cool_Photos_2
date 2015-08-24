@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -49,7 +50,22 @@ public class FullscreenPictureActivity extends AppCompatActivity {
         fullPicture = (ImageView) findViewById(R.id.full_picture);
         try {
             //fullPicture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            Picasso.with(this).load(new File(picturePath)).into(fullPicture);
+             Picasso.with(this).load(new File(picturePath)).into(fullPicture, new Callback() {
+                 @Override
+                 public void onSuccess() {
+                     handler.postDelayed(new Runnable() {
+                         @Override
+                         public void run() {
+                             FullscreenPictureActivity.this.finish();
+                         }
+                     }, Constants.SHOW_TIME);
+                 }
+
+                 @Override
+                 public void onError() {
+                     FullscreenPictureActivity.this.finish();
+                 }
+             });
         }catch(Throwable t){
             t.printStackTrace();
             finish();
@@ -59,17 +75,6 @@ public class FullscreenPictureActivity extends AppCompatActivity {
     private void parseIntent() {
         Intent intent = getIntent();
         picturePath = intent.getStringExtra(Constants.EXTRA_FILE_NAME);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FullscreenPictureActivity.this.finish();
-            }
-        }, Constants.SHOW_TIME);
     }
 
     @Override
