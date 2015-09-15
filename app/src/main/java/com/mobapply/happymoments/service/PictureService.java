@@ -1,6 +1,7 @@
 package com.mobapply.happymoments.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
@@ -11,11 +12,20 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mobapply.happymoments.Constants;
+import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.activity.FullscreenPictureActivity;
 import com.mobapply.happymoments.provider.PictureProvider;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,6 +36,9 @@ public class PictureService extends Service {
 
     public final static String TAG = "PictureService";
     private Handler mHandler;
+    private Handler mHandler2;
+    private LayoutInflater mInflater;
+    private int statusBarHeight;
     //private Timer mTimer;
     private Cursor mCursor;
     private Random mRandom;
@@ -78,6 +91,9 @@ public class PictureService extends Service {
     private void init() {
         mRandom = new Random();
         mHandler = new Handler();
+        mHandler2 = new Handler();
+        mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        statusBarHeight = getStatusBarHeight();
         //mTimer = new Timer();
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         mCursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " + PictureProvider.PLAY, null, null);
@@ -96,11 +112,51 @@ public class PictureService extends Service {
         mHandler.postDelayed(mPictureRunnable, periodMinutes);
     }
 
+//    private void showFullscreenPicture(String fileName) {
+//        Intent intent = new Intent(this, FullscreenPictureActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.putExtra(Constants.EXTRA_FILE_NAME, fileName);
+//        startActivity(intent);
+//    }
+
     private void showFullscreenPicture(String fileName) {
-        Intent intent = new Intent(this, FullscreenPictureActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(Constants.EXTRA_FILE_NAME, fileName);
-        startActivity(intent);
+        final Toast toast = new Toast(getApplicationContext());
+        final View view = mInflater.inflate(R.layout.toast_fullscreen_picture, null);
+        final ImageView fullPicture = (ImageView)view.findViewById(R.id.full_picture);
+        toast.setView(view);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+
+        try {
+            Picasso.with(this).load(new File(fileName)).into(fullPicture, new Callback() {
+                @Override
+                public void onSuccess() {
+                    toast.show();
+
+                    mHandler2.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            toast.cancel();
+                        }
+                    }, Constants.SHOW_TIME);
+                }
+
+                @Override
+                public void onError() {
+                }
+            });
+        }catch(Throwable t){
+            t.printStackTrace();
+        }
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 
 

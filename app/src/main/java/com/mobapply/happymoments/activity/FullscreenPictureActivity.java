@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-public class FullscreenPictureActivity extends AppCompatActivity {
+public class FullscreenPictureActivity extends Activity {
     private Handler handler;
     private ImageView fullPicture;
     private String picturePath;
@@ -36,10 +36,10 @@ public class FullscreenPictureActivity extends AppCompatActivity {
         //hideBars();
         hide();
 
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
-            actionBar.hide();
-        }
+       // ActionBar actionBar = getSupportActionBar();
+       // if(actionBar != null) {
+       //     actionBar.hide();
+       // }
 
         setContentView(R.layout.activity_fullscreen_picture);
 

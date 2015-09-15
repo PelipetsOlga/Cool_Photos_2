@@ -2,11 +2,12 @@ package com.mobapply.happymoments.adapter;
 
 
 import android.content.Context;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 public class AlbumImageView  extends ImageView {
-
     public AlbumImageView(Context context) {
         super(context);
     }
