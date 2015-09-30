@@ -33,10 +33,31 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="Theme.Transparent2" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@android:color/transparent</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+             which is used to tint widgets -->
+        <item name="colorAccent">@color/color_selected_menu</item>
+
+        <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
+
+
+    </style>
+
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/color_selected_menu</item>
         <item name="android:textColorPrimary">@color/color_text_settings</item>
         <item name="android:background">@color/color_setting_background</item>
+    </style>
+
+    <style name="ColorSwitchStyle">
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="android:colorForeground">@android:color/black</item>
     </style>
 
 </resources>

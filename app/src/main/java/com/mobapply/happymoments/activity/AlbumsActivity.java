@@ -1,19 +1,25 @@
 package com.mobapply.happymoments.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.SwitchCompat;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
@@ -40,6 +46,10 @@ public class AlbumsActivity extends ActionBarActivity
     private GridView mGrid;
     private ActionBar actionBar;
     private Cursor cursor;
+    private SwitchCompat mSwitchMode;
+    private boolean modeConscious;
+    private boolean firstStart;
+    private SharedPreferences sPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +62,16 @@ public class AlbumsActivity extends ActionBarActivity
 
         initViews();
 
+        loadSettings();
+
+        showTutorial();
+
         fillData();
+    }
+
+    private void loadSettings(){
+        modeConscious = sPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
+        firstStart = sPref.getBoolean(Constants.FIRST_START, true);
     }
 
     private void setupNavigationDrawer() {
@@ -71,6 +90,8 @@ public class AlbumsActivity extends ActionBarActivity
         mGrid = (GridView) findViewById(R.id.gridAlbums);
         mFab = (FloatingActionButton) findViewById(R.id.fab_albums);
         mFab.setOnClickListener(this);
+        mSwitchMode = (SwitchCompat) findViewById(R.id.switch_mode);
+        sPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
     }
 
     private void fillData() {
@@ -103,6 +124,17 @@ public class AlbumsActivity extends ActionBarActivity
             }
         });
         mGrid.setAdapter(adapter);
+    }
+
+    private void showTutorial(){
+        if(firstStart) {
+            startActivity(new Intent(this, TutorialActivity.class));
+            firstStart = false;
+            SharedPreferences.Editor ed = sPref.edit();
+            ed.putBoolean(Constants.FIRST_START, firstStart);
+            modeConscious = firstStart;
+            ed.commit();
+        }
     }
 
     @Override
@@ -139,6 +171,22 @@ public class AlbumsActivity extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        MenuItem menuItem =menu.findItem(R.id.action_mode);
+        mSwitchMode = (SwitchCompat)MenuItemCompat.getActionView(menuItem).findViewById(R.id.actionbar_switch);
+        mSwitchMode.setChecked(modeConscious);
+        mSwitchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putBoolean(Constants.MODE_CONSCIOUS, isChecked);
+                modeConscious = isChecked;
+                ed.commit();
+
+                Toast toast = Toast.makeText(AlbumsActivity.this, modeConscious ? R.string.conscious : R.string.subconscious, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.RIGHT | Gravity.TOP, 50, 2*getStatusBarHeight());
+                toast.show();
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -146,6 +194,8 @@ public class AlbumsActivity extends ActionBarActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem selectAlbum = menu.findItem(R.id.action_select_albums);
         selectAlbum.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
+        loadSettings();
+        mSwitchMode.setChecked(modeConscious);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -180,4 +230,12 @@ public class AlbumsActivity extends ActionBarActivity
         stopService(new Intent(this, PictureService.class));
     }
 
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 }

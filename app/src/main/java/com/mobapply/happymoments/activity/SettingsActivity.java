@@ -24,8 +24,10 @@ public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences sPref;
     private DiscreteSeekBar mSeekBar;
     private SwitchCompat mSwitchShuffle;
+    private SwitchCompat mSwitchMode;
     private int period;
     private boolean shuffle;
+    private boolean modeConscious;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +57,14 @@ public class SettingsActivity extends AppCompatActivity {
     private void loadSettings(){
         sPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         period = sPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
-        shuffle = sPref.getBoolean(Constants.SHUFFLE, false);
+        shuffle = sPref.getBoolean(Constants.SHUFFLE, Constants.DEFAULT_SHUFFLE);
+        modeConscious = sPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
     }
 
     private void initViews(){
         mSeekBar = (DiscreteSeekBar) findViewById(R.id.seekbar);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
+        mSwitchMode = (SwitchCompat) findViewById(R.id.switch_mode);
     }
 
     private void init(){
@@ -92,6 +96,17 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putBoolean(Constants.SHUFFLE, isChecked);
                 shuffle = isChecked;
+                ed.commit();
+            }
+        });
+
+        mSwitchMode.setChecked(modeConscious);
+        mSwitchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putBoolean(Constants.MODE_CONSCIOUS, isChecked);
+                modeConscious = isChecked;
                 ed.commit();
             }
         });

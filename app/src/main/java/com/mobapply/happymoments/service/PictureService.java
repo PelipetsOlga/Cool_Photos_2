@@ -47,6 +47,8 @@ public class PictureService extends Service {
     private int period;
     private int periodMinutes;
     private boolean shuffle;
+    private boolean modeConscious;
+    private long showTime;
     private boolean started = false;
     private final ChangeObserver mChangeObserver = new ChangeObserver();
 
@@ -104,7 +106,9 @@ public class PictureService extends Service {
 
     private void loadSettings() {
         period = mPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
-        shuffle = mPref.getBoolean(Constants.SHUFFLE, false);
+        shuffle = mPref.getBoolean(Constants.SHUFFLE, Constants.DEFAULT_SHUFFLE);
+        modeConscious = mPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
+        showTime = modeConscious ? Constants.SHOW_TIME_CONSCIOUS :  Constants.SHOW_TIME_SUBCONSCIOUS;
         periodMinutes = period * 60 * 1000;
     }
 
@@ -138,7 +142,7 @@ public class PictureService extends Service {
                         public void run() {
                             toast.cancel();
                         }
-                    }, Constants.SHOW_TIME);
+                    }, showTime);
                 }
 
                 @Override

@@ -49,11 +49,11 @@ public class CreateAlbumDialog extends DialogFragment {
 
             }
         });
-
         builder.setView(view);
         builder.setCancelable(true);
-
-        return builder.create();
+        Dialog  dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(R.color.color_white_bg);
+        return dialog;
     }
 
     private void createAlbum(String title){
