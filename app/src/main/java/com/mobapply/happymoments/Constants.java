@@ -16,7 +16,7 @@ public final class Constants {
     public static final int DEFAULT_PERIOD_UPDATING = 1;
     public static final long SHOW_TIME=33;
 
-    public static final long SHOW_TIME_CONSCIOUS=1000;
+    public static final long SHOW_TIME_CONSCIOUS=2000;
     public static final long SHOW_TIME_SUBCONSCIOUS=33;
 
     public static final String EXTRA_ID="extra_id";

@@ -196,6 +196,8 @@ public class AlbumsActivity extends ActionBarActivity
         selectAlbum.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
         loadSettings();
         mSwitchMode.setChecked(modeConscious);
+        MenuItem actionMode =menu.findItem(R.id.action_mode);
+        actionMode.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
         return super.onPrepareOptionsMenu(menu);
     }
 

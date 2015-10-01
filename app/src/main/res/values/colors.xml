@@ -12,6 +12,6 @@
     <color name="color_selecting_image">#9930E4E0</color>
     <color name="color_end_gradient">#00000000</color>
     <color name="color_start_gradient">#BB000000</color>
-    <color name="color_switch_pink">#FF568A</color>
+    <color name="color_switch_pink">#FFFF568A</color>
     <color name="color_switch_white">#FFFFFFFF</color>
 </resources>
