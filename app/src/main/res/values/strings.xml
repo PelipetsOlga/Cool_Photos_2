@@ -51,6 +51,7 @@
     <string name="new_switch">New switch with 2 modes</string>
     <string name="conscious">Conscious</string>
     <string name="subconscious">Subconscious</string>
+    <string name="conscious_default">Conscious ( set by default )</string>
     <string name="conscious_text">In this mode you will see popup images. Set by default.</string>
     <string name="subconscious_text">In this mode, images will be shown as a 25 frame. You will not see them, but they may affect you subconscious.</string>
     <string name="done">DONE</string>
