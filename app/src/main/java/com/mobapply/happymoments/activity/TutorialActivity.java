@@ -1,48 +1,59 @@
 package com.mobapply.happymoments.activity;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
-import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
+import com.mobapply.happymoments.fragment.TutorialFirstFragment;
 
-public class TutorialActivity extends ActionBarActivity {
+/**
+ * Created by apelipets on 10/5/15.
+ */
+public class TutorialActivity  extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
+        replaceFragment(new TutorialFirstFragment());
 
-        findViewById(R.id.button_done).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        MenuItem menuItem =menu.findItem(R.id.action_mode);
-        SwitchCompat switchMode = (SwitchCompat)MenuItemCompat.getActionView(menuItem).findViewById(R.id.actionbar_switch);
-        switchMode.setEnabled(false);
-        menuItem =menu.findItem(R.id.action_select_albums);
-        menuItem.setEnabled(false);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void returnResult(final int result){
+        final Intent intent = new Intent();
+        //setResult(result, intent);
+        (new Handler()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AlbumsActivity.getInstance().onActivityResult(AlbumsActivity.TUTORIAL_REQUEST_CODE, result, intent);
+
+            }
+        }, 100);
+        finish();
+
     }
 }

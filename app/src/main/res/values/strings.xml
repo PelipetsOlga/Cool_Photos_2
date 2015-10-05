@@ -27,6 +27,7 @@
     <string name="dialog_hint">Enter a name</string>
     <string name="btn_save">Save</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="btn_next">Next</string>
 
     <string name="title_select_albums_activity">Select albums</string>
     <string name="ab_play_selected_albums">Play</string>
@@ -55,5 +56,6 @@
     <string name="conscious_text">In this mode you will see popup images. Set by default.</string>
     <string name="subconscious_text">In this mode, images will be shown as a 25 frame. You will not see them, but they may affect you subconscious.</string>
     <string name="done">DONE</string>
+    <string name="create_new_album">Create a new album</string>
 
 </resources>

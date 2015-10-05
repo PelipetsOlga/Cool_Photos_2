@@ -31,7 +31,7 @@ public class CreateAlbumDialog extends DialogFragment {
         view.setHint(getActivity().getResources().getString(R.string.dialog_hint));
         view.setPadding(16, 24, 16, 24);
         builder.setTitle(getActivity().getResources().getString(R.string.dialog_title));
-        builder.setPositiveButton(getActivity().getResources().getString(R.string.btn_save), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getActivity().getResources().getString(R.string.btn_next), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -69,5 +69,6 @@ public class CreateAlbumDialog extends DialogFragment {
         Uri newUri = getActivity().getContentResolver()
                 .insert(PictureProvider.ALBUM_CONTENT_URI, cv);
     };
+
 
 }

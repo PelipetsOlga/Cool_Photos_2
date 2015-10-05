@@ -3,6 +3,7 @@ package com.mobapply.happymoments.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -33,6 +34,10 @@ public class AlbumsActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
 
 
+    public static final int TUTORIAL_REQUEST_CODE = 1;
+
+    private static AlbumsActivity instance;
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -51,10 +56,16 @@ public class AlbumsActivity extends ActionBarActivity
     private boolean firstStart;
     private SharedPreferences sPref;
 
+    public static AlbumsActivity getInstance(){
+        return instance;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums);
+
+        instance = this;
 
         startService();
 
@@ -128,13 +139,28 @@ public class AlbumsActivity extends ActionBarActivity
 
     private void showTutorial(){
         if(firstStart) {
-            startActivity(new Intent(this, TutorialActivity.class));
+            startActivityForResult(new Intent(this, TutorialActivity.class), TUTORIAL_REQUEST_CODE);
             firstStart = false;
             SharedPreferences.Editor ed = sPref.edit();
             ed.putBoolean(Constants.FIRST_START, firstStart);
             modeConscious = firstStart;
             ed.commit();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case TUTORIAL_REQUEST_CODE:
+                    CreateAlbumDialog dialog = new CreateAlbumDialog();
+                    dialog.show(getFragmentManager(), null);
+                    break;
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
     }
 
     @Override
@@ -165,6 +191,12 @@ public class AlbumsActivity extends ActionBarActivity
     protected void onResume() {
         super.onResume();
         actionBar.setTitle(mTitle);
+    }
+
+    @Override
+    protected void onDestroy() {
+        instance = null;
+        super.onDestroy();
     }
 
     @Override
