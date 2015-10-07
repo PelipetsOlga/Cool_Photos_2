@@ -9,7 +9,6 @@
     <string name="action_sign_out">Sign Out &amp; Stop</string>
 
     <string name="title_navigation_drawer">My Posmo</string>
-    <string name="title_activity_select_album">SelectAlbumsActivity</string>
 
     <string name="ab_select_albums">Select albums</string>
     <string name="ab_add_picture">Add picture from Gallery</string>
@@ -37,12 +36,6 @@
     <string name="title_select_pictures_activity">Select moments</string>
     <string name="ab_share_selected_pictures">Share</string>
     <string name="ab_delete_selected_pictures">Delete</string>
-
-    <string name="title_activity_pictures">PicturesActivity</string>
-    <string name="title_activity_select_pictures">SelectPicturesActivity</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="title_activity_add_album">AddAlbumActivity</string>
-    <string name="title_activity_fullscreen_picture">FullscreenPictureActivity</string>
 
     <string name="moments_count">moments</string>
     <string name="now_playing">Now playing</string>
