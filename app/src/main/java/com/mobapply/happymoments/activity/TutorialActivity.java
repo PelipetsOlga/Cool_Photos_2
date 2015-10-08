@@ -46,13 +46,7 @@ public class TutorialActivity  extends ActionBarActivity {
     public void returnResult(final int result){
         final Intent intent = new Intent();
         //setResult(result, intent);
-        (new Handler()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AlbumsActivity.getInstance().onActivityResult(AlbumsActivity.TUTORIAL_REQUEST_CODE, result, intent);
-
-            }
-        }, 100);
+        AlbumsActivity.getInstance().onActivityResult(AlbumsActivity.TUTORIAL_REQUEST_CODE, result, intent);
         finish();
 
     }
