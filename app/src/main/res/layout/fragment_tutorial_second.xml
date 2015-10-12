@@ -2,13 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_white_bg"
+
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="46dp"
+        android:layout_marginRight="36dp"
         android:gravity="right"
         android:layout_above="@+id/bottom_container"
         android:layout_alignParentRight="true"
@@ -20,6 +20,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="25dp"
             android:layout_gravity="top"
+
             android:text="@string/create_new_album"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
@@ -27,6 +28,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_gravity="bottom"
             android:src="@drawable/ic_modal_arrow_bottom_36dp" />
     </LinearLayout>

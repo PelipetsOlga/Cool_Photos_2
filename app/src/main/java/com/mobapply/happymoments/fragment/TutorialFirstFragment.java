@@ -1,10 +1,10 @@
 package com.mobapply.happymoments.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +22,8 @@ import com.mobapply.happymoments.activity.TutorialActivity;
 public class TutorialFirstFragment extends Fragment {
 
 
+    private ActionBar actionBar;
+
     public TutorialFirstFragment() {
         // Required empty public constructor
     }
@@ -29,8 +31,10 @@ public class TutorialFirstFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,11 +43,15 @@ public class TutorialFirstFragment extends Fragment {
         view.findViewById(R.id.button_done).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((TutorialActivity)getActivity()).replaceFragment(new TutorialSecondFragment());
+                ((TutorialActivity) getActivity()).replaceFragment(new TutorialSecondFragment());
             }
         });
+
+
         return view;
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

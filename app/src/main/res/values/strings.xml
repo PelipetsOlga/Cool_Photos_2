@@ -27,6 +27,7 @@
     <string name="btn_save">Save</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_next">Next</string>
+    <string name="btn_done">Done</string>
 
     <string name="title_select_albums_activity">Select albums</string>
     <string name="ab_play_selected_albums">Play</string>

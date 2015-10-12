@@ -14,4 +14,10 @@
     <color name="color_start_gradient">#BB000000</color>
     <color name="color_switch_pink">#FFFF6195</color>
     <color name="color_switch_white">#FFFFFFFF</color>
+    <color name="color_hint">#bdbbb3</color>
+    <color name="color_text_below_icecream">#5d3431</color>
+    <color name="tutorial_actionbar">#fff6ee</color>
+    <color name="toast_custom_background">#DD707070</color>
+
+    <color name="color_dialog_new_album_stripe">#e0ddd5</color>
 </resources>

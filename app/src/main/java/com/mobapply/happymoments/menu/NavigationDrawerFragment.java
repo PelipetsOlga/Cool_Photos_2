@@ -1,29 +1,27 @@
 package com.mobapply.happymoments.menu;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.mobapply.happymoments.R;
-import com.mobapply.happymoments.activity.SettingsActivity;
-import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,12 +153,14 @@ public class NavigationDrawerFragment extends Fragment {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
+
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_menu_white_24dp,             /* nav drawer image to replace 'Up' caret */
+               // R.drawable.ic_menu_white_24dp,             /* nav drawer image to replace 'Up' caret */
+               null, //changed here
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -171,7 +171,8 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
                 actionBar.setTitle(currentTitle);
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                //mDrawerToggle.syncState();//here changed
             }
 
             @Override
@@ -181,7 +182,7 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
                 currentTitle = actionBar.getTitle().toString();
-                if (!mUserLearnedDrawer) {
+                 if (!mUserLearnedDrawer) {
                     // The user manually opened the drawer; store this flag to prevent auto-showing
                     // the navigation drawer automatically in the future.
                     mUserLearnedDrawer = true;
@@ -189,8 +190,8 @@ public class NavigationDrawerFragment extends Fragment {
                             .getDefaultSharedPreferences(getActivity());
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
-
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                   getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+              //  mDrawerToggle.syncState();//here changed
             }
         };
 
@@ -209,6 +210,7 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
     }
 
     private void selectItem(int position) {

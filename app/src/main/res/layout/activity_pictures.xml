@@ -102,7 +102,6 @@
                 </LinearLayout>
 
 
-
             </FrameLayout>
 
             <GridView
@@ -126,7 +125,7 @@
             android:id="@+id/fab_pictures"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="12dp"
             android:src="@drawable/ic_play_arrow_white_36dp"
             app:fabSize="normal"
             app:layout_anchor="@id/header"
@@ -141,22 +140,35 @@
         android:background="@drawable/repeatable_background_360dp"
         android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/eyescream_image"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/frame_with_icecream"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/empty_folder_button_360dp" />
+            android:layout_above="@+id/empty_text"
+            android:layout_alignParentTop="true">
+
+            <ImageView
+                android:id="@+id/eyescream_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/empty_folder_button_360dp" />
+        </FrameLayout>
 
         <TextView
+            android:id="@id/empty_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:lineSpacingMultiplier="1.5"
-            android:gravity="center"
             android:layout_marginBottom="50dp"
-            android:text="@string/empty_album_text" />
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.25"
+            android:text="@string/empty_album_text"
+            android:textColor="@color/color_text_below_icecream"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
     </RelativeLayout>
 

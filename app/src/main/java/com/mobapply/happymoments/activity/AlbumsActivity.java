@@ -1,8 +1,10 @@
 package com.mobapply.happymoments.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
@@ -16,10 +18,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobapply.happymoments.Constants;
@@ -56,7 +62,7 @@ public class AlbumsActivity extends ActionBarActivity
     private boolean firstStart;
     private SharedPreferences sPref;
 
-    public static AlbumsActivity getInstance(){
+    public static AlbumsActivity getInstance() {
         return instance;
     }
 
@@ -78,16 +84,31 @@ public class AlbumsActivity extends ActionBarActivity
         showTutorial();
 
         fillData();
+        //  adjustHomeButtonLayout();
+
     }
 
-    private void loadSettings(){
+    private void adjustHomeButtonLayout() {
+        ImageView view = (ImageView) findViewById(android.R.id.home);
+        if (view.getParent() instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view.getParent();
+            View upView = viewGroup.getChildAt(0);
+            if (upView != null && upView.getLayoutParams() instanceof FrameLayout.LayoutParams) {
+                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) upView.getLayoutParams();
+                layoutParams.width = 20;// **can give your own width**
+                upView.setLayoutParams(layoutParams);
+            }
+        }
+    }
+
+    private void loadSettings() {
         modeConscious = sPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
         firstStart = sPref.getBoolean(Constants.FIRST_START, true);
     }
 
     private void setupNavigationDrawer() {
         mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+                getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getResources().getString(R.string.action_home);
         restoreActionBar();
 
@@ -137,8 +158,8 @@ public class AlbumsActivity extends ActionBarActivity
         mGrid.setAdapter(adapter);
     }
 
-    private void showTutorial(){
-        if(firstStart) {
+    private void showTutorial() {
+        if (firstStart) {
             startActivityForResult(new Intent(this, TutorialActivity.class), TUTORIAL_REQUEST_CODE);
             firstStart = false;
             SharedPreferences.Editor ed = sPref.edit();
@@ -189,6 +210,8 @@ public class AlbumsActivity extends ActionBarActivity
         actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle(mTitle);
     }
 
@@ -208,8 +231,8 @@ public class AlbumsActivity extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
-        MenuItem menuItem =menu.findItem(R.id.action_mode);
-        mSwitchMode = (SwitchCompat)MenuItemCompat.getActionView(menuItem).findViewById(R.id.actionbar_switch);
+        MenuItem menuItem = menu.findItem(R.id.action_mode);
+        mSwitchMode = (SwitchCompat) MenuItemCompat.getActionView(menuItem).findViewById(R.id.actionbar_switch);
         mSwitchMode.setChecked(modeConscious);
         mSwitchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -220,7 +243,12 @@ public class AlbumsActivity extends ActionBarActivity
                 ed.commit();
 
                 Toast toast = Toast.makeText(AlbumsActivity.this, modeConscious ? R.string.conscious : R.string.subconscious, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.RIGHT | Gravity.TOP, 50, 2*getStatusBarHeight());
+                View view = toast.getView();
+                view.setBackgroundResource(R.drawable.toast_custom);
+                toast.setGravity(Gravity.RIGHT | Gravity.TOP, 50, 5 * getStatusBarHeight() / 2);
+                TextView text = (TextView) view.findViewById(android.R.id.message);
+                text.setTextSize(14);
+                text.setTextColor(Color.WHITE);
                 toast.show();
             }
         });
@@ -233,7 +261,7 @@ public class AlbumsActivity extends ActionBarActivity
         selectAlbum.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
         loadSettings();
         mSwitchMode.setChecked(modeConscious);
-        MenuItem actionMode =menu.findItem(R.id.action_mode);
+        MenuItem actionMode = menu.findItem(R.id.action_mode);
         actionMode.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
         return super.onPrepareOptionsMenu(menu);
     }
@@ -261,11 +289,11 @@ public class AlbumsActivity extends ActionBarActivity
         }
     }
 
-    private void startService(){
+    private void startService() {
         startService(new Intent(this, PictureService.class));
     }
 
-    private void stoptService(){
+    private void stoptService() {
         stopService(new Intent(this, PictureService.class));
     }
 
