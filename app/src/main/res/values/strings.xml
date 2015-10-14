@@ -38,7 +38,7 @@
     <string name="ab_share_selected_pictures">Share</string>
     <string name="ab_delete_selected_pictures">Delete</string>
 
-    <string name="moments_count">moments</string>
+    <string name="moments_count">items</string>
     <string name="now_playing">Now playing</string>
 
     <string name="error_picture">Loading picture error</string>

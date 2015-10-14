@@ -97,7 +97,7 @@ public class HappyMomentsUtils {
                     rotate = 270;
                     break;
             }
-        } catch (IOException e1) {
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
 
