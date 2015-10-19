@@ -166,22 +166,24 @@ public class HappyMomentsUtils {
     }
 
     public static String getImagePath(Uri uri, Activity ctx) {
-        if (uri == null)
-            return null;
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = ctx.managedQuery(uri, projection, null, null,
-                null);
-        if (cursor != null) {
-            try {
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                if (cursor.moveToFirst()) {
-                    return cursor.getString(column_index);
-                }
-            } catch(Throwable t){
-                t.printStackTrace();
-            }
-        }
-        return uri.getPath();
+//        if (uri == null)
+//            return null;
+//        String[] projection = {MediaStore.Images.Media.DATA};
+//        Cursor cursor = ctx.managedQuery(uri, projection, null, null,
+//                null);
+//        if (cursor != null) {
+//            try {
+//                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//                if (cursor.moveToFirst()) {
+//                    return cursor.getString(column_index);
+//                }
+//            } catch(Throwable t){
+//                t.printStackTrace();
+//            }
+//        }
+//        return uri.getPath();
+
+        return FileUtils.getPath(ctx, uri);
     }
 
     public static boolean deleteDirectory(String path) {
@@ -202,6 +204,9 @@ public class HappyMomentsUtils {
         }
         return(folder.delete() );
     }
+
+
+
 
 
 

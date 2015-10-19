@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@color/greed_background"
         android:padding="4dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -145,7 +145,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/repeatable_background_360dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <FrameLayout
             android:id="@+id/frame_with_icecream"
@@ -159,6 +159,7 @@
                 android:id="@+id/eyescream_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/empty_folder_button_360dp" />
         </FrameLayout>
 
