@@ -38,7 +38,7 @@
     <string name="ab_share_selected_pictures">Share</string>
     <string name="ab_delete_selected_pictures">Delete</string>
 
-    <string name="moments_count">items</string>
+    <string name="moments_count">images</string>
     <string name="now_playing">Now playing</string>
 
     <string name="error_picture">Loading picture error</string>
@@ -51,5 +51,6 @@
     <string name="subconscious_text">In this mode, images will be shown as a 25 frame. You will not see them, but they may affect you subconscious.</string>
     <string name="done">DONE</string>
     <string name="create_new_album">Create a new album</string>
+    <string name="empty_album">Empty album</string>
 
 </resources>

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.provider.PictureProvider;
@@ -37,6 +38,15 @@ public class AlbumViewBinder implements SimpleCursorAdapter.ViewBinder {
         if (cursor == null)
             return false;
         switch (view.getId()) {
+            case R.id.tv_album_count:
+                TextView countTextView  = (TextView) view;
+                int count = cursor.getInt(cursor.getColumnIndex(PictureProvider.ALBUM_COUNT));
+                if(count == 0){
+                    countTextView.setText(R.string.empty_album);
+                } else{
+                    countTextView.setText(count + " " + ctx.getString(R.string.moments_count));
+                }
+                return true;
             case R.id.picture:
                 AlbumImageView picture = (AlbumImageView) view;
                 String fileFirstPicturePath = cursor.getString(cursor.getColumnIndex(PictureProvider.ALBUM_FILE));
