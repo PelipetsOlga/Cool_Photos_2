@@ -17,10 +17,11 @@
     <string name="chooser_gallery">Select picture</string>
     <string name="empty_album_text">Tap on the eyescream icon to add your\nPositive Mood</string>
 
-    <string name="tv_min">min</string>
+    <string name="tv_min">minutes</string>
     <string name="tv_content_updating">Content updating</string>
     <string name="tv_shuffle_images">Shuffle images</string>
     <string name="tv_mode">Subconscious/Conscious</string>
+    <string name="tv_delay">Delay between slides</string>
 
     <string name="dialog_title">New album</string>
     <string name="dialog_hint">Enter a name</string>

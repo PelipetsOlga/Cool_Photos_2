@@ -36,28 +36,32 @@
             android:textOn="" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="left"
+        android:text="@string/tv_delay"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/color_text_settings" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-
+        <SeekBar
             android:id="@+id/seekbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingTop="46dp"
-            android:paddingLeft="-6dp"
-            app:dsb_indicatorColor="@color/color_selected_menu"
-            app:dsb_max="20"
-            app:dsb_min="1"
-            app:dsb_progressColor="@color/color_selected_menu"
-            app:dsb_trackColor="@color/seekbar_background" />
+            android:max="20" />
 
 
         <TextView
+            android:id="@+id/tv_delay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
@@ -67,15 +71,6 @@
             android:textColor="@color/color_selected_menu" />
     </LinearLayout>
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="10dp"
-        android:text="@string/tv_content_updating"
-        android:textAppearance="?android:attr/textAppearance"
-        android:textColor="@color/color_text_settings" />
 
     <LinearLayout
         android:layout_width="match_parent"

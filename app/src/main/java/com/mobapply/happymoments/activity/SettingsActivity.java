@@ -2,6 +2,11 @@ package com.mobapply.happymoments.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +14,9 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
+
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 
@@ -22,7 +30,8 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private SharedPreferences sPref;
-    private DiscreteSeekBar mSeekBar;
+    private SeekBar mSeekBar;
+    private TextView mDelay;
     private SwitchCompat mSwitchShuffle;
     private SwitchCompat mSwitchMode;
     private int period;
@@ -62,29 +71,33 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        mSeekBar = (DiscreteSeekBar) findViewById(R.id.seekbar);
+        mDelay = (TextView)findViewById(R.id.tv_delay);
+        mSeekBar = (SeekBar) findViewById(R.id.seekbar);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
         mSwitchMode = (SwitchCompat) findViewById(R.id.switch_mode);
     }
 
+
     private void init(){
         mSeekBar.setProgress(period);
-        mSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+        mDelay.setText(period + " " + getString(R.string.tv_min));
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(DiscreteSeekBar discreteSeekBar, int i, boolean b) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                period = progress;
+                mDelay.setText(period + " " + getString(R.string.tv_min));
                 SharedPreferences.Editor ed = sPref.edit();
-                ed.putInt(Constants.PERIOD_UPDATING, i);
-                period = i;
+                ed.putInt(Constants.PERIOD_UPDATING, progress);
                 ed.commit();
             }
 
             @Override
-            public void onStartTrackingTouch(DiscreteSeekBar discreteSeekBar) {
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(DiscreteSeekBar discreteSeekBar) {
+            public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });

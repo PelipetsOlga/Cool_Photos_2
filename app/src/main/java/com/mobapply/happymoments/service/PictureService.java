@@ -1,5 +1,8 @@
 package com.mobapply.happymoments.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +14,7 @@ import android.database.DataSetObserver;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
+import com.mobapply.happymoments.activity.AlbumsActivity;
 import com.mobapply.happymoments.activity.FullscreenPictureActivity;
 import com.mobapply.happymoments.provider.PictureProvider;
 import com.squareup.picasso.Callback;
@@ -51,13 +56,14 @@ public class PictureService extends Service {
     private long showTime;
     private boolean started = false;
     private final ChangeObserver mChangeObserver = new ChangeObserver();
-
+    private NotificationManager nm;
 
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "service started");
         init();
         loadSettings();
+        sendNotif();
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -80,6 +86,7 @@ public class PictureService extends Service {
         if (mCursor != null && !mCursor.isClosed()) {
             mCursor.close();
         }
+        cancelNotif();
         super.onDestroy();
     }
 
@@ -91,6 +98,7 @@ public class PictureService extends Service {
     }
 
     private void init() {
+        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mRandom = new Random();
         mHandler = new Handler();
         mHandler2 = new Handler();
@@ -152,6 +160,35 @@ public class PictureService extends Service {
         }catch(Throwable t){
             t.printStackTrace();
         }
+    }
+
+    void sendNotif() {
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launch_status_24dp)
+                        .setOngoing(true)
+                        .setContentTitle("Positta")
+                        .setContentText("Running");
+
+        Intent resultIntent = new Intent(this, AlbumsActivity.class);
+        resultIntent.putExtra(Constants.EXTRA_STOP_SERVICE, true);
+
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+
+        nm.notify(1, mBuilder.build());
+    }
+
+    void cancelNotif() {
+        nm.cancel(1);
     }
 
     public int getStatusBarHeight() {
