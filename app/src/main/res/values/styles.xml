@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/color_selected_menu</item>
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
+        <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

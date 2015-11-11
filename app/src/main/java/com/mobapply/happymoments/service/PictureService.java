@@ -166,7 +166,7 @@ public class PictureService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_launch_status_24dp)
+                        .setSmallIcon(R.mipmap.ic_launcher)
                         .setOngoing(true)
                         .setContentTitle("Positta")
                         .setContentText("Running");
