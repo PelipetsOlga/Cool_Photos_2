@@ -166,10 +166,10 @@ public class PictureService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.ic_launch_status_24dp)
                         .setOngoing(true)
-                        .setContentTitle("Positta")
-                        .setContentText("Running");
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.running));
 
         Intent resultIntent = new Intent(this, AlbumsActivity.class);
         resultIntent.putExtra(Constants.EXTRA_STOP_SERVICE, true);

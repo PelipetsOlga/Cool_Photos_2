@@ -53,5 +53,6 @@
     <string name="done">DONE</string>
     <string name="create_new_album">Create a new album</string>
     <string name="empty_album">Empty album</string>
+    <string name="running">Running</string>
 
 </resources>
