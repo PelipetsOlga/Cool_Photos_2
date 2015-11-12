@@ -10,7 +10,7 @@
         </shape>
     </item>
     <!-- CONTENT LAYER -->
-    <item android:bottom="1dp" android:right="1dp">
+    <item android:bottom="1dp" >
         <shape android:shape="oval">
             <solid android:color="@color/color_switch_white" />
             <size
