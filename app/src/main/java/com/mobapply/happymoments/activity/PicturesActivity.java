@@ -1,6 +1,9 @@
 package com.mobapply.happymoments.activity;
 
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -8,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.CoordinatorLayout;
@@ -40,6 +44,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.concurrent.Executor;
 
 public class PicturesActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -210,12 +215,19 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         // choose photo from gallery
         Intent intentGallery = new Intent();
         intentGallery.setType("image/*");
-        intentGallery
-                .setAction(Intent.ACTION_GET_CONTENT);
+        intentGallery.setAction(Intent.ACTION_GET_CONTENT);
+        allowMultiple(intentGallery);
         startActivityForResult(
                 Intent.createChooser(intentGallery,
                         getResources().getString(R.string.chooser_gallery)),
                 Constants.REQUEST_CODE_GALLERY);
+    }
+
+    @SuppressLint("NewApi")
+    private void allowMultiple(Intent intent){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        }
     }
 
     private void capturePicture() {
@@ -340,6 +352,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         updateLayout();
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         selectMenu = false;
@@ -351,13 +364,29 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             }
         } else if (requestCode == Constants.REQUEST_CODE_GALLERY) {
             if (resultCode == RESULT_OK && data != null) {
-                Uri selectedImageUri = data.getData();
-                String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
-                File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
-                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+                if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) && (data.getData()== null))
+                {
+                    ClipData clipdata = data.getClipData();
+                    for (int i=0; i<clipdata.getItemCount();i++) {
+                        Uri selectedImageUri = clipdata.getItemAt(i).getUri();
+                        String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
+                        File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
+                        File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
 
-                AddPictureAsyncTask task = new AddPictureAsyncTask();
-                task.execute(selectedImagePath, this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
+                        AddPictureAsyncTask task = new AddPictureAsyncTask();
+                        task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, selectedImagePath, this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
+                    }
+                } else{
+                    Uri selectedImageUri = data.getData();
+                    String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
+                    File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
+                    File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+
+                    AddPictureAsyncTask task = new AddPictureAsyncTask();
+                    task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, selectedImagePath, this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
+
+                }
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
