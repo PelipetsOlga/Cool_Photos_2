@@ -57,6 +57,7 @@ public class PictureService extends Service {
     private boolean started = false;
     private final ChangeObserver mChangeObserver = new ChangeObserver();
     private NotificationManager nm;
+    private boolean firstShown = false;
 
     public void onCreate() {
         super.onCreate();
@@ -228,7 +229,6 @@ public class PictureService extends Service {
                         return;
                     }
                 }
-                ;
             }
 
             final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
@@ -240,6 +240,17 @@ public class PictureService extends Service {
     protected void onContentChanged() {
         if (mCursor != null && !mCursor.isClosed()) {
             mDataValid = mCursor.requery();
+            if(mDataValid && !firstShown && mCursor.moveToFirst() &&  mCursor.getCount() == 1){
+                firstShown = true;
+                final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
+                mHandler.postDelayed(new Runnable() {
+                                         @Override
+                                         public void run() {
+                                             showFullscreenPicture(fileName);
+
+                                         }
+                                     },2000);
+            }
         }
     }
 
