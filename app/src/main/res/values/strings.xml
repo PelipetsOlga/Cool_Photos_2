@@ -17,7 +17,8 @@
     <string name="chooser_gallery">Select picture</string>
     <string name="empty_album_text">Tap on the eyescream icon to add your\nPositive Mood</string>
 
-    <string name="tv_min">minutes</string>
+    <string name="minutes">minutes</string>
+    <string name="minute">minute</string>
     <string name="tv_content_updating">Content updating</string>
     <string name="tv_shuffle_images">Shuffle images</string>
     <string name="tv_mode">Subconscious/Conscious</string>

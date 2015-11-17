@@ -80,12 +80,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void init(){
         mSeekBar.setProgress(period-1);
-        mDelay.setText(period + " " + getString(R.string.tv_min));
+        mDelay.setText(period + " " + (period > 1 ? getString(R.string.minutes) : getString(R.string.minute)));
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 period = progress+1;
-                mDelay.setText(period + " " + getString(R.string.tv_min));
+                mDelay.setText(period + " " +(period > 1 ? getString(R.string.minutes) : getString(R.string.minute)));
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putInt(Constants.PERIOD_UPDATING, period);
                 ed.commit();
