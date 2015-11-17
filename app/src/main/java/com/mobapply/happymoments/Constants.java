@@ -24,7 +24,7 @@ public final class Constants {
     public static final String EXTRA_TITLE="extra_title";
     public static final String EXTRA_FILE_NAME="extra_file_name";
     public static final String EXTRA_STOP_SERVICE="extra_stop_service";
-
+    public static final String EXTRA_ADD_PICTURE="extra_add_picture";
 
     public static final int REQUEST_CODE_PHOTO=33;
     public static final int REQUEST_CODE_GALLERY=34;

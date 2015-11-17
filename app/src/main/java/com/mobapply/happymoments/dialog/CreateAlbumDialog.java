@@ -1,5 +1,9 @@
 package com.mobapply.happymoments.dialog;
 
+import android.app.Activity;
+import android.content.ContentUris;
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,10 +12,13 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
 import com.mobapply.happymoments.activity.AlbumsActivity;
+import com.mobapply.happymoments.activity.PicturesActivity;
 import com.mobapply.happymoments.provider.PictureProvider;
 import com.mobapply.happymoments.utils.HappyMomentsUtils;
 
@@ -40,7 +47,8 @@ public class CreateAlbumDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 String title = view.getText().toString();
                 if (!TextUtils.isEmpty(title)) {
-                    createAlbum(title);
+                    long id = createAlbum(title);
+                    showPicturesPage(id, 0, title);
                 }
             }
         });
@@ -60,7 +68,7 @@ public class CreateAlbumDialog extends DialogFragment {
         return dialog;
     }
 
-    private void createAlbum(String title){
+    private long createAlbum(String title){
         Calendar calendar = Calendar.getInstance();
         Long date = calendar.getTimeInMillis();
         String folderPath = HappyMomentsUtils.getNewAlbumPath(date);
@@ -72,7 +80,19 @@ public class CreateAlbumDialog extends DialogFragment {
         cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
         Uri newUri = getActivity().getContentResolver()
                 .insert(PictureProvider.ALBUM_CONTENT_URI, cv);
+        return ContentUris.parseId(newUri);
     };
+
+    private void showPicturesPage(long id, int count, String title){
+        Intent intent = new Intent(getActivity(), PicturesActivity.class);
+        intent.putExtra(Constants.EXTRA_ID, id);
+        intent.putExtra(Constants.EXTRA_COUNT, count);
+        intent.putExtra(Constants.EXTRA_TITLE, title);
+        intent.putExtra(Constants.EXTRA_ADD_PICTURE, true);
+
+        startActivity(intent);
+
+    }
 
 
 }

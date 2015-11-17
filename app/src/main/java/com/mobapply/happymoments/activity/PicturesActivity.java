@@ -3,6 +3,7 @@ package com.mobapply.happymoments.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -68,6 +70,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     private FloatingActionButton fab;
     private int isPlaying = PictureProvider.PlAY_NOT;
 
+    private boolean isAddPicture = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +90,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         fillData();
 
         updateFAB();
+
+        addPictureForEmpty();
     }
 
     private void parseIntent() {
@@ -93,6 +99,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         idAlbum = intent.getLongExtra(Constants.EXTRA_ID, 0);
         countPictures = intent.getIntExtra(Constants.EXTRA_COUNT, 0);
         titleAlbum = intent.getStringExtra(Constants.EXTRA_TITLE);
+        isAddPicture = intent.getBooleanExtra(Constants.EXTRA_ADD_PICTURE, false);
     }
 
     private void updateLayout() {
@@ -124,6 +131,12 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_play_arrow_white_36dp));
         } else {
             fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_pause_white_36dp));
+        }
+    }
+
+    private void addPictureForEmpty(){
+        if(isAddPicture){
+            selectPicture();
         }
     }
 
