@@ -56,4 +56,7 @@
     <string name="empty_album">Empty album</string>
     <string name="running">Running</string>
 
+    <string name="select_all">Select All</string>
+    <string name="clear">Clear</string>
+
 </resources>

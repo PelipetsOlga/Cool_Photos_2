@@ -15,10 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -34,7 +36,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SelectPicturesActivity extends AppCompatActivity {
+public class SelectPicturesActivity extends AppCompatActivity implements View.OnClickListener{
 
     private long idAlbum;
     private int countPictures;
@@ -54,6 +56,7 @@ public class SelectPicturesActivity extends AppCompatActivity {
     private Cursor cursor;
     private long idHeaderPicture = 0;
     private ImageView selectingHeader;
+    private SimpleCursorAdapter adapter;
 
 
     @Override
@@ -102,6 +105,7 @@ public class SelectPicturesActivity extends AppCompatActivity {
         View mCustomView = mInflater.inflate(R.layout.actionbar_select, null);
         tvTitle = (TextView) mCustomView.findViewById(R.id.title_text);
         tvTitle.setText(titleActivity);
+        mCustomView.findViewById(R.id.title_drop_down).setOnClickListener(this);
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
     }
@@ -119,7 +123,7 @@ public class SelectPicturesActivity extends AppCompatActivity {
 
         String from[] = {PictureProvider.PICTURE_FILE_PREVIEW, PictureProvider.PICTURE_ID};
         int to[] = {R.id.picture, R.id.selecting_picture};
-        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+        adapter = new SimpleCursorAdapter(this,
                 R.layout.item_picture, cursor, from, to);
 
         PicturesViewBinder binder = new PicturesViewBinder(this);
@@ -291,8 +295,52 @@ public class SelectPicturesActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
-        return super.
+        return super.onOptionsItemSelected(item);
+    }
 
-                onOptionsItemSelected(item);
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.title_drop_down:
+                PopupMenu popupMenu = new PopupMenu(this, v);
+                popupMenu.inflate(R.menu.menu_popup);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+
+                            case R.id.action_select_all:
+                                setPictures.add(idHeaderPicture);
+                                selectingHeader.setVisibility(View.VISIBLE);
+                                for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
+                                    long id = cursor.getLong(cursor.getColumnIndex(PictureProvider.ALBUM_ID));
+                                    setPictures.add(id);
+                                }
+                                adapter.notifyDataSetChanged();
+                                tvTitle.setText("(" + setPictures.size() + ")");
+                                showActions = true;
+                                invalidateOptionsMenu();
+                                return true;
+                            case R.id.action_clear:
+                                tvTitle.setText(titleActivity);
+                                setPictures.clear();
+                                selectingHeader.setVisibility(View.GONE);
+                                adapter.notifyDataSetChanged();
+                                tvTitle.setText(titleActivity);
+                                showActions = false;
+                                invalidateOptionsMenu();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                        });
+
+                popupMenu.show();
+            break;
+        }
+
     }
 }
