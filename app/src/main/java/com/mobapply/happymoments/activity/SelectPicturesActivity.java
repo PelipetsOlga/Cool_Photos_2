@@ -336,7 +336,7 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                                 return false;
                         }
                     }
-                        });
+                });
 
                 popupMenu.show();
             break;

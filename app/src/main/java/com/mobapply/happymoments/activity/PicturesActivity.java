@@ -44,7 +44,11 @@ import com.mobapply.happymoments.provider.PictureProvider;
 import com.mobapply.happymoments.utils.HappyMomentsUtils;
 import com.squareup.picasso.Picasso;
 
+import net.yazeed44.imagepicker.model.ImageEntry;
+import net.yazeed44.imagepicker.util.Picker;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.Executor;
 
@@ -224,24 +228,55 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         llIsPlaying = (LinearLayout) findViewById(R.id.ll_is_playing);
     }
 
-    private void selectPicture() {
-        // choose photo from gallery
-        Intent intentGallery = new Intent();
-        intentGallery.setType("image/*");
-        intentGallery.setAction(Intent.ACTION_GET_CONTENT);
-        allowMultiple(intentGallery);
-        startActivityForResult(
-                Intent.createChooser(intentGallery,
-                        getResources().getString(R.string.chooser_gallery)),
-                Constants.REQUEST_CODE_GALLERY);
+
+
+    private void selectPicture(){
+        new Picker.Builder(this,new MyPickListener(),R.style.MIP_theme)
+                .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
+                .build()
+                .startActivity();
     }
 
-    @SuppressLint("NewApi")
-    private void allowMultiple(Intent intent){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+    private class MyPickListener implements Picker.PickListener
+    {
+        @Override
+        public void onPickedSuccessfully(final ArrayList<ImageEntry> images)
+        {
+            selectMenu = false;
+            for (ImageEntry image : images) {
+                String selectedImagePath = image.path;
+                File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
+                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+
+                AddPictureAsyncTask task = new AddPictureAsyncTask();
+                task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, selectedImagePath, PicturesActivity.this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
+            }
+        }
+
+        @Override
+        public void onCancel(){
+            selectMenu = false;
         }
     }
+
+//    private void selectPicture() {
+//        // choose photo from gallery
+//        Intent intentGallery = new Intent();
+//        intentGallery.setType("image/*");
+//        intentGallery.setAction(Intent.ACTION_GET_CONTENT);
+//        allowMultiple(intentGallery);
+//        startActivityForResult(
+//                Intent.createChooser(intentGallery,
+//                        getResources().getString(R.string.chooser_gallery)),
+//                Constants.REQUEST_CODE_GALLERY);
+//    }
+
+//    @SuppressLint("NewApi")
+//    private void allowMultiple(Intent intent){
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+//            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+//        }
+//    }
 
     private void capturePicture() {
         Intent intentCapture = new Intent(
