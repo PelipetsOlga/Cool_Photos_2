@@ -243,14 +243,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         public void onPickedSuccessfully(final ArrayList<ImageEntry> images)
         {
             selectMenu = false;
-            for (ImageEntry image : images) {
-                String selectedImagePath = image.path;
-                File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
-                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
-
-                AddPictureAsyncTask task = new AddPictureAsyncTask();
-                task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, selectedImagePath, PicturesActivity.this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
-            }
+            AddPicturesAsyncTask task = new AddPicturesAsyncTask();
+            task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, PicturesActivity.this, images);
         }
 
         @Override
@@ -535,6 +529,98 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             progressBar.setVisibility(View.GONE);
             if (aBoolean) {
                 countPictures++;
+                invalidateOptionsMenu();
+                updateLayout();
+                refreshHeader();
+            }else{
+                Toast.makeText(PicturesActivity.this, R.string.error_picture, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+
+    private class AddPicturesAsyncTask extends AsyncTask<Object, Void, Boolean> {
+
+        private ArrayList<ImageEntry> images;
+
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... param) {
+            AppCompatActivity ctx = (AppCompatActivity) param[0];
+            images = (ArrayList<ImageEntry>) param[1];
+
+            for (ImageEntry image : images) {
+                String selectedImagePath = image.path;
+                File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
+                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+
+                String oldPicturePath  = image.path;
+                String newPicturePath = pictureFile.getAbsolutePath();
+                String previewPath = previewFile.getAbsolutePath();
+
+                boolean done = HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+
+                if (!done) {
+                    break;
+                }
+
+                HappyMomentsUtils.generatePreview(newPicturePath, previewPath);
+
+                Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
+                Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);
+                int countAlbum = 0;
+                int isPlayingAlbum = PictureProvider.PlAY_NOT;
+                boolean isFirstPicture = false;
+                if (albumQuery.moveToFirst()) {
+                    isPlayingAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
+                    countAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
+                    ContentValues cvAlbum = new ContentValues();
+                    if (countAlbum == 0) {
+                        // add first picture to empty album
+                        cvAlbum.put(PictureProvider.ALBUM_FILE, newPicturePath);
+                        cvAlbum.put(PictureProvider.ALBUM_FILE_PREVIEW, previewPath);
+                        isFirstPicture = true;
+                    }
+                    // change count of pictures in the album
+                    cvAlbum.put(PictureProvider.ALBUM_COUNT, countAlbum + 1);
+                    getContentResolver().update(uriAlbum, cvAlbum, null, null);
+                }
+
+                Calendar calendar = Calendar.getInstance();
+                Long date = calendar.getTimeInMillis();
+                ContentValues cv = new ContentValues();
+                cv.put(PictureProvider.PICTURE_ALBUM_ID, idAlbum);
+                cv.put(PictureProvider.PICTURE_DATE, date);
+                cv.put(PictureProvider.PICTURE_IS_PLAY, isPlayingAlbum);
+                cv.put(PictureProvider.PICTURE_FILE, newPicturePath);
+                cv.put(PictureProvider.PICTURE_FILE_PREVIEW, previewPath);
+                if (isFirstPicture) {
+                    cv.put(PictureProvider.PICTURE_IS_MAIN, PictureProvider.MAIN);
+                } else {
+                    cv.put(PictureProvider.PICTURE_IS_MAIN, PictureProvider.NOT_MAIN);
+                }
+                cv.put(PictureProvider.ALBUM_IS_PLAY, PictureProvider.PlAY_NOT);
+                Uri newUri = getContentResolver()
+                        .insert(PictureProvider.PICTURE_CONTENT_URI, cv);
+            }
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            progressBar.setVisibility(View.GONE);
+            if (aBoolean) {
+                countPictures = countPictures + images.size();
                 invalidateOptionsMenu();
                 updateLayout();
                 refreshHeader();
