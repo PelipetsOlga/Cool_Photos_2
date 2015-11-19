@@ -305,6 +305,11 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
             case R.id.title_drop_down:
                 PopupMenu popupMenu = new PopupMenu(this, v);
                 popupMenu.inflate(R.menu.menu_popup);
+                if (setPictures.isEmpty()){
+                    popupMenu.getMenu().findItem(R.id.action_clear).setVisible(false);
+                }else{
+                    popupMenu.getMenu().findItem(R.id.action_clear).setVisible(true);
+                }
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
                     @Override
