@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HappyMoments.iml" filepath="$PROJECT_DIR$/HappyMoments.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/posmo-android.iml" filepath="$PROJECT_DIR$/posmo-android.iml" />
     </modules>
   </component>
 </project>

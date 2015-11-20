@@ -150,6 +150,9 @@ public class HappyMomentsUtils {
         opt.inSampleSize = scaleFactor;
         opt.inPurgeable = true;
         b = BitmapFactory.decodeFile(bifFilePath, opt);
+        if(b == null){
+            return;
+        }
 
         FileOutputStream out = null;
         try {

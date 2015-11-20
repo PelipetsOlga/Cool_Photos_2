@@ -1,5 +1,8 @@
 package com.mobapply.happymoments.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +14,7 @@ import android.database.DataSetObserver;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 
 import com.mobapply.happymoments.Constants;
 import com.mobapply.happymoments.R;
+import com.mobapply.happymoments.activity.AlbumsActivity;
 import com.mobapply.happymoments.activity.FullscreenPictureActivity;
 import com.mobapply.happymoments.provider.PictureProvider;
 import com.squareup.picasso.Callback;
@@ -51,13 +56,15 @@ public class PictureService extends Service {
     private long showTime;
     private boolean started = false;
     private final ChangeObserver mChangeObserver = new ChangeObserver();
-
+    private NotificationManager nm;
+    private boolean firstShown = false;
 
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "service started");
         init();
         loadSettings();
+        sendNotif();
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -80,6 +87,7 @@ public class PictureService extends Service {
         if (mCursor != null && !mCursor.isClosed()) {
             mCursor.close();
         }
+        cancelNotif();
         super.onDestroy();
     }
 
@@ -91,6 +99,7 @@ public class PictureService extends Service {
     }
 
     private void init() {
+        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mRandom = new Random();
         mHandler = new Handler();
         mHandler2 = new Handler();
@@ -154,6 +163,35 @@ public class PictureService extends Service {
         }
     }
 
+    void sendNotif() {
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launch_status_24dp)
+                        .setOngoing(true)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.running));
+
+        Intent resultIntent = new Intent(this, AlbumsActivity.class);
+        resultIntent.putExtra(Constants.EXTRA_STOP_SERVICE, true);
+
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+
+        nm.notify(1, mBuilder.build());
+    }
+
+    void cancelNotif() {
+        nm.cancel(1);
+    }
+
     public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -191,7 +229,6 @@ public class PictureService extends Service {
                         return;
                     }
                 }
-                ;
             }
 
             final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
@@ -203,6 +240,17 @@ public class PictureService extends Service {
     protected void onContentChanged() {
         if (mCursor != null && !mCursor.isClosed()) {
             mDataValid = mCursor.requery();
+            if(mDataValid && !firstShown && mCursor.moveToFirst() &&  mCursor.getCount() == 1){
+                firstShown = true;
+                final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
+                mHandler.postDelayed(new Runnable() {
+                                         @Override
+                                         public void run() {
+                                             showFullscreenPicture(fileName);
+
+                                         }
+                                     },2000);
+            }
         }
     }
 

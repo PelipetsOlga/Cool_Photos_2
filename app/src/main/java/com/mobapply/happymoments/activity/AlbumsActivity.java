@@ -73,6 +73,12 @@ public class AlbumsActivity extends ActionBarActivity
 
         instance = this;
 
+        if (getIntent().getExtras()!= null && getIntent().getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)){
+            stoptService();
+            finish();
+            return;
+        }
+
         startService();
 
         setupNavigationDrawer();
@@ -86,6 +92,16 @@ public class AlbumsActivity extends ActionBarActivity
         fillData();
         //  adjustHomeButtonLayout();
 
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)){
+            stoptService();
+            finish();
+            return;
+        }
     }
 
     private void adjustHomeButtonLayout() {
