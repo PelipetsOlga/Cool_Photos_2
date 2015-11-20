@@ -2,14 +2,11 @@ package com.mobapply.happymoments.activity;
 
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -23,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -50,7 +46,6 @@ import net.yazeed44.imagepicker.util.Picker;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.concurrent.Executor;
 
 public class PicturesActivity extends AppCompatActivity implements View.OnClickListener {
 

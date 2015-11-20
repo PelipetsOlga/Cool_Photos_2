@@ -1,19 +1,14 @@
 package com.mobapply.happymoments.utils;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
-import android.widget.Toast;
 
 import com.mobapply.happymoments.Constants;
 
