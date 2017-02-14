@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/greed_background"
     android:padding="4dp"
-    tools:context="com.mobapply.happymoments.activity.SelectAlbumsActivity">
+    tools:context="com.mobapply.coolphotos.activity.SelectAlbumsActivity">
 
     <GridView
         android:id="@+id/gridAlbums"

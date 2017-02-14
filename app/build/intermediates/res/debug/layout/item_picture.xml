@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.mobapply.happymoments.adapter.SquireImageView
+    <com.mobapply.coolphotos.adapter.SquireImageView
         android:id="@+id/picture"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"

@@ -31,7 +31,7 @@
         android:required="false" />
 
     <application
-        android:name="com.mobapply.happymoments.HMApplication"
+        android:name="com.mobapply.coolphotos.HMApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,7 +39,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.mobapply.happymoments.activity.AlbumsActivity"
+            android:name="com.mobapply.coolphotos.activity.AlbumsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
@@ -50,42 +50,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mobapply.happymoments.activity.SelectAlbumsActivity"
+            android:name="com.mobapply.coolphotos.activity.SelectAlbumsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" />
         <activity
-            android:name="com.mobapply.happymoments.activity.PicturesActivity"
+            android:name="com.mobapply.coolphotos.activity.PicturesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.mobapply.happymoments.activity.SelectPicturesActivity"
+            android:name="com.mobapply.coolphotos.activity.SelectPicturesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" />
         <activity
-            android:name="com.mobapply.happymoments.activity.SettingsActivity"
+            android:name="com.mobapply.coolphotos.activity.SettingsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" />
         <activity
-            android:name="com.mobapply.happymoments.activity.FullscreenPictureActivity"
+            android:name="com.mobapply.coolphotos.activity.FullscreenPictureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.Transparent" >
         </activity>
         <activity
-            android:name="com.mobapply.happymoments.activity.TutorialActivity"
+            android:name="com.mobapply.coolphotos.activity.TutorialActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.Transparent2" >
         </activity>
 
         <provider
-            android:name="com.mobapply.happymoments.provider.PictureProvider"
-            android:authorities="com.mobapply.happymoments.providers.HappyMoments"
+            android:name="com.mobapply.coolphotos.provider.PictureProvider"
+            android:authorities="com.mobapply.coolphotos.providers.HappyMoments"
             android:exported="false" />
 
         <service
-            android:name="com.mobapply.happymoments.service.PictureService"
+            android:name="com.mobapply.coolphotos.service.PictureService"
             android:exported="false" />
 
         <meta-data

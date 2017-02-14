@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.mobapply.happymoments.activity.SelectAlbumsActivity">
+    tools:context="com.mobapply.coolphotos.activity.SelectAlbumsActivity">
     <group
         android:id="@+id/select_albums_menu_group">
         <item

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    tools:context="com.mobapply.happymoments.activity.FullscreenPictureActivity">
+    tools:context="com.mobapply.coolphotos.activity.FullscreenPictureActivity">
 
 <ImageView
     android:id = "@+id/full_picture"

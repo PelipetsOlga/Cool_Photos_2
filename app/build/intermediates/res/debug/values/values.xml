@@ -471,7 +471,7 @@
     <string name="clear">Clear</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">4199cc89-1b50-4266-911b-1b906a1cba9d</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">6d86e39f-846e-4c9e-90ea-864af0f44d72</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="conscious">Conscious</string>
@@ -1512,13 +1512,8 @@
         <item name="color">@android:color/white</item>
     </style>
     <style name="MIP_theme" parent="AppTheme">
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
-
-
-
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mobapply.happymoments"
+    package="com.mobapply.coolphotos"
     android:installLocation="preferExternal" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,14 +12,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".HMApplication"
+        android:name="com.mobapply.coolphotos.HMApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.AlbumsActivity"
+            android:name="com.mobapply.coolphotos.activity.AlbumsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
@@ -29,42 +29,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SelectAlbumsActivity"
+            android:name="com.mobapply.coolphotos.activity.SelectAlbumsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"/>
         <activity
-            android:name=".activity.PicturesActivity"
+            android:name="com.mobapply.coolphotos.activity.PicturesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:label="@string/app_name" />
         <activity
-            android:name=".activity.SelectPicturesActivity"
+            android:name="com.mobapply.coolphotos.activity.SelectPicturesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" />
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name="com.mobapply.coolphotos.activity.SettingsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" />
         <activity
-            android:name=".activity.FullscreenPictureActivity"
+            android:name="com.mobapply.coolphotos.activity.FullscreenPictureActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.Transparent" >
         </activity>
         <activity
-            android:name=".activity.TutorialActivity"
+            android:name="com.mobapply.coolphotos.activity.TutorialActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.Transparent2">
         </activity>
 
         <provider
-            android:name=".provider.PictureProvider"
-            android:authorities="com.mobapply.happymoments.providers.HappyMoments"
+            android:name="com.mobapply.coolphotos.provider.PictureProvider"
+            android:authorities="com.mobapply.coolphotos.providers.HappyMoments"
             android:exported="false" />
 
         <service
-            android:name=".service.PictureService"
+            android:name="com.mobapply.coolphotos.service.PictureService"
             android:exported="false" />
 
         <meta-data
