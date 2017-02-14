@@ -37,19 +37,12 @@ import com.mobapply.coolphotos.service.PictureService;
 public class AlbumsActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
 
-
     public static final int TUTORIAL_REQUEST_CODE = 1;
 
     private static AlbumsActivity instance;
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
     private FloatingActionButton mFab;
     private GridView mGrid;
@@ -88,8 +81,6 @@ public class AlbumsActivity extends ActionBarActivity
         showTutorial();
 
         fillData();
-        //  adjustHomeButtonLayout();
-
     }
 
     @Override
@@ -185,7 +176,6 @@ public class AlbumsActivity extends ActionBarActivity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //No call for super(). Bug on API Level > 11.
     }
 
     @Override

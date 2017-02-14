@@ -16,25 +16,16 @@ import android.view.ViewGroup;
 import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.activity.TutorialActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TutorialFirstFragment extends Fragment {
 
-
-    private ActionBar actionBar;
-
     public TutorialFirstFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,12 +37,8 @@ public class TutorialFirstFragment extends Fragment {
                 ((TutorialActivity) getActivity()).replaceFragment(new TutorialSecondFragment());
             }
         });
-
-
         return view;
     }
-
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -63,7 +50,4 @@ public class TutorialFirstFragment extends Fragment {
         menuItem.setEnabled(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
-
-
 }

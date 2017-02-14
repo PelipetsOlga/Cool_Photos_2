@@ -16,7 +16,7 @@ import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.activity.PicturesActivity;
 import com.mobapply.coolphotos.provider.PictureProvider;
-import com.mobapply.coolphotos.utils.HappyMomentsUtils;
+import com.mobapply.coolphotos.utils.CoolPhotosUtils;
 
 import java.util.Calendar;
 
@@ -67,7 +67,7 @@ public class CreateAlbumDialog extends DialogFragment {
     private long createAlbum(String title){
         Calendar calendar = Calendar.getInstance();
         Long date = calendar.getTimeInMillis();
-        String folderPath = HappyMomentsUtils.getNewAlbumPath(date);
+        String folderPath = CoolPhotosUtils.getNewAlbumPath(date);
         ContentValues cv = new ContentValues();
         cv.put(PictureProvider.ALBUM_NAME, title);
         cv.put(PictureProvider.ALBUM_DATE, date);
@@ -85,9 +85,7 @@ public class CreateAlbumDialog extends DialogFragment {
         intent.putExtra(Constants.EXTRA_COUNT, count);
         intent.putExtra(Constants.EXTRA_TITLE, title);
         intent.putExtra(Constants.EXTRA_ADD_PICTURE, true);
-
         startActivity(intent);
-
     }
 
 

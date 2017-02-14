@@ -43,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
         init();
     }
 
-    private void setupActionBar(){
+    private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
@@ -54,29 +54,29 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void loadSettings(){
+    private void loadSettings() {
         sPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         period = sPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
         shuffle = sPref.getBoolean(Constants.SHUFFLE, Constants.DEFAULT_SHUFFLE);
         modeConscious = sPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
     }
 
-    private void initViews(){
-        mDelay = (TextView)findViewById(R.id.tv_delay);
+    private void initViews() {
+        mDelay = (TextView) findViewById(R.id.tv_delay);
         mSeekBar = (SeekBar) findViewById(R.id.seekbar);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
         mSwitchMode = (SwitchCompat) findViewById(R.id.switch_mode);
     }
 
 
-    private void init(){
-        mSeekBar.setProgress(period-1);
+    private void init() {
+        mSeekBar.setProgress(period - 1);
         mDelay.setText(period + " " + (period > 1 ? getString(R.string.minutes) : getString(R.string.minute)));
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                period = progress+1;
-                mDelay.setText(period + " " +(period > 1 ? getString(R.string.minutes) : getString(R.string.minute)));
+                period = progress + 1;
+                mDelay.setText(period + " " + (period > 1 ? getString(R.string.minutes) : getString(R.string.minute)));
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putInt(Constants.PERIOD_UPDATING, period);
                 ed.commit();
@@ -119,9 +119,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

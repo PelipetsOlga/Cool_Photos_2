@@ -1,8 +1,5 @@
 package com.mobapply.coolphotos.menu;
 
-/**
- * Created by igor on 3/7/15.
- */
 public class MenuItem {
     private int id;
     private int iconId;

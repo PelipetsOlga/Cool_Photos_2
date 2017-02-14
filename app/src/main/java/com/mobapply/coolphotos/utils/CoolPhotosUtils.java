@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-public class HappyMomentsUtils {
+public class CoolPhotosUtils {
 
 
     public static String getNewAlbumPath(long date) {

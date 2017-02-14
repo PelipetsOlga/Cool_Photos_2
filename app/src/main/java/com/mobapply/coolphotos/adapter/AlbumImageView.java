@@ -18,8 +18,6 @@ public class AlbumImageView  extends ImageView {
         super(context, attrs, defStyleAttr);
     }
 
-
-
     @Override
     protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
         final int width = getDefaultSize(getSuggestedMinimumWidth(),widthMeasureSpec);
@@ -31,6 +29,4 @@ public class AlbumImageView  extends ImageView {
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         super.onSizeChanged(w, w, oldw, oldh);
     }
-
-
 }

@@ -37,7 +37,7 @@ import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.adapter.HeaderImageView;
 import com.mobapply.coolphotos.adapter.PicturesViewBinder;
 import com.mobapply.coolphotos.provider.PictureProvider;
-import com.mobapply.coolphotos.utils.HappyMomentsUtils;
+import com.mobapply.coolphotos.utils.CoolPhotosUtils;
 import com.squareup.picasso.Picasso;
 
 import net.yazeed44.imagepicker.model.ImageEntry;
@@ -191,7 +191,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             }
             String firstPicturePath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FILE));
             Picasso.with(this).load(new File(firstPicturePath)).into(headerPicture);
-            //headerPicture.setImageBitmap(BitmapFactory.decodeFile(firstPicturePath));
         }
     }
 
@@ -223,8 +222,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         llIsPlaying = (LinearLayout) findViewById(R.id.ll_is_playing);
     }
 
-
-
     private void selectPicture(){
         new Picker.Builder(this,new MyPickListener(),R.style.MIP_theme)
                 .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
@@ -248,29 +245,10 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-//    private void selectPicture() {
-//        // choose photo from gallery
-//        Intent intentGallery = new Intent();
-//        intentGallery.setType("image/*");
-//        intentGallery.setAction(Intent.ACTION_GET_CONTENT);
-//        allowMultiple(intentGallery);
-//        startActivityForResult(
-//                Intent.createChooser(intentGallery,
-//                        getResources().getString(R.string.chooser_gallery)),
-//                Constants.REQUEST_CODE_GALLERY);
-//    }
-
-//    @SuppressLint("NewApi")
-//    private void allowMultiple(Intent intent){
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-//            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//        }
-//    }
-
     private void capturePicture() {
         Intent intentCapture = new Intent(
                 MediaStore.ACTION_IMAGE_CAPTURE);
-        File f = HappyMomentsUtils.generateCaptureFile(albumPath);
+        File f = CoolPhotosUtils.generateCaptureFile(albumPath);
         picturePath = f.getAbsolutePath();
         intentCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
         startActivityForResult(intentCapture, Constants.REQUEST_CODE_PHOTO);
@@ -313,7 +291,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_pictures, menu);
         return true;
     }
@@ -395,7 +372,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         selectMenu = false;
         if (requestCode == Constants.REQUEST_CODE_PHOTO) {
             if (resultCode == RESULT_OK) {
-                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+                File previewFile = CoolPhotosUtils.generatePreviewFile(albumPath);
                 AddPictureAsyncTask task = new AddPictureAsyncTask();
                 task.execute(picturePath, this, picturePath, previewFile.getAbsolutePath());
             }
@@ -406,18 +383,18 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                     ClipData clipdata = data.getClipData();
                     for (int i=0; i<clipdata.getItemCount();i++) {
                         Uri selectedImageUri = clipdata.getItemAt(i).getUri();
-                        String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
-                        File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
-                        File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+                        String selectedImagePath = CoolPhotosUtils.getImagePath(selectedImageUri, this);
+                        File pictureFile = CoolPhotosUtils.generateCaptureFile(albumPath);
+                        File previewFile = CoolPhotosUtils.generatePreviewFile(albumPath);
 
                         AddPictureAsyncTask task = new AddPictureAsyncTask();
                         task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, selectedImagePath, this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
                     }
                 } else{
                     Uri selectedImageUri = data.getData();
-                    String selectedImagePath = HappyMomentsUtils.getImagePath(selectedImageUri, this);
-                    File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
-                    File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+                    String selectedImagePath = CoolPhotosUtils.getImagePath(selectedImageUri, this);
+                    File pictureFile = CoolPhotosUtils.generateCaptureFile(albumPath);
+                    File previewFile = CoolPhotosUtils.generatePreviewFile(albumPath);
 
                     AddPictureAsyncTask task = new AddPictureAsyncTask();
                     task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, selectedImagePath, this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
@@ -471,13 +448,13 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             String newPicturePath = (String) param[2];
             String previewPath = (String) param[3];
 
-            boolean done =  HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+            boolean done =  CoolPhotosUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
 
             if (!done){
                 return false;
             }
 
-            HappyMomentsUtils.generatePreview(newPicturePath, previewPath);
+            CoolPhotosUtils.generatePreview(newPicturePath, previewPath);
 
             Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
             Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);
@@ -555,20 +532,20 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
             for (ImageEntry image : images) {
                 String selectedImagePath = image.path;
-                File pictureFile = HappyMomentsUtils.generateCaptureFile(albumPath);
-                File previewFile = HappyMomentsUtils.generatePreviewFile(albumPath);
+                File pictureFile = CoolPhotosUtils.generateCaptureFile(albumPath);
+                File previewFile = CoolPhotosUtils.generatePreviewFile(albumPath);
 
                 String oldPicturePath  = image.path;
                 String newPicturePath = pictureFile.getAbsolutePath();
                 String previewPath = previewFile.getAbsolutePath();
 
-                boolean done = HappyMomentsUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+                boolean done = CoolPhotosUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
 
                 if (!done) {
                     break;
                 }
 
-                HappyMomentsUtils.generatePreview(newPicturePath, previewPath);
+                CoolPhotosUtils.generatePreview(newPicturePath, previewPath);
 
                 Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
                 Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);

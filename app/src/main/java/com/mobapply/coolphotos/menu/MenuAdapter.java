@@ -16,9 +16,6 @@ import com.mobapply.coolphotos.R;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by igor on 3/7/15.
- */
 public class MenuAdapter extends BaseAdapter {
 
     private static final String TAG = MenuAdapter.class.getCanonicalName();
@@ -34,7 +31,6 @@ public class MenuAdapter extends BaseAdapter {
         this.list = list;
         inflater= context.getLayoutInflater();
     }
-
 
     public void setListener(AdapterView.OnItemClickListener listener) {
         this.listener = listener;
@@ -67,8 +63,6 @@ public class MenuAdapter extends BaseAdapter {
             viewHolder.icon = (ImageView) rowView.findViewById(R.id.icon);
             rowView.setTag(viewHolder);
         }
-
-
 
         ViewHolder holder = (ViewHolder) rowView.getTag();
         MenuItem item = list.get(position);

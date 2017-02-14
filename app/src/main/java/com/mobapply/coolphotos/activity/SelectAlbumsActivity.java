@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.adapter.AlbumViewBinder;
 import com.mobapply.coolphotos.provider.PictureProvider;
-import com.mobapply.coolphotos.utils.HappyMomentsUtils;
+import com.mobapply.coolphotos.utils.CoolPhotosUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -46,7 +46,6 @@ public class SelectAlbumsActivity extends AppCompatActivity {
         mGrid = (GridView) findViewById(R.id.gridAlbums);
 
         fillData();
-
     }
 
     public void restoreActionBar() {
@@ -171,7 +170,7 @@ public class SelectAlbumsActivity extends AppCompatActivity {
                     Cursor albumCursor = getContentResolver().query(uriDeletedAlbum, null, null, null, null);
                     albumCursor.moveToFirst();
                     String albumPath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FOLDER));
-                    if (HappyMomentsUtils.deleteDirectory(albumPath)) {
+                    if (CoolPhotosUtils.deleteDirectory(albumPath)) {
 
                         getContentResolver().delete(uriDeletedAlbum, null, null);
                         Cursor cursorDeletedPictures = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null,

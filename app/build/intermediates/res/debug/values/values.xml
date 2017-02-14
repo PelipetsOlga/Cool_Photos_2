@@ -441,7 +441,7 @@
     <string name="action_deselect_all">Deselect all</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="action_home">Positta albums</string>
+    <string name="action_home">Cool Albums</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/net.yazeed44.imagepicker/imagepicker/1.3.0/res/values/values.xml -->
     <eat-comment/>
     <string name="action_select_all">Select all</string>
@@ -457,7 +457,7 @@
     <string name="all_photos">All Photos</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_name">Positta</string>
+    <string name="app_name">Cool Photos</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
@@ -471,7 +471,7 @@
     <string name="clear">Clear</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">6d86e39f-846e-4c9e-90ea-864af0f44d72</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">1e30febc-d150-4aae-afe5-5b6b5940daff</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="conscious">Conscious</string>
@@ -520,8 +520,8 @@
     <string name="minute">minute</string>
     <string name="minutes">minutes</string>
     <string name="moments_count">images</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="navigation_drawer_open">open</string>
     <string name="new_switch">New switch with 2 modes</string>
     <string name="now_playing">Now playing</string>
     <string name="running">Running</string>
@@ -533,7 +533,7 @@
     <eat-comment/>
     <string name="subconscious">Subconscious</string>
     <string name="subconscious_text">In this mode, images will be shown as a 25 frame. You will not see them, but they may affect you subconscious.</string>
-    <string name="title_navigation_drawer">My Positta</string>
+    <string name="title_navigation_drawer">Cool photos</string>
     <string name="title_select_albums_activity">Select albums</string>
     <string name="title_select_pictures_activity">Select moments</string>
     <string name="tv_content_updating">Content updating</string>

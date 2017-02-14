@@ -10,9 +10,6 @@ import android.view.Menu;
 import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.fragment.TutorialFirstFragment;
 
-/**
- * Created by apelipets on 10/5/15.
- */
 public class TutorialActivity  extends ActionBarActivity {
 
     @Override
@@ -38,7 +35,6 @@ public class TutorialActivity  extends ActionBarActivity {
 
     public void returnResult(final int result){
         final Intent intent = new Intent();
-        //setResult(result, intent);
         AlbumsActivity.getInstance().onActivityResult(AlbumsActivity.TUTORIAL_REQUEST_CODE, result, intent);
         finish();
 

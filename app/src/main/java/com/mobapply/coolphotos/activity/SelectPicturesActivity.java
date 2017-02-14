@@ -343,6 +343,5 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                 popupMenu.show();
             break;
         }
-
     }
 }

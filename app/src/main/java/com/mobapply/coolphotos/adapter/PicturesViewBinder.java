@@ -57,7 +57,5 @@ public class PicturesViewBinder implements SimpleCursorAdapter.ViewBinder {
             default:
                 return false;
         }
-
-
     }
 }
