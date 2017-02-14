@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="@color/seekbar_background" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid android:color="@color/color_selected_menu" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list><!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/drawable/progress_bar.xml -->

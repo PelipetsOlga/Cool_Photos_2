@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.mobapply.happymoments.activity.SelectPicturesActivity">
+    <group
+        android:id="@+id/select_pictures_menu_group">
+
+       <!-- <item
+            android:id="@+id/ab_share_pictures"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_share_white_24dp"
+            android:title="@string/ab_delete_selected_pictures"
+            app:showAsAction="always"
+            android:visible="false"/>-->
+
+        <item
+            android:id="@+id/ab_delete_pictures"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_delete_white_24dp"
+            android:title="@string/ab_delete_selected_pictures"
+            app:showAsAction="always" />
+
+    </group>
+
+</menu>
+<!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/menu/menu_select_pictures.xml -->

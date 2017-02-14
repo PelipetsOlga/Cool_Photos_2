@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="toolbar">#2f7bef</color>
+    <color name="dark">#232ca8</color>
+    <color name="accent">#c859e3</color>
     <color name="color_pink">#F33976</color>
     <color name="color_dark_pink">#E02A66</color>
     <color name="color_blue_fab">#01ECE8</color>

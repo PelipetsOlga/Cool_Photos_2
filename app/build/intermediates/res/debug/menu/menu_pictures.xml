@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.mobapply.happymoments.activity.PicturesActivity">
+    <item
+        android:id="@+id/action_add_from_gallery"
+        android:icon="@drawable/ic_add_white_24dp"
+        android:title="@string/ab_add_picture"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_capture"
+        android:icon="@drawable/ic_photo_camera_white_24dp"
+        android:title="@string/ab_capture"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_select_pictures"
+        android:icon="@drawable/ic_check_white_24dp"
+        android:title="@string/ab_select_pictures"
+        app:showAsAction="always" />
+</menu>
+<!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/menu/menu_pictures.xml -->

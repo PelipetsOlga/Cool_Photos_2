@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_picture"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mobapply.happymoments.adapter.SquireImageView
+        android:id="@+id/picture"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/empty_folder_thumbnai_174dp"/>
+
+    <ImageView
+        android:id="@+id/selecting_picture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_selecting_image"
+        android:src="@drawable/ic_check_white_48dp"
+        android:layout_gravity="center"
+        android:scaleType="center"
+        android:visibility="gone"/>
+
+</FrameLayout>
+<!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/layout/item_picture.xml -->

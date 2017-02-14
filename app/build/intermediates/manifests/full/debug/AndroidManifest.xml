@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mobapply.happymoments"
+    android:installLocation="preferExternal"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <application
+        android:name="com.mobapply.happymoments.HMApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.mobapply.happymoments.activity.AlbumsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mobapply.happymoments.activity.SelectAlbumsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.mobapply.happymoments.activity.PicturesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.mobapply.happymoments.activity.SelectPicturesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.mobapply.happymoments.activity.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.mobapply.happymoments.activity.FullscreenPictureActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.Transparent" >
+        </activity>
+        <activity
+            android:name="com.mobapply.happymoments.activity.TutorialActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.Transparent2" >
+        </activity>
+
+        <provider
+            android:name="com.mobapply.happymoments.provider.PictureProvider"
+            android:authorities="com.mobapply.happymoments.providers.HappyMoments"
+            android:exported="false" />
+
+        <service
+            android:name="com.mobapply.happymoments.service.PictureService"
+            android:exported="false" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="c9cbd0456fcb6fd13236ade58090a96cf32d0db7" />
+
+        <activity android:name="net.yazeed44.imagepicker.ui.PickerActivity" />
+
+        <service
+            android:name="net.yazeed44.imagepicker.util.OfflineSpiceService"
+            android:exported="false" />
+
+        <activity android:name="com.commonsware.cwac.cam2.CameraActivity" />
+        <activity android:name="com.commonsware.cwac.cam2.VideoRecorderActivity" />
+    </application>
+
+</manifest>

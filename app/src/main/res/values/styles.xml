@@ -2,9 +2,9 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/color_pink</item>
-        <item name="colorPrimaryDark">@color/color_dark_pink</item>
-        <item name="colorAccent">@color/color_selected_menu</item>
+        <item name="colorPrimary">@color/toolbar</item>
+        <item name="colorPrimaryDark">@color/dark</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
@@ -14,9 +14,6 @@
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
     </style>
-
-
-
     <style name="AppThemeNoBar" parent="Theme.AppCompat.Light">
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowNoTitle">true</item>

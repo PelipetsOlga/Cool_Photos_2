@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.mobapply.happymoments.activity.SelectPicturesActivity">
+    <group android:id="@+id/popup_group">
+
+        <item
+            android:id="@+id/action_select_all"
+            android:orderInCategory="100"
+            android:title="@string/select_all"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/action_clear"
+            android:orderInCategory="101"
+            android:title="@string/clear"
+            app:showAsAction="always" />
+
+    </group>
+
+</menu>
+<!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/menu/menu_popup.xml -->
