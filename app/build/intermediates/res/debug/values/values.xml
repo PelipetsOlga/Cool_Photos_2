@@ -471,7 +471,7 @@
     <string name="clear">Clear</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">1be23c62-d055-42b3-8726-f18808ae0191</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">4199cc89-1b50-4266-911b-1b906a1cba9d</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="conscious">Conscious</string>
@@ -557,7 +557,7 @@
         <item name="android:background">@color/color_setting_background</item>
         <item name="windowMinWidthMajor">80%</item>
         <item name="windowMinWidthMinor">80%</item>
-        <item name="colorAccent">@color/color_selected_menu</item>
+        <item name="colorAccent">@color/accent</item>
 
     </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -1503,7 +1503,7 @@
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="ColorSwitchStyle">
-        <item name="colorPrimary">@color/color_pink</item>
+        <item name="colorPrimary">@color/toolbar</item>
         <item name="colorControlActivated">@android:color/white</item>
         <item name="android:colorForeground">@android:color/black</item>
     </style>
@@ -1803,11 +1803,11 @@
         <item name="colorPrimary">@android:color/transparent</item>
 
         <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">@color/color_dark_pink</item>
+        <item name="colorPrimaryDark">@color/dark</item>
 
         <!-- colorAccent is used as the default value for colorControlActivated,
              which is used to tint widgets -->
-        <item name="colorAccent">@color/color_selected_menu</item>
+        <item name="colorAccent">@color/accent</item>
 
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
 

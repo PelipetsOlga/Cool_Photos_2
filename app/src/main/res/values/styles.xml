@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/toolbar</item>
@@ -14,6 +13,7 @@
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
     </style>
+
     <style name="AppThemeNoBar" parent="Theme.AppCompat.Light">
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -35,11 +35,11 @@
         <item name="colorPrimary">@android:color/transparent</item>
 
         <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">@color/color_dark_pink</item>
+        <item name="colorPrimaryDark">@color/dark</item>
 
         <!-- colorAccent is used as the default value for colorControlActivated,
              which is used to tint widgets -->
-        <item name="colorAccent">@color/color_selected_menu</item>
+        <item name="colorAccent">@color/accent</item>
 
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
 
@@ -57,25 +57,18 @@
         <item name="android:background">@color/color_setting_background</item>
         <item name="windowMinWidthMajor">80%</item>
         <item name="windowMinWidthMinor">80%</item>
-        <item name="colorAccent">@color/color_selected_menu</item>
+        <item name="colorAccent">@color/accent</item>
 
     </style>
 
     <style name="ColorSwitchStyle">
-        <item name="colorPrimary">@color/color_pink</item>
+        <item name="colorPrimary">@color/toolbar</item>
         <item name="colorControlActivated">@android:color/white</item>
         <item name="android:colorForeground">@android:color/black</item>
     </style>
 
     <style name="MIP_theme" parent="AppTheme">
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
-
-
-
     </style>
-
-
 </resources>
