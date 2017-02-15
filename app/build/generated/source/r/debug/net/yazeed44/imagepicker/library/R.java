@@ -669,10 +669,10 @@ public final class R {
 		public static final int fab_shadow_mini = 0x7f020054;
 		public static final int ic_action_camera_white = 0x7f020055;
 		public static final int ic_action_done_white = 0x7f020056;
-		public static final int ic_play_arrow = 0x7f020069;
-		public static final int image_border = 0x7f020070;
-		public static final int notification_template_icon_bg = 0x7f020079;
-		public static final int transparent = 0x7f02007a;
+		public static final int ic_play_arrow = 0x7f020068;
+		public static final int image_border = 0x7f02006d;
+		public static final int notification_template_icon_bg = 0x7f020076;
+		public static final int transparent = 0x7f020077;
 	}
 	public static final class id {
 		public static final int action0 = 0x7f0c00a0;

@@ -57,10 +57,10 @@ public class AlbumViewBinder implements SimpleCursorAdapter.ViewBinder {
                         Picasso.with(ctx).load(firstPicture).into(picture);
                       //  picture.setImageBitmap(BitmapFactory.decodeFile(fileFirstPicturePath));
                     } else {
-                        picture.setImageDrawable(ctx.getResources().getDrawable(R.drawable.empty_folder_thumbnai_174dp));
+                        picture.setImageDrawable(ctx.getResources().getDrawable(R.drawable.empty_small));
                     }
                 } else {
-                    picture.setImageDrawable(ctx.getResources().getDrawable(R.drawable.empty_folder_thumbnai_174dp));
+                    picture.setImageDrawable(ctx.getResources().getDrawable(R.drawable.empty_small));
                 }
 
                 return true;

@@ -466,7 +466,7 @@
     <string name="clear">Clear</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">ee51f9f7-b6ce-4f29-ab4b-fa21adbb0864</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">328abfc0-ab55-4204-b0f6-fb08cd087347</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="conscious">Conscious</string>
@@ -491,7 +491,7 @@
     <string name="dialog_title">New album</string>
     <string name="done">DONE</string>
     <string name="empty_album">Empty album</string>
-    <string name="empty_album_text">Tap on the eyescream icon to add your\nPositive Mood</string>
+    <string name="empty_album_text">Tap to add your\nCool photos</string>
     <string name="error_picture">Loading picture error</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/net.yazeed44.imagepicker/imagepicker/1.3.0/res/values/values.xml -->
     <eat-comment/>

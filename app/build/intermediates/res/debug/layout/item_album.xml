@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/repeatable_background_360dp"
-        android:scaleType="center"
+        android:scaleType="centerInside"
         android:paddingBottom="72dp"
-        android:src="@drawable/empty_folder_thumbnai_174dp" />
+        android:src="@drawable/empty_small" />
 
     <LinearLayout
         android:layout_width="match_parent"

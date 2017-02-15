@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/empty_folder_button_360dp" />
+                    android:src="@drawable/empty_big" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -156,11 +156,12 @@
             android:layout_alignParentTop="true">
 
             <ImageView
+                android:layout_marginTop="16dp"
                 android:id="@+id/eyescream_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/empty_folder_button_360dp" />
+                android:src="@drawable/empty_big" />
         </FrameLayout>
 
         <TextView
