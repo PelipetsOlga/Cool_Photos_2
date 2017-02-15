@@ -43,11 +43,11 @@ public class TutorialFirstFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
-        MenuItem menuItem =menu.findItem(R.id.action_mode);
-        SwitchCompat switchMode = (SwitchCompat) MenuItemCompat.getActionView(menuItem).findViewById(R.id.actionbar_switch);
-        switchMode.setEnabled(false);
-        menuItem =menu.findItem(R.id.action_select_albums);
-        menuItem.setEnabled(false);
+//        MenuItem menuItem =menu.findItem(R.id.action_mode);
+//        SwitchCompat switchMode = (SwitchCompat) MenuItemCompat.getActionView(menuItem).findViewById(R.id.actionbar_switch);
+//        switchMode.setEnabled(false);
+//        menuItem =menu.findItem(R.id.action_select_albums);
+//        menuItem.setEnabled(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 }

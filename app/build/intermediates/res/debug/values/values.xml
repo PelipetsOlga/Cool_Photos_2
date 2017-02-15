@@ -466,7 +466,7 @@
     <string name="clear">Clear</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">d139c465-61c4-4c61-993d-a63a8c9dcf10</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">ee51f9f7-b6ce-4f29-ab4b-fa21adbb0864</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="conscious">Conscious</string>
