@@ -61,25 +61,19 @@ public class AlbumsActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_albums);
-
         instance = this;
 
         if (getIntent().getExtras()!= null && getIntent().getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)){
-            stoptService();
+            stopService();
             finish();
             return;
         }
 
         startService();
-
         setupNavigationDrawer();
-
         initViews();
-
         loadSettings();
-
         showTutorial();
-
         fillData();
     }
 
@@ -87,7 +81,7 @@ public class AlbumsActivity extends ActionBarActivity
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent.getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)){
-            stoptService();
+            stopService();
             finish();
             return;
         }
@@ -116,8 +110,6 @@ public class AlbumsActivity extends ActionBarActivity
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getResources().getString(R.string.action_home);
         restoreActionBar();
-
-        // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
@@ -132,7 +124,6 @@ public class AlbumsActivity extends ActionBarActivity
     }
 
     private void fillData() {
-        //albums container
         cursor = getContentResolver().query(PictureProvider.ALBUM_CONTENT_URI, null, null,
                 null, null);
         startManagingCursor(cursor);
@@ -203,12 +194,11 @@ public class AlbumsActivity extends ActionBarActivity
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case 2:
-                stoptService();
+                stopService();
                 finish();
                 break;
         }
     }
-
 
     public void restoreActionBar() {
         actionBar = getSupportActionBar();
@@ -297,7 +287,7 @@ public class AlbumsActivity extends ActionBarActivity
         startService(new Intent(this, PictureService.class));
     }
 
-    private void stoptService() {
+    private void stopService() {
         stopService(new Intent(this, PictureService.class));
     }
 

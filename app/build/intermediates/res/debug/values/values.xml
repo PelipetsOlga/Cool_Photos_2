@@ -110,11 +110,6 @@
     <eat-comment/>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/colors.xml -->
-    <eat-comment/>
-    <color name="greed_background">#FFFCF2</color>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
-    <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
@@ -471,7 +466,7 @@
     <string name="clear">Clear</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">1e30febc-d150-4aae-afe5-5b6b5940daff</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">c3239f4e-c8c6-4031-ae1c-58043242f8fa</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="conscious">Conscious</string>
