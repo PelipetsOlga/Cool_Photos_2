@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <corners android:radius="3dp" />
-    <solid android:color="@color/toast_custom_background" />
-
-</shape><!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/drawable/toast_custom.xml -->

@@ -236,14 +236,7 @@ public class AlbumsActivity extends ActionBarActivity
                 modeConscious = isChecked;
                 ed.commit();
 
-                Toast toast = Toast.makeText(AlbumsActivity.this, modeConscious ? R.string.conscious : R.string.subconscious, Toast.LENGTH_SHORT);
-                View view = toast.getView();
-                view.setBackgroundResource(R.drawable.toast_custom);
-                toast.setGravity(Gravity.RIGHT | Gravity.TOP, 50, 5 * getStatusBarHeight() / 2);
-                TextView text = (TextView) view.findViewById(android.R.id.message);
-                text.setTextSize(14);
-                text.setTextColor(Color.WHITE);
-                toast.show();
+                Toast.makeText(AlbumsActivity.this, modeConscious ? R.string.conscious : R.string.subconscious, Toast.LENGTH_SHORT).show();
             }
         });
         return super.onCreateOptionsMenu(menu);

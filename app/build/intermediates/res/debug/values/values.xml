@@ -466,7 +466,7 @@
     <string name="clear">Clear</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
     <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">c3239f4e-c8c6-4031-ae1c-58043242f8fa</string>
+    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">d139c465-61c4-4c61-993d-a63a8c9dcf10</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="conscious">Conscious</string>
@@ -561,7 +561,6 @@
         <item name="colorAccent">@color/accent</item>
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
     </style>
     <style name="AppThemeNoBar" parent="Theme.AppCompat.Light">
         <item name="android:windowDisablePreview">true</item>
@@ -1657,15 +1656,6 @@
     <style name="RtlOverlay.Widget.AppCompat.SearchView.MagIcon" parent="android:Widget">
         <item name="android:layout_marginLeft">@dimen/abc_dropdownitem_text_padding_left</item>
     </style>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/styles_apptheme.xml -->
-    <eat-comment/>
-    <style name="SeekBarAppTheme" parent="android:Widget.Holo.Light.SeekBar">
-      <item name="android:progressDrawable">@drawable/apptheme_scrubber_progress_horizontal_holo_light</item>
-      <item name="android:indeterminateDrawable">@drawable/apptheme_scrubber_progress_horizontal_holo_light</item>
-      <item name="android:thumb">@drawable/apptheme_scrubber_control_selector_holo_light</item>
-  </style>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
-    <eat-comment/>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>
     <style name="TextAppearance.AppCompat.Body2" parent="Base.TextAppearance.AppCompat.Body2"/>

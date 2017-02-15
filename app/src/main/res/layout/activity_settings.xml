@@ -68,7 +68,7 @@
             android:layout_marginLeft="32dp"
             android:text="@string/minutes"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/color_selected_menu" />
+            android:textColor="?attr/colorAccent" />
     </LinearLayout>
 
 

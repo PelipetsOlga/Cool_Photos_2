@@ -97,19 +97,19 @@ public final class R {
 		public static final int labels_text_size = 0x7f070074;
 	}
 	public static final class drawable {
-		public static final int cwac_cam2_action_bar_bg_translucent = 0x7f02004a;
-		public static final int cwac_cam2_action_bar_bg_transparent = 0x7f02004b;
-		public static final int cwac_cam2_ic_action_camera = 0x7f02004c;
-		public static final int cwac_cam2_ic_action_facing = 0x7f02004d;
-		public static final int cwac_cam2_ic_action_settings = 0x7f02004e;
-		public static final int cwac_cam2_ic_check_white = 0x7f02004f;
-		public static final int cwac_cam2_ic_close = 0x7f020050;
-		public static final int cwac_cam2_ic_close_white = 0x7f020051;
-		public static final int cwac_cam2_ic_refresh_white = 0x7f020052;
-		public static final int cwac_cam2_ic_stop = 0x7f020053;
-		public static final int cwac_cam2_ic_switch_camera = 0x7f020054;
-		public static final int cwac_cam2_ic_videocam = 0x7f020055;
-		public static final int fab_add = 0x7f02005b;
+		public static final int cwac_cam2_action_bar_bg_translucent = 0x7f020041;
+		public static final int cwac_cam2_action_bar_bg_transparent = 0x7f020042;
+		public static final int cwac_cam2_ic_action_camera = 0x7f020043;
+		public static final int cwac_cam2_ic_action_facing = 0x7f020044;
+		public static final int cwac_cam2_ic_action_settings = 0x7f020045;
+		public static final int cwac_cam2_ic_check_white = 0x7f020046;
+		public static final int cwac_cam2_ic_close = 0x7f020047;
+		public static final int cwac_cam2_ic_close_white = 0x7f020048;
+		public static final int cwac_cam2_ic_refresh_white = 0x7f020049;
+		public static final int cwac_cam2_ic_stop = 0x7f02004a;
+		public static final int cwac_cam2_ic_switch_camera = 0x7f02004b;
+		public static final int cwac_cam2_ic_videocam = 0x7f02004c;
+		public static final int fab_add = 0x7f020052;
 	}
 	public static final class id {
 		public static final int cwac_cam2_ok = 0x7f0c00ae;
