@@ -31,11 +31,9 @@ public class CreateAlbumDialog extends DialogFragment {
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity());
         final EditText view = new EditText(getActivity());
-
         view.setHint(getActivity().getResources().getString(R.string.dialog_hint));
-        view.setHintTextColor(getActivity().getResources().getColor(R.color.color_hint));
+        //        view.setHintTextColor(getActivity().getResources().getColor(R.color.color_hint));
         view.setPadding(48, 24, 48, 24);
-
         builder.setTitle(getActivity().getResources().getString(R.string.dialog_title));
         builder.setPositiveButton(getActivity().getResources().getString(R.string.btn_save), new DialogInterface.OnClickListener() {
 
@@ -48,19 +46,17 @@ public class CreateAlbumDialog extends DialogFragment {
                 }
             }
         });
-
-
-        builder.setNegativeButton(getActivity().getResources().getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-
+        builder.setNegativeButton(getActivity().getResources().getString(R.string.btn_cancel),
+                new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         });
         builder.setView(view);
         builder.setCancelable(true);
         Dialog  dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawableResource(R.color.color_white_bg);
+//        dialog.getWindow().setBackgroundDrawableResource(R.color.color_white_bg);
+        dialog.getWindow().getDecorView().setPadding(24, 24, 24, 24);
         return dialog;
     }
 
@@ -87,6 +83,4 @@ public class CreateAlbumDialog extends DialogFragment {
         intent.putExtra(Constants.EXTRA_ADD_PICTURE, true);
         startActivity(intent);
     }
-
-
 }

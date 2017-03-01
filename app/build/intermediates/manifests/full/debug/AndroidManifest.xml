@@ -71,13 +71,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.Transparent" >
-        </activity>
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name="com.mobapply.coolphotos.activity.TutorialActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/Theme.Transparent2" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <provider
             android:name="com.mobapply.coolphotos.provider.PictureProvider"

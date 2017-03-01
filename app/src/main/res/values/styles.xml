@@ -1,5 +1,4 @@
 <resources>
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/toolbar</item>
         <item name="colorPrimaryDark">@color/dark</item>
@@ -13,12 +12,6 @@
         <item name="color">@android:color/white</item>
     </style>
 
-    <style name="AppThemeNoBar" parent="Theme.AppCompat.Light">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/black</item>
-    </style>
-
     <style name="Theme.Transparent" parent="android:Theme">
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -29,44 +22,15 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="Theme.Transparent2" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- colorPrimary is used for the default action bar background -->
-        <item name="colorPrimary">@android:color/transparent</item>
-
-        <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">@color/dark</item>
-
-        <!-- colorAccent is used as the default value for colorControlActivated,
-             which is used to tint widgets -->
-        <item name="colorAccent">@color/accent</item>
-
-        <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
-
-        <item name="android:actionBarStyle">@style/TransparentActionBar</item>
-
-
-    </style>
-
-    <style name="TransparentActionBar">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColorPrimary">@color/color_text_settings</item>
-        <item name="android:background">@color/color_setting_background</item>
+        <!--<item name="android:textColorPrimary">@color/color_text_settings</item>-->
+        <!--<item name="android:background">@color/color_setting_background</item>-->
         <item name="windowMinWidthMajor">80%</item>
         <item name="windowMinWidthMinor">80%</item>
         <item name="colorAccent">@color/accent</item>
-
     </style>
 
-    <style name="ColorSwitchStyle">
-        <item name="colorPrimary">@color/toolbar</item>
-        <item name="colorControlActivated">@android:color/white</item>
-        <item name="android:colorForeground">@android:color/black</item>
-    </style>
-
-    <style name="MIP_theme" parent="AppTheme">
+     <style name="MIP_theme" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

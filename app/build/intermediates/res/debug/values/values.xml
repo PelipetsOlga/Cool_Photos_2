@@ -54,11 +54,7 @@
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="color_blue_fab">#01ECE8</color>
-    <color name="color_dark_pink">#E02A66</color>
-    <color name="color_dialog_new_album_stripe">#e0ddd5</color>
     <color name="color_end_gradient">#00000000</color>
-    <color name="color_hint">#bdbbb3</color>
-    <color name="color_pink">#F33976</color>
     <color name="color_selected_menu">#00D6D2</color>
     <color name="color_selecting_image">#552f7bef</color>
     <color name="color_setting_background">#FFFCF2</color>
@@ -153,9 +149,7 @@
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/colors.xml -->
     <eat-comment/>
-    <color name="toast_custom_background">#DD707070</color>
     <color name="toolbar">#2f7bef</color>
-    <color name="tutorial_actionbar">#fff6ee</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
     <declare-styleable name="ActionBarLayout"><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ActionMenuItemView"><attr name="android:minWidth"/></declare-styleable>
@@ -539,12 +533,11 @@
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColorPrimary">@color/color_text_settings</item>
-        <item name="android:background">@color/color_setting_background</item>
+        <!--<item name="android:textColorPrimary">@color/color_text_settings</item>-->
+        <!--<item name="android:background">@color/color_setting_background</item>-->
         <item name="windowMinWidthMajor">80%</item>
         <item name="windowMinWidthMinor">80%</item>
         <item name="colorAccent">@color/accent</item>
-
     </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/toolbar</item>
@@ -552,11 +545,6 @@
         <item name="colorAccent">@color/accent</item>
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-    </style>
-    <style name="AppThemeNoBar" parent="Theme.AppCompat.Light">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/black</item>
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
@@ -1487,11 +1475,6 @@
     </style>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="ColorSwitchStyle">
-        <item name="colorPrimary">@color/toolbar</item>
-        <item name="colorControlActivated">@android:color/white</item>
-        <item name="android:colorForeground">@android:color/black</item>
-    </style>
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
@@ -1769,23 +1752,6 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
-    <style name="Theme.Transparent2" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- colorPrimary is used for the default action bar background -->
-        <item name="colorPrimary">@android:color/transparent</item>
-
-        <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">@color/dark</item>
-
-        <!-- colorAccent is used as the default value for colorControlActivated,
-             which is used to tint widgets -->
-        <item name="colorAccent">@color/accent</item>
-
-        <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
-
-        <item name="android:actionBarStyle">@style/TransparentActionBar</item>
-
-
-    </style>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <style name="ThemeOverlay.AppCompat" parent="Base.ThemeOverlay.AppCompat"/>
@@ -1793,13 +1759,6 @@
     <style name="ThemeOverlay.AppCompat.Dark" parent="Base.ThemeOverlay.AppCompat.Dark"/>
     <style name="ThemeOverlay.AppCompat.Dark.ActionBar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="ThemeOverlay.AppCompat.Light" parent="Base.ThemeOverlay.AppCompat.Light"/>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
-    <style name="TransparentActionBar">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
-    <eat-comment/>
     <style name="Widget.AppCompat.ActionBar" parent="Base.Widget.AppCompat.ActionBar">
     </style>
     <style name="Widget.AppCompat.ActionBar.Solid" parent="Base.Widget.AppCompat.ActionBar.Solid">
