@@ -37,9 +37,6 @@
     <color name="alter_primary_dark">#212121</color>
     <color name="alter_unchecked_image_background">@android:color/transparent</color>
     <color name="alter_video_thumbnail_overlay">#9b9b9b</color>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/colors_apptheme.xml -->
-    <eat-comment/>
-    <color name="apptheme_color">#00d6d2</color>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <color name="background_floating_material_dark">@color/material_grey_800</color>

@@ -78,12 +78,12 @@ public final class R {
 		public static final int menu_showShadow = 0x7f01006e;
 	}
 	public static final class color {
-		public static final int cwac_cam2_picture_fab = 0x7f0b002e;
-		public static final int cwac_cam2_picture_fab_pressed = 0x7f0b002f;
-		public static final int cwac_cam2_recording_fab = 0x7f0b0030;
-		public static final int cwac_cam2_recording_fab_pressed = 0x7f0b0031;
-		public static final int cwac_cam2_secondary_fab = 0x7f0b0032;
-		public static final int cwac_cam2_secondary_fab_pressed = 0x7f0b0033;
+		public static final int cwac_cam2_picture_fab = 0x7f0b002d;
+		public static final int cwac_cam2_picture_fab_pressed = 0x7f0b002e;
+		public static final int cwac_cam2_recording_fab = 0x7f0b002f;
+		public static final int cwac_cam2_recording_fab_pressed = 0x7f0b0030;
+		public static final int cwac_cam2_secondary_fab = 0x7f0b0031;
+		public static final int cwac_cam2_secondary_fab_pressed = 0x7f0b0032;
 	}
 	public static final class dimen {
 		public static final int cwac_cam2_fragment_drawer_offset_distance = 0x7f07004c;

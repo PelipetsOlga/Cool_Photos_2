@@ -95,7 +95,7 @@ public class MenuAdapter extends BaseAdapter {
 
         holder.text.setText(context.getString(item.getTextId()));
         if(item.isSelected()){
-            holder.text.setTextColor(context.getResources().getColor(R.color.color_selected_menu));
+            holder.text.setTextColor(context.getResources().getColor(R.color.accent));
          }
         else{
             holder.text.setTextColor(context.getResources().getColor(R.color.color_text_settings));
