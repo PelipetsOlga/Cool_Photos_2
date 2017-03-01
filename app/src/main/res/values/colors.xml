@@ -12,7 +12,7 @@
     <color name="seekbar_background">#CDBFB7</color>
 
     <color name="color_white_bg">#FFFCF2</color>
-    <color name="color_selecting_image">#9930E4E0</color>
+    <color name="color_selecting_image">#552f7bef</color>
     <color name="color_end_gradient">#00000000</color>
     <color name="color_start_gradient">#BB000000</color>
     <color name="color_switch_pink">#FFFF6195</color>

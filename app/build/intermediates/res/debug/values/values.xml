@@ -60,7 +60,7 @@
     <color name="color_hint">#bdbbb3</color>
     <color name="color_pink">#F33976</color>
     <color name="color_selected_menu">#00D6D2</color>
-    <color name="color_selecting_image">#9930E4E0</color>
+    <color name="color_selecting_image">#552f7bef</color>
     <color name="color_setting_background">#FFFCF2</color>
     <color name="color_start_gradient">#BB000000</color>
     <color name="color_switch_pink">#FFFF6195</color>
