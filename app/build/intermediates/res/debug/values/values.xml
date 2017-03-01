@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:ns1="http://schemas.android.com/tools">
+<resources>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
@@ -436,7 +436,7 @@
     <string name="action_deselect_all">Deselect all</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="action_home">Cool Albums</string>
+    <string name="action_home">Albums</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/net.yazeed44.imagepicker/imagepicker/1.3.0/res/values/values.xml -->
     <eat-comment/>
     <string name="action_select_all">Select all</string>
@@ -452,7 +452,7 @@
     <string name="all_photos">All Photos</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_name">Cool Photos</string>
+    <string name="app_name">Happy Moments</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
@@ -464,11 +464,6 @@
     <string name="btn_save">Save</string>
     <string name="chooser_gallery">Select picture</string>
     <string name="clear">Clear</string>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/generated/fabric/res/debug/values/com_crashlytics_build_id.xml -->
-    <eat-comment/>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">328abfc0-ab55-4204-b0f6-fb08cd087347</string>
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
     <string name="conscious">Conscious</string>
     <string name="conscious_default">Conscious ( set by default )</string>
     <string name="conscious_text">In this mode you will see popup images. Set by default.</string>
@@ -515,8 +510,8 @@
     <string name="minute">minute</string>
     <string name="minutes">minutes</string>
     <string name="moments_count">images</string>
-    <string name="navigation_drawer_close">close</string>
-    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">Menu close</string>
+    <string name="navigation_drawer_open">Menu open</string>
     <string name="new_switch">New switch with 2 modes</string>
     <string name="now_playing">Now playing</string>
     <string name="running">Running</string>
@@ -528,7 +523,6 @@
     <eat-comment/>
     <string name="subconscious">Subconscious</string>
     <string name="subconscious_text">In this mode, images will be shown as a 25 frame. You will not see them, but they may affect you subconscious.</string>
-    <string name="title_navigation_drawer">Cool photos</string>
     <string name="title_select_albums_activity">Select albums</string>
     <string name="title_select_pictures_activity">Select moments</string>
     <string name="tv_content_updating">Content updating</string>
