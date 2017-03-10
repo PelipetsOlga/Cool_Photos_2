@@ -24,6 +24,7 @@
             android:verticalSpacing="4dp" />
 
 
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_albums"
             android:layout_width="wrap_content"
@@ -35,6 +36,47 @@
             app:layout_anchor="@id/gridAlbums"
             app:layout_anchorGravity="bottom|right|end" />
     </android.support.design.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/repeatable_background_360dp"
+        android:visibility="visible">
+
+        <FrameLayout
+            android:id="@+id/frame_with_icecream"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/empty_text"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/eyescream_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/empty_big" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@id/empty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.25"
+            android:text="@string/empty_all"
+            android:textColor="@color/color_text_below_icecream"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
 
        <fragment
         android:id="@+id/navigation_drawer"

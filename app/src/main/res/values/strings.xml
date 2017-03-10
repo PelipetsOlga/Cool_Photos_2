@@ -13,7 +13,8 @@
     <string name="ab_capture">Capture</string>
     <string name="ab_select_pictures">Select pictures</string>
     <string name="chooser_gallery">Select picture</string>
-    <string name="empty_album_text">Tap to add your\nCool photos</string>
+    <string name="empty_album_text">Tap to add your\nHappy Moments</string>
+    <string name="empty_all">Tap to add your\nHappy Albums</string>
 
     <string name="minutes">minutes</string>
     <string name="minute">minute</string>

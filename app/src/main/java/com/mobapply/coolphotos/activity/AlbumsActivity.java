@@ -22,6 +22,7 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,8 @@ public class AlbumsActivity extends ActionBarActivity
     private ActionBar actionBar;
     private Cursor cursor;
     private SharedPreferences sPref;
+    private RelativeLayout empty;
+    private ImageView eyescreamImageView;
 
     public static AlbumsActivity getInstance() {
         return instance;
@@ -60,7 +63,7 @@ public class AlbumsActivity extends ActionBarActivity
         setContentView(R.layout.activity_albums);
         instance = this;
 
-        if (getIntent().getExtras()!= null && getIntent().getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)){
+        if (getIntent().getExtras() != null && getIntent().getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)) {
             stopService();
             finish();
             return;
@@ -71,12 +74,13 @@ public class AlbumsActivity extends ActionBarActivity
         initViews();
         loadSettings();
         fillData();
+        updateEmptyView();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (intent.getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)){
+        if (intent.getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)) {
             stopService();
             finish();
             return;
@@ -101,6 +105,9 @@ public class AlbumsActivity extends ActionBarActivity
         mFab = (FloatingActionButton) findViewById(R.id.fab_albums);
         mFab.setOnClickListener(this);
         sPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+        empty = (RelativeLayout) findViewById(R.id.empty);
+        eyescreamImageView = (ImageView) findViewById(R.id.eyescream_image);
+        eyescreamImageView.setOnClickListener(this);
     }
 
     private void fillData() {
@@ -132,6 +139,14 @@ public class AlbumsActivity extends ActionBarActivity
             }
         });
         mGrid.setAdapter(adapter);
+    }
+
+    private void updateEmptyView() {
+        if (mGrid.getAdapter().getCount() == 0) {
+            empty.setVisibility(View.VISIBLE);
+        } else {
+            empty.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -180,6 +195,8 @@ public class AlbumsActivity extends ActionBarActivity
     @Override
     protected void onResume() {
         super.onResume();
+        updateEmptyView();
+        invalidateOptionsMenu();
         actionBar.setTitle(mTitle);
     }
 
@@ -199,7 +216,11 @@ public class AlbumsActivity extends ActionBarActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem selectAlbum = menu.findItem(R.id.action_select_albums);
-        selectAlbum.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
+        if (mGrid.getAdapter().getCount() == 0) {
+            selectAlbum.setVisible(false);
+        } else {
+            selectAlbum.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
+        }
         loadSettings();
         return super.onPrepareOptionsMenu(menu);
     }
@@ -220,6 +241,7 @@ public class AlbumsActivity extends ActionBarActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.eyescream_image:
             case R.id.fab_albums:
                 CreateAlbumDialog dialog = new CreateAlbumDialog();
                 dialog.show(getFragmentManager(), null);
@@ -235,12 +257,4 @@ public class AlbumsActivity extends ActionBarActivity
         stopService(new Intent(this, PictureService.class));
     }
 
-//    public int getStatusBarHeight() {
-//        int result = 0;
-//        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-//        if (resourceId > 0) {
-//            result = getResources().getDimensionPixelSize(resourceId);
-//        }
-//        return result;
-//    }
 }

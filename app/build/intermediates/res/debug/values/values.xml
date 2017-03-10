@@ -477,7 +477,8 @@
     <string name="dialog_title">New album</string>
     <string name="done">DONE</string>
     <string name="empty_album">Empty album</string>
-    <string name="empty_album_text">Tap to add your\nCool photos</string>
+    <string name="empty_album_text">Tap to add your\nHappy Moments</string>
+    <string name="empty_all">Tap to add your\nHappy Albums</string>
     <string name="error_picture">Loading picture error</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/net.yazeed44.imagepicker/imagepicker/1.3.0/res/values/values.xml -->
     <eat-comment/>
