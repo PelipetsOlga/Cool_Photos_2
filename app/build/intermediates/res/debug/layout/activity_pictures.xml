@@ -186,6 +186,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:visibility="gone" />
+
+    <!--style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"-->
 </FrameLayout>
 <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/layout/activity_pictures.xml -->
