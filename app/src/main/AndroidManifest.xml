@@ -51,9 +51,6 @@
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.Transparent"></activity>
-        <activity
-            android:name="com.mobapply.coolphotos.activity.TutorialActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
 
         <provider
             android:name="com.mobapply.coolphotos.provider.PictureProvider"

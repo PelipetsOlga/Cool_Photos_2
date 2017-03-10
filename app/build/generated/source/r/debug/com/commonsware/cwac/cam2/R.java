@@ -112,11 +112,11 @@ public final class R {
 		public static final int fab_add = 0x7f020052;
 	}
 	public static final class id {
-		public static final int cwac_cam2_ok = 0x7f0c00ad;
+		public static final int cwac_cam2_ok = 0x7f0c00aa;
 		public static final int cwac_cam2_picture = 0x7f0c0086;
 		public static final int cwac_cam2_preview_stack = 0x7f0c0084;
 		public static final int cwac_cam2_progress = 0x7f0c0085;
-		public static final int cwac_cam2_retry = 0x7f0c00ac;
+		public static final int cwac_cam2_retry = 0x7f0c00a9;
 		public static final int cwac_cam2_settings = 0x7f0c0087;
 		public static final int cwac_cam2_switch_camera = 0x7f0c0088;
 		public static final int down = 0x7f0c0032;
@@ -133,7 +133,7 @@ public final class R {
 		public static final int up = 0x7f0c000a;
 	}
 	public static final class layout {
-		public static final int cwac_cam2_fragment = 0x7f040021;
+		public static final int cwac_cam2_fragment = 0x7f040020;
 	}
 	public static final class menu {
 		public static final int cwac_cam2_confirm = 0x7f0d0000;

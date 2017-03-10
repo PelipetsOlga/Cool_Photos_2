@@ -48,9 +48,6 @@ public class AlbumsActivity extends ActionBarActivity
     private GridView mGrid;
     private ActionBar actionBar;
     private Cursor cursor;
-//    private SwitchCompat mSwitchMode;
-//    private boolean modeConscious;
-    private boolean firstStart;
     private SharedPreferences sPref;
 
     public static AlbumsActivity getInstance() {
@@ -73,7 +70,6 @@ public class AlbumsActivity extends ActionBarActivity
         setupNavigationDrawer();
         initViews();
         loadSettings();
-        showTutorial();
         fillData();
     }
 
@@ -87,22 +83,7 @@ public class AlbumsActivity extends ActionBarActivity
         }
     }
 
-//    private void adjustHomeButtonLayout() {
-//        ImageView view = (ImageView) findViewById(android.R.id.home);
-//        if (view.getParent() instanceof ViewGroup) {
-//            ViewGroup viewGroup = (ViewGroup) view.getParent();
-//            View upView = viewGroup.getChildAt(0);
-//            if (upView != null && upView.getLayoutParams() instanceof FrameLayout.LayoutParams) {
-//                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) upView.getLayoutParams();
-//                layoutParams.width = 20;// **can give your own width**
-//                upView.setLayoutParams(layoutParams);
-//            }
-//        }
-//    }
-
     private void loadSettings() {
-//        modeConscious = sPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
-        firstStart = sPref.getBoolean(Constants.FIRST_START, true);
     }
 
     private void setupNavigationDrawer() {
@@ -119,7 +100,6 @@ public class AlbumsActivity extends ActionBarActivity
         mGrid = (GridView) findViewById(R.id.gridAlbums);
         mFab = (FloatingActionButton) findViewById(R.id.fab_albums);
         mFab.setOnClickListener(this);
-//        mSwitchMode = (SwitchCompat) findViewById(R.id.switch_mode);
         sPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
     }
 
@@ -154,17 +134,6 @@ public class AlbumsActivity extends ActionBarActivity
         mGrid.setAdapter(adapter);
     }
 
-    private void showTutorial() {
-        if (firstStart) {
-            startActivityForResult(new Intent(this, TutorialActivity.class), TUTORIAL_REQUEST_CODE);
-            firstStart = false;
-            SharedPreferences.Editor ed = sPref.edit();
-            ed.putBoolean(Constants.FIRST_START, firstStart);
-//            modeConscious = firstStart;
-            ed.commit();
-        }
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
     }
@@ -181,7 +150,6 @@ public class AlbumsActivity extends ActionBarActivity
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-
     }
 
     @Override
@@ -233,9 +201,6 @@ public class AlbumsActivity extends ActionBarActivity
         MenuItem selectAlbum = menu.findItem(R.id.action_select_albums);
         selectAlbum.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
         loadSettings();
-//        mSwitchMode.setChecked(modeConscious);
-//        MenuItem actionMode = menu.findItem(R.id.action_mode);
-//        actionMode.setVisible(!mNavigationDrawerFragment.isDrawerOpen());
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -270,12 +235,12 @@ public class AlbumsActivity extends ActionBarActivity
         stopService(new Intent(this, PictureService.class));
     }
 
-    public int getStatusBarHeight() {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
+//    public int getStatusBarHeight() {
+//        int result = 0;
+//        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+//        if (resourceId > 0) {
+//            result = getResources().getDimensionPixelSize(resourceId);
+//        }
+//        return result;
+//    }
 }
