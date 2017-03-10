@@ -75,21 +75,13 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pictures);
-
         initViews();
-
         parseIntent();
-
         restoreActionBar();
-
         updateLayout();
-
         init();
-
         fillData();
-
         updateFAB();
-
         addPictureForEmpty();
     }
 

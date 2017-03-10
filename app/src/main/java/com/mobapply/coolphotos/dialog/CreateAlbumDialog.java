@@ -80,7 +80,7 @@ public class CreateAlbumDialog extends DialogFragment {
         intent.putExtra(Constants.EXTRA_ID, id);
         intent.putExtra(Constants.EXTRA_COUNT, count);
         intent.putExtra(Constants.EXTRA_TITLE, title);
-        intent.putExtra(Constants.EXTRA_ADD_PICTURE, true);
+        intent.putExtra(Constants.EXTRA_ADD_PICTURE, false);
         startActivity(intent);
     }
 }
