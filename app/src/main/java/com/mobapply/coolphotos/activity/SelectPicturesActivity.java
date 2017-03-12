@@ -5,9 +5,11 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
@@ -234,6 +237,29 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
             case android.R.id.home:
                 finish();
                 return true;
+
+            case R.id.ab_share_pictures:
+                for (long id : setPictures) {
+                    Uri uriSharedPicture = ContentUris.withAppendedId(PictureProvider.PICTURE_CONTENT_URI, id);
+                    Cursor pictureCursor = getContentResolver().query(uriSharedPicture, null, null, null, null);
+                    pictureCursor.moveToFirst();
+                    String picturePath = pictureCursor.getString(pictureCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
+                    if (!TextUtils.isEmpty(picturePath)) {
+                        File sharedFile = new File(picturePath);
+                       // Uri contentUri = FileProvider.getUriForFile(this, "com.mobapply.coolphotos.fileprovider", sharedFile);
+                        Uri contentUri = Uri.fromFile(sharedFile);
+                        if (contentUri != null) {
+                            Intent shareIntent = new Intent();
+                            shareIntent.setAction(Intent.ACTION_SEND);
+                            shareIntent.setType("image/jpeg");
+                            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
+                          //  shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+                            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                            startActivity(Intent.createChooser(shareIntent, "Share"));
+                        }
+                    }
+                }
+                break;
 
             case R.id.ab_delete_pictures:
                 boolean refactorHeader = setPictures.contains(idHeaderPicture);

@@ -24,18 +24,18 @@ public final class R {
 		public static final int dsb_value = 0x7f010041;
 	}
 	public static final class color {
-		public static final int dsb_disabled_color = 0x7f0b003d;
-		public static final int dsb_progress_color = 0x7f0b003e;
-		public static final int dsb_progress_color_list = 0x7f0b0073;
-		public static final int dsb_ripple_color_focused = 0x7f0b003f;
-		public static final int dsb_ripple_color_list = 0x7f0b0074;
-		public static final int dsb_ripple_color_pressed = 0x7f0b0040;
-		public static final int dsb_track_color = 0x7f0b0041;
-		public static final int dsb_track_color_list = 0x7f0b0075;
+		public static final int dsb_disabled_color = 0x7f0c003d;
+		public static final int dsb_progress_color = 0x7f0c003e;
+		public static final int dsb_progress_color_list = 0x7f0c0073;
+		public static final int dsb_ripple_color_focused = 0x7f0c003f;
+		public static final int dsb_ripple_color_list = 0x7f0c0074;
+		public static final int dsb_ripple_color_pressed = 0x7f0c0040;
+		public static final int dsb_track_color = 0x7f0c0041;
+		public static final int dsb_track_color_list = 0x7f0c0075;
 	}
 	public static final class style {
-		public static final int Widget_DiscreteIndicatorTextAppearance = 0x7f080143;
-		public static final int Widget_DiscreteSeekBar = 0x7f080144;
+		public static final int Widget_DiscreteIndicatorTextAppearance = 0x7f090143;
+		public static final int Widget_DiscreteSeekBar = 0x7f090144;
 	}
 	public static final class styleable {
 		public static final int[] DiscreteSeekBar = { 0x7f01003f, 0x7f010040, 0x7f010041, 0x7f010042, 0x7f010043, 0x7f010044, 0x7f010045, 0x7f010046, 0x7f010047, 0x7f010048, 0x7f010049, 0x7f01004a, 0x7f01004b };

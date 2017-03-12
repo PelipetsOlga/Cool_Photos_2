@@ -2,21 +2,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.mobapply.coolphotos.activity.SelectPicturesActivity">
-    <group
-        android:id="@+id/select_pictures_menu_group">
+    <group android:id="@+id/select_pictures_menu_group">
 
-       <!-- <item
+        <item
             android:id="@+id/ab_share_pictures"
-            android:orderInCategory="100"
             android:icon="@drawable/ic_share_white_24dp"
+            android:orderInCategory="100"
             android:title="@string/ab_delete_selected_pictures"
-            app:showAsAction="always"
-            android:visible="false"/>-->
+            android:visible="false"
+            app:showAsAction="always" />
 
         <item
             android:id="@+id/ab_delete_pictures"
-            android:orderInCategory="100"
             android:icon="@drawable/ic_delete_white_24dp"
+            android:orderInCategory="100"
             android:title="@string/ab_delete_selected_pictures"
             app:showAsAction="always" />
 
