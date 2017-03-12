@@ -78,23 +78,23 @@ public final class R {
 		public static final int menu_showShadow = 0x7f01006e;
 	}
 	public static final class color {
-		public static final int cwac_cam2_picture_fab = 0x7f0c0029;
-		public static final int cwac_cam2_picture_fab_pressed = 0x7f0c002a;
-		public static final int cwac_cam2_recording_fab = 0x7f0c002b;
-		public static final int cwac_cam2_recording_fab_pressed = 0x7f0c002c;
-		public static final int cwac_cam2_secondary_fab = 0x7f0c002d;
-		public static final int cwac_cam2_secondary_fab_pressed = 0x7f0c002e;
+		public static final int cwac_cam2_picture_fab = 0x7f0b0029;
+		public static final int cwac_cam2_picture_fab_pressed = 0x7f0b002a;
+		public static final int cwac_cam2_recording_fab = 0x7f0b002b;
+		public static final int cwac_cam2_recording_fab_pressed = 0x7f0b002c;
+		public static final int cwac_cam2_secondary_fab = 0x7f0b002d;
+		public static final int cwac_cam2_secondary_fab_pressed = 0x7f0b002e;
 	}
 	public static final class dimen {
-		public static final int cwac_cam2_fragment_drawer_offset_distance = 0x7f08004c;
-		public static final int cwac_cam2_fragment_drawer_shadow_size = 0x7f08004d;
-		public static final int cwac_cam2_fragment_drawer_width = 0x7f08004e;
-		public static final int cwac_cam2_fragment_panel_item_height = 0x7f08004f;
-		public static final int cwac_cam2_fragment_panel_item_width = 0x7f080050;
-		public static final int cwac_cam2_fragment_panel_padding = 0x7f080051;
-		public static final int fab_size_mini = 0x7f08006a;
-		public static final int fab_size_normal = 0x7f08006b;
-		public static final int labels_text_size = 0x7f080074;
+		public static final int cwac_cam2_fragment_drawer_offset_distance = 0x7f07004c;
+		public static final int cwac_cam2_fragment_drawer_shadow_size = 0x7f07004d;
+		public static final int cwac_cam2_fragment_drawer_width = 0x7f07004e;
+		public static final int cwac_cam2_fragment_panel_item_height = 0x7f07004f;
+		public static final int cwac_cam2_fragment_panel_item_width = 0x7f070050;
+		public static final int cwac_cam2_fragment_panel_padding = 0x7f070051;
+		public static final int fab_size_mini = 0x7f07006a;
+		public static final int fab_size_normal = 0x7f07006b;
+		public static final int labels_text_size = 0x7f070074;
 	}
 	public static final class drawable {
 		public static final int cwac_cam2_action_bar_bg_translucent = 0x7f020041;
@@ -112,35 +112,35 @@ public final class R {
 		public static final int fab_add = 0x7f020052;
 	}
 	public static final class id {
-		public static final int cwac_cam2_ok = 0x7f0d00aa;
-		public static final int cwac_cam2_picture = 0x7f0d0086;
-		public static final int cwac_cam2_preview_stack = 0x7f0d0084;
-		public static final int cwac_cam2_progress = 0x7f0d0085;
-		public static final int cwac_cam2_retry = 0x7f0d00a9;
-		public static final int cwac_cam2_settings = 0x7f0d0087;
-		public static final int cwac_cam2_switch_camera = 0x7f0d0088;
-		public static final int down = 0x7f0d0032;
-		public static final int end = 0x7f0d0020;
-		public static final int fab_label = 0x7f0d0004;
-		public static final int left = 0x7f0d0022;
-		public static final int marquee = 0x7f0d0030;
-		public static final int middle = 0x7f0d0031;
-		public static final int mini = 0x7f0d002f;
-		public static final int none = 0x7f0d0011;
-		public static final int normal = 0x7f0d000d;
-		public static final int right = 0x7f0d0023;
-		public static final int start = 0x7f0d0024;
-		public static final int up = 0x7f0d000a;
+		public static final int cwac_cam2_ok = 0x7f0c00aa;
+		public static final int cwac_cam2_picture = 0x7f0c0086;
+		public static final int cwac_cam2_preview_stack = 0x7f0c0084;
+		public static final int cwac_cam2_progress = 0x7f0c0085;
+		public static final int cwac_cam2_retry = 0x7f0c00a9;
+		public static final int cwac_cam2_settings = 0x7f0c0087;
+		public static final int cwac_cam2_switch_camera = 0x7f0c0088;
+		public static final int down = 0x7f0c0032;
+		public static final int end = 0x7f0c0020;
+		public static final int fab_label = 0x7f0c0004;
+		public static final int left = 0x7f0c0022;
+		public static final int marquee = 0x7f0c0030;
+		public static final int middle = 0x7f0c0031;
+		public static final int mini = 0x7f0c002f;
+		public static final int none = 0x7f0c0011;
+		public static final int normal = 0x7f0c000d;
+		public static final int right = 0x7f0c0023;
+		public static final int start = 0x7f0c0024;
+		public static final int up = 0x7f0c000a;
 	}
 	public static final class layout {
 		public static final int cwac_cam2_fragment = 0x7f040020;
 	}
 	public static final class menu {
-		public static final int cwac_cam2_confirm = 0x7f0e0000;
+		public static final int cwac_cam2_confirm = 0x7f0d0000;
 	}
 	public static final class string {
-		public static final int cwac_cam2_ok = 0x7f070032;
-		public static final int cwac_cam2_retry = 0x7f070033;
+		public static final int cwac_cam2_ok = 0x7f060032;
+		public static final int cwac_cam2_retry = 0x7f060033;
 	}
 	public static final class styleable {
 		public static final int[] FloatingActionButton = { 0x010100d4, 0x7f01001a, 0x7f010054, 0x7f010055, 0x7f010056, 0x7f010057, 0x7f010058, 0x7f010059, 0x7f01005a, 0x7f01005b, 0x7f01005c, 0x7f01005d, 0x7f01005e, 0x7f01005f, 0x7f010060, 0x7f010061, 0x7f010062, 0x7f010063, 0x7f010064, 0x7f010065, 0x7f010066, 0x7f010067, 0x7f010068, 0x7f010069, 0x7f01006a, 0x7f01006b, 0x7f01006c, 0x7f01006d, 0x7f010150, 0x7f010151 };

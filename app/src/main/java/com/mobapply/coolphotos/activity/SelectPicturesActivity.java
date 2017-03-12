@@ -246,14 +246,12 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                     String picturePath = pictureCursor.getString(pictureCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
                     if (!TextUtils.isEmpty(picturePath)) {
                         File sharedFile = new File(picturePath);
-                       // Uri contentUri = FileProvider.getUriForFile(this, "com.mobapply.coolphotos.fileprovider", sharedFile);
                         Uri contentUri = Uri.fromFile(sharedFile);
                         if (contentUri != null) {
                             Intent shareIntent = new Intent();
                             shareIntent.setAction(Intent.ACTION_SEND);
                             shareIntent.setType("image/jpeg");
-                            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
-                          //  shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+                            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                             shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
                             startActivity(Intent.createChooser(shareIntent, "Share"));
                         }
