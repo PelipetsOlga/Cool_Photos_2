@@ -33,10 +33,12 @@ import com.mobapply.coolphotos.provider.PictureProvider;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class SelectPicturesActivity extends AppCompatActivity implements View.OnClickListener{
+public class SelectPicturesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private long idAlbum;
     private int countPictures;
@@ -239,6 +241,7 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                 return true;
 
             case R.id.ab_share_pictures:
+                ArrayList<Uri> list = new ArrayList<>();
                 for (long id : setPictures) {
                     Uri uriSharedPicture = ContentUris.withAppendedId(PictureProvider.PICTURE_CONTENT_URI, id);
                     Cursor pictureCursor = getContentResolver().query(uriSharedPicture, null, null, null, null);
@@ -248,15 +251,17 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                         File sharedFile = new File(picturePath);
                         Uri contentUri = Uri.fromFile(sharedFile);
                         if (contentUri != null) {
-                            Intent shareIntent = new Intent();
-                            shareIntent.setAction(Intent.ACTION_SEND);
-                            shareIntent.setType("image/jpeg");
-                            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-                            startActivity(Intent.createChooser(shareIntent, "Share"));
+                            list.add(contentUri);
                         }
                     }
                 }
+                if (list.size() == 0) break;
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+                shareIntent.setType("image/jpeg");
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, list);
+                startActivity(Intent.createChooser(shareIntent, "Share"));
                 break;
 
             case R.id.ab_delete_pictures:
@@ -305,7 +310,7 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                     }
                 }
                 getContentResolver().update(updatedAlbum, cvAlbum, null, null);
-                if (refactorHeader){
+                if (refactorHeader) {
                     refreshHeader();
                     selectingHeader.setVisibility(View.GONE);
                 }
@@ -322,13 +327,13 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_drop_down:
                 PopupMenu popupMenu = new PopupMenu(this, v);
                 popupMenu.inflate(R.menu.menu_popup);
-                if (setPictures.isEmpty()){
+                if (setPictures.isEmpty()) {
                     popupMenu.getMenu().findItem(R.id.action_clear).setVisible(false);
-                }else{
+                } else {
                     popupMenu.getMenu().findItem(R.id.action_clear).setVisible(true);
                 }
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -340,7 +345,7 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                             case R.id.action_select_all:
                                 setPictures.add(idHeaderPicture);
                                 selectingHeader.setVisibility(View.VISIBLE);
-                                for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
+                                for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                                     long id = cursor.getLong(cursor.getColumnIndex(PictureProvider.ALBUM_ID));
                                     setPictures.add(id);
                                 }
@@ -365,7 +370,7 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
                 });
 
                 popupMenu.show();
-            break;
+                break;
         }
     }
 }
