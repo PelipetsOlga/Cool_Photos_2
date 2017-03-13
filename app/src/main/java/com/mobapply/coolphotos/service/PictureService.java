@@ -149,7 +149,7 @@ public class PictureService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_launch_status_24dp)
+                        .setSmallIcon(R.drawable.balloon_notif)
                         .setOngoing(true)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(getString(R.string.running));
