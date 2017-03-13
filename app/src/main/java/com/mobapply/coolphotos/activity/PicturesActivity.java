@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +17,8 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,11 +73,14 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
     private int isPlaying = PictureProvider.PlAY_NOT;
 
     private boolean isAddPicture = false;
+    private Cursor albumCursor;
+    private LayoutInflater mInflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pictures);
+        mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         initViews();
         parseIntent();
         restoreActionBar();
@@ -111,7 +117,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
         }
         albumUri = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
-        Cursor albumCursor = getContentResolver().query(albumUri, null, null, null, null);
+        albumCursor = getContentResolver().query(albumUri, null, null, null, null);
         if (albumCursor.moveToFirst()) {
             albumPath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FOLDER));
         }
@@ -125,8 +131,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void addPictureForEmpty(){
-        if(isAddPicture){
+    private void addPictureForEmpty() {
+        if (isAddPicture) {
             selectPicture();
         }
     }
@@ -152,12 +158,27 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                View cell = adapter.getView(position, null, null);
-                ImageView selecting = (ImageView) cell.findViewById(R.id.selecting_picture);
-                selecting.setVisibility(View.INVISIBLE);
+                String picturePath = "";
+                ViewGroup parentView = (ViewGroup) view;
+                int childCount = parentView.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    View child = parentView.getChildAt(i);
+                    if (child != null) {
+                        picturePath = (String) child.getTag();
+                        break;
+                    }
+                }
+                if (TextUtils.isEmpty(picturePath)) return;
+                showFullscreenPicture(picturePath);
             }
         });
         grid.setAdapter(adapter);
+    }
+
+    private void showFullscreenPicture(String fileName) {
+        Intent intent = new Intent(this, FullscreenPictureLongActivity.class);
+        intent.putExtra(Constants.EXTRA_FILE_NAME, fileName);
+        startActivity(intent);
     }
 
     private void refreshHeader() {
@@ -172,7 +193,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         } else {
             frameHeader.setVisibility(View.VISIBLE);
             fab.setVisibility(View.VISIBLE);
-            //albumCursor.moveToFirst();
             albumTitle.setText(albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_NAME)));
             albumTvCount.setText(new Integer(albumCount).toString());
             isPlaying = albumCursor.getInt(albumCursor.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
@@ -183,6 +203,13 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             }
             String firstPicturePath = albumCursor.getString(albumCursor.getColumnIndex(PictureProvider.ALBUM_FILE));
             Picasso.with(this).load(new File(firstPicturePath)).into(headerPicture);
+            headerPicture.setTag(firstPicturePath);
+            headerPicture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFullscreenPicture((String) v.getTag());
+                }
+            });
         }
     }
 
@@ -214,25 +241,23 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         llIsPlaying = (LinearLayout) findViewById(R.id.ll_is_playing);
     }
 
-    private void selectPicture(){
-        new Picker.Builder(this,new MyPickListener(),R.style.MIP_theme)
+    private void selectPicture() {
+        new Picker.Builder(this, new MyPickListener(), R.style.MIP_theme)
                 .setPickMode(Picker.PickMode.MULTIPLE_IMAGES)
                 .build()
                 .startActivity();
     }
 
-    private class MyPickListener implements Picker.PickListener
-    {
+    private class MyPickListener implements Picker.PickListener {
         @Override
-        public void onPickedSuccessfully(final ArrayList<ImageEntry> images)
-        {
+        public void onPickedSuccessfully(final ArrayList<ImageEntry> images) {
             selectMenu = false;
             AddPicturesAsyncTask task = new AddPicturesAsyncTask();
             task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, PicturesActivity.this, images);
         }
 
         @Override
-        public void onCancel(){
+        public void onCancel() {
             selectMenu = false;
         }
     }
@@ -245,8 +270,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         intentCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
         startActivityForResult(intentCapture, Constants.REQUEST_CODE_PHOTO);
     }
-
-    ;
 
     private void playPauseAlbum() {
         if (isPlaying == PictureProvider.PLAY) {
@@ -370,10 +393,9 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             }
         } else if (requestCode == Constants.REQUEST_CODE_GALLERY) {
             if (resultCode == RESULT_OK && data != null) {
-                if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) && (data.getData()== null))
-                {
+                if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) && (data.getData() == null)) {
                     ClipData clipdata = data.getClipData();
-                    for (int i=0; i<clipdata.getItemCount();i++) {
+                    for (int i = 0; i < clipdata.getItemCount(); i++) {
                         Uri selectedImageUri = clipdata.getItemAt(i).getUri();
                         String selectedImagePath = CoolPhotosUtils.getImagePath(selectedImageUri, this);
                         File pictureFile = CoolPhotosUtils.generateCaptureFile(albumPath);
@@ -382,7 +404,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                         AddPictureAsyncTask task = new AddPictureAsyncTask();
                         task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, selectedImagePath, this, pictureFile.getAbsolutePath(), previewFile.getAbsolutePath());
                     }
-                } else{
+                } else {
                     Uri selectedImageUri = data.getData();
                     String selectedImagePath = CoolPhotosUtils.getImagePath(selectedImageUri, this);
                     File pictureFile = CoolPhotosUtils.generateCaptureFile(albumPath);
@@ -415,8 +437,8 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         totalHeight = listItem.getMeasuredHeight();
 
         float x = 1;
-        if( items > columns ){
-            x = items/columns;
+        if (items > columns) {
+            x = items / columns;
             rows = (int) (x + 1);
             totalHeight *= rows;
         }
@@ -440,9 +462,9 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             String newPicturePath = (String) param[2];
             String previewPath = (String) param[3];
 
-            boolean done =  CoolPhotosUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
+            boolean done = CoolPhotosUtils.rotateAndSaveCapture(oldPicturePath, ctx, newPicturePath);
 
-            if (!done){
+            if (!done) {
                 return false;
             }
 
@@ -451,10 +473,10 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
             Uri uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
             Cursor albumQuery = getContentResolver().query(uriAlbum, null, null, null, null);
             int countAlbum = 0;
-            int isPlayingAlbum=PictureProvider.PlAY_NOT;
+            int isPlayingAlbum = PictureProvider.PlAY_NOT;
             boolean isFirstPicture = false;
             if (albumQuery.moveToFirst()) {
-                isPlayingAlbum=albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
+                isPlayingAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_IS_PLAY));
                 countAlbum = albumQuery.getInt(albumQuery.getColumnIndex(PictureProvider.ALBUM_COUNT));
                 ContentValues cvAlbum = new ContentValues();
                 if (countAlbum == 0) {
@@ -496,7 +518,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 invalidateOptionsMenu();
                 updateLayout();
                 refreshHeader();
-            }else{
+            } else {
                 Toast.makeText(PicturesActivity.this, R.string.error_picture, Toast.LENGTH_SHORT).show();
             }
         }
@@ -527,7 +549,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 File pictureFile = CoolPhotosUtils.generateCaptureFile(albumPath);
                 File previewFile = CoolPhotosUtils.generatePreviewFile(albumPath);
 
-                String oldPicturePath  = image.path;
+                String oldPicturePath = image.path;
                 String newPicturePath = pictureFile.getAbsolutePath();
                 String previewPath = previewFile.getAbsolutePath();
 
@@ -588,7 +610,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                 invalidateOptionsMenu();
                 updateLayout();
                 refreshHeader();
-            }else{
+            } else {
                 Toast.makeText(PicturesActivity.this, R.string.error_picture, Toast.LENGTH_SHORT).show();
             }
         }

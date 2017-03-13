@@ -40,6 +40,7 @@ public class PicturesViewBinder implements SimpleCursorAdapter.ViewBinder {
             case R.id.picture:
                 SquireImageView picture = (SquireImageView) view;
                 String pathName = cursor.getString(cursor.getColumnIndex(PictureProvider.PICTURE_FILE));
+                picture.setTag(pathName);
                 Picasso.with(ctx).load(new File(pathName)).into(picture);
               //  picture.setImageBitmap(BitmapFactory.decodeFile(pathName));
                 return true;
