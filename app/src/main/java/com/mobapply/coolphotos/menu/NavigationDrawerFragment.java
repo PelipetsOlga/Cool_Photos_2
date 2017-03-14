@@ -96,6 +96,7 @@ public class NavigationDrawerFragment extends Fragment {
             list = new ArrayList<>();
             list.add(new com.mobapply.coolphotos.menu.MenuItem(R.drawable.ic_folder_brown_24dp, R.string.action_home, true));
             list.add(new com.mobapply.coolphotos.menu.MenuItem(R.drawable.ic_settings_brown_24dp, R.string.action_settings, false));
+            list.add(new com.mobapply.coolphotos.menu.MenuItem(R.drawable.ligature_symbols_brown, R.string.action_rate, false));
             list.add(new com.mobapply.coolphotos.menu.MenuItem(R.drawable.ic_exit_brown_24dp, R.string.action_sign_out, false));
         }
         return list;

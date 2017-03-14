@@ -671,8 +671,8 @@ public final class R {
 		public static final int ic_action_done_white = 0x7f020057;
 		public static final int ic_play_arrow = 0x7f020068;
 		public static final int image_border = 0x7f02006e;
-		public static final int notification_template_icon_bg = 0x7f020077;
-		public static final int transparent = 0x7f020078;
+		public static final int notification_template_icon_bg = 0x7f020079;
+		public static final int transparent = 0x7f02007a;
 	}
 	public static final class id {
 		public static final int action0 = 0x7f0c009d;
@@ -908,35 +908,35 @@ public final class R {
 		public static final int abc_shareactionprovider_share_with_application = 0x7f06000f;
 		public static final int abc_toolbar_collapse_description = 0x7f060010;
 		public static final int action_deselect_all = 0x7f060022;
-		public static final int action_select_all = 0x7f060024;
+		public static final int action_select_all = 0x7f060025;
 		public static final int action_take_photo = 0x7f060012;
 		public static final int album_thumbnail = 0x7f060013;
 		public static final int albums_title = 0x7f060014;
 		public static final int all_photos = 0x7f060015;
 		public static final int app_name = 0x7f060016;
-		public static final int appbar_scrolling_view_behavior = 0x7f060027;
-		public static final int cwac_cam2_ok = 0x7f060032;
-		public static final int cwac_cam2_retry = 0x7f060033;
-		public static final int define_FloatingActionButton = 0x7f060034;
-		public static final int dialog_choose_camera_item_0 = 0x7f060035;
-		public static final int dialog_choose_camera_item_1 = 0x7f060036;
-		public static final int dialog_choose_camera_title = 0x7f060037;
+		public static final int appbar_scrolling_view_behavior = 0x7f060028;
+		public static final int cwac_cam2_ok = 0x7f060033;
+		public static final int cwac_cam2_retry = 0x7f060034;
+		public static final int define_FloatingActionButton = 0x7f060035;
+		public static final int dialog_choose_camera_item_0 = 0x7f060036;
+		public static final int dialog_choose_camera_item_1 = 0x7f060037;
+		public static final int dialog_choose_camera_title = 0x7f060038;
 		public static final int image_check = 0x7f060017;
-		public static final int image_position_in_view_pager = 0x7f06003f;
+		public static final int image_position_in_view_pager = 0x7f060040;
 		public static final int image_thumbnail = 0x7f060018;
-		public static final int image_video_icon_desc = 0x7f060040;
-		public static final int library_FloatingActionButton_author = 0x7f060041;
-		public static final int library_FloatingActionButton_authorWebsite = 0x7f060042;
-		public static final int library_FloatingActionButton_isOpenSource = 0x7f060043;
-		public static final int library_FloatingActionButton_libraryDescription = 0x7f060044;
-		public static final int library_FloatingActionButton_libraryName = 0x7f060045;
-		public static final int library_FloatingActionButton_libraryVersion = 0x7f060046;
-		public static final int library_FloatingActionButton_libraryWebsite = 0x7f060047;
-		public static final int library_FloatingActionButton_licenseId = 0x7f060048;
-		public static final int library_FloatingActionButton_repositoryLink = 0x7f060049;
+		public static final int image_video_icon_desc = 0x7f060041;
+		public static final int library_FloatingActionButton_author = 0x7f060042;
+		public static final int library_FloatingActionButton_authorWebsite = 0x7f060043;
+		public static final int library_FloatingActionButton_isOpenSource = 0x7f060044;
+		public static final int library_FloatingActionButton_libraryDescription = 0x7f060045;
+		public static final int library_FloatingActionButton_libraryName = 0x7f060046;
+		public static final int library_FloatingActionButton_libraryVersion = 0x7f060047;
+		public static final int library_FloatingActionButton_libraryWebsite = 0x7f060048;
+		public static final int library_FloatingActionButton_licenseId = 0x7f060049;
+		public static final int library_FloatingActionButton_repositoryLink = 0x7f06004a;
 		public static final int status_bar_notification_info_overflow = 0x7f060011;
-		public static final int video_too_long = 0x7f06005b;
-		public static final int you_cant_check_more_images = 0x7f06005c;
+		public static final int video_too_long = 0x7f06005c;
+		public static final int you_cant_check_more_images = 0x7f06005d;
 	}
 	public static final class style {
 		public static final int AlertDialog_AppCompat = 0x7f08007b;

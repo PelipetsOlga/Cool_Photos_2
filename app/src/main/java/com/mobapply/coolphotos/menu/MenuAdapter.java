@@ -85,6 +85,13 @@ public class MenuAdapter extends BaseAdapter {
                 break;
             case 2:
                 if (item.isSelected()){
+                    icon=resources.getDrawable(R.drawable.ligature_symbols_accent);
+                }else{
+                    icon=resources.getDrawable(R.drawable.ligature_symbols_brown);
+                }
+                break;
+            case 3:
+                if (item.isSelected()){
                     icon=resources.getDrawable(R.drawable.ic_exit_turquoise_24dp);
                 }else{
                     icon=resources.getDrawable(R.drawable.ic_exit_brown_24dp);

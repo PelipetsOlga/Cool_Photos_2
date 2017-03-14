@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
@@ -177,6 +178,12 @@ public class AlbumsActivity extends ActionBarActivity
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case 2:
+                Intent intentEstimate = new Intent(Intent.ACTION_VIEW);
+                intentEstimate.setData(Uri
+                        .parse("market://details?id=com.mobapply.coolphotos"));
+                startActivity(intentEstimate);
+                break;
+            case 3:
                 stopService();
                 finish();
                 break;
