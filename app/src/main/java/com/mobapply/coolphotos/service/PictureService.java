@@ -43,6 +43,7 @@ public class PictureService extends Service {
     private SharedPreferences mPref;
     private boolean mDataValid;
     private int period;
+    private long duration;
     private int periodMinutes;
     private boolean shuffle;
     private boolean modeConscious;
@@ -93,21 +94,21 @@ public class PictureService extends Service {
         mRandom = new Random();
         mHandler = new Handler();
         mHandler2 = new Handler();
-        mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         statusBarHeight = getStatusBarHeight();
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         mCursor = getContentResolver().query(PictureProvider.PICTURE_CONTENT_URI, null, PictureProvider.PICTURE_IS_PLAY + " = " + PictureProvider.PLAY, null, null);
         if (mChangeObserver != null) mCursor.registerContentObserver(mChangeObserver);
         mDataValid = true;
-
     }
 
     private void loadSettings() {
         period = mPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
         shuffle = mPref.getBoolean(Constants.SHUFFLE, Constants.DEFAULT_SHUFFLE);
         modeConscious = mPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
-        showTime = modeConscious ? Constants.SHOW_TIME_CONSCIOUS :  Constants.SHOW_TIME_SUBCONSCIOUS;
+        showTime = modeConscious ? mPref.getLong(Constants.DURATION, Constants.SHOW_TIME_CONSCIOUS) : Constants.SHOW_TIME_SUBCONSCIOUS;
         periodMinutes = period * 60 * 1000;
+        duration = mPref.getLong(Constants.DURATION, Constants.SHOW_TIME_CONSCIOUS_MIN);
     }
 
     private void process() {
@@ -117,7 +118,7 @@ public class PictureService extends Service {
     private void showFullscreenPicture(String fileName) {
         final Toast toast = new Toast(getApplicationContext());
         final View view = mInflater.inflate(R.layout.toast_fullscreen_picture, null);
-        final ImageView fullPicture = (ImageView)view.findViewById(R.id.full_picture);
+        final ImageView fullPicture = (ImageView) view.findViewById(R.id.full_picture);
         toast.setView(view);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -140,7 +141,7 @@ public class PictureService extends Service {
                 public void onError() {
                 }
             });
-        }catch(Throwable t){
+        } catch (Throwable t) {
             t.printStackTrace();
         }
     }
@@ -222,16 +223,16 @@ public class PictureService extends Service {
     protected void onContentChanged() {
         if (mCursor != null && !mCursor.isClosed()) {
             mDataValid = mCursor.requery();
-            if(mDataValid && !firstShown && mCursor.moveToFirst() &&  mCursor.getCount() == 1){
+            if (mDataValid && !firstShown && mCursor.moveToFirst() && mCursor.getCount() == 1) {
                 firstShown = true;
                 final String fileName = mCursor.getString(mCursor.getColumnIndex(PictureProvider.PICTURE_FILE));
                 mHandler.postDelayed(new Runnable() {
-                                         @Override
-                                         public void run() {
-                                             showFullscreenPicture(fileName);
+                    @Override
+                    public void run() {
+                        showFullscreenPicture(fileName);
 
-                                         }
-                                     },2000);
+                    }
+                }, 2000);
             }
         }
     }

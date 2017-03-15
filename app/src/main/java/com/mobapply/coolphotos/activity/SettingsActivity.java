@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -16,16 +18,23 @@ import android.widget.TextView;
 import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
 
+import java.util.Formatter;
+import java.util.Locale;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
 
     private SharedPreferences sPref;
-    private SeekBar mSeekBar;
+    private SeekBar seekPeriod;
+    private SeekBar seekDuration;
     private TextView mDelay;
+    private TextView mDuration;
     private SwitchCompat mSwitchShuffle;
     private SwitchCompat mSwitchMode;
+    private LinearLayout llDuration;
     private int period;
+    private long duration;
     private boolean shuffle;
     private boolean modeConscious;
 
@@ -59,20 +68,52 @@ public class SettingsActivity extends AppCompatActivity {
         period = sPref.getInt(Constants.PERIOD_UPDATING, Constants.DEFAULT_PERIOD_UPDATING);
         shuffle = sPref.getBoolean(Constants.SHUFFLE, Constants.DEFAULT_SHUFFLE);
         modeConscious = sPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
+        duration = sPref.getLong(Constants.DURATION, Constants.SHOW_TIME_CONSCIOUS);
     }
 
     private void initViews() {
         mDelay = (TextView) findViewById(R.id.tv_delay);
-        mSeekBar = (SeekBar) findViewById(R.id.seekbar);
+        mDuration = (TextView) findViewById(R.id.tv_duration);
+        seekPeriod = (SeekBar) findViewById(R.id.seekbar);
+        seekDuration = (SeekBar) findViewById(R.id.sb_duration);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
         mSwitchMode = (SwitchCompat) findViewById(R.id.switch_mode);
+        llDuration = (LinearLayout) findViewById(R.id.ll_duration);
     }
 
+    private void setDurationSeekBar(long value) {
+        seekDuration.setProgress((int) value);
+        mDuration.setText(String.format("%.1f sec", (double) duration / 1000));
+    }
 
     private void init() {
-        mSeekBar.setProgress(period - 1);
+        setDurationSeekBar(duration);
+        seekDuration.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (progress < Constants.SHOW_TIME_CONSCIOUS_MIN) {
+                    duration = Constants.SHOW_TIME_CONSCIOUS_MIN;
+                } else {
+                    duration = progress;
+                }
+                setDurationSeekBar(duration);
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putLong(Constants.DURATION, duration);
+                ed.commit();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        seekPeriod.setProgress(period - 1);
         mDelay.setText(period + " " + (period > 1 ? getString(R.string.minutes) : getString(R.string.minute)));
-        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekPeriod.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 period = progress + 1;
@@ -84,12 +125,10 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
@@ -108,6 +147,7 @@ public class SettingsActivity extends AppCompatActivity {
         mSwitchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                llDuration.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putBoolean(Constants.MODE_CONSCIOUS, isChecked);
                 modeConscious = isChecked;

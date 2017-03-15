@@ -18,11 +18,13 @@
     <string name="empty_all">Tap to add your\nHappy Albums</string>
 
     <string name="minutes">minutes</string>
+    <string name="miliseconds">sec</string>
     <string name="minute">minute</string>
     <string name="tv_content_updating">Content updating</string>
     <string name="tv_shuffle_images">Shuffle images</string>
     <string name="tv_mode">Subconscious/Conscious</string>
     <string name="tv_delay">Delay between slides</string>
+    <string name="tv_duration">Duration</string>
 
     <string name="dialog_title">New album</string>
     <string name="dialog_hint">Enter a name</string>

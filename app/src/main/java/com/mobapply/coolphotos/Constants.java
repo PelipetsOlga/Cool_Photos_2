@@ -8,6 +8,7 @@ public final class Constants {
     public static final String PERIOD_UPDATING = "period";
     public static final String SHUFFLE = "shuffle";
     public static final String MODE_CONSCIOUS = "mode_conscious";
+    public static final String DURATION= "duration";
     public static final String FIRST_START = "first_start";
 
     public static final boolean DEFAULT_SHUFFLE = false;
@@ -17,6 +18,8 @@ public final class Constants {
     public static final long SHOW_TIME=33;
 
     public static final long SHOW_TIME_CONSCIOUS=2000;
+    public static final long SHOW_TIME_CONSCIOUS_MIN=500;
+    public static final long SHOW_TIME_CONSCIOUS_MAX=5000;
     public static final long SHOW_TIME_SUBCONSCIOUS=33;
 
     public static final String EXTRA_ID="extra_id";
