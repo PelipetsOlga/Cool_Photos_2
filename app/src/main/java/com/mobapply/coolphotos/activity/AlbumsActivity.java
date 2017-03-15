@@ -28,6 +28,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.adapter.AlbumViewBinder;
@@ -76,6 +78,19 @@ public class AlbumsActivity extends ActionBarActivity
         loadSettings();
         fillData();
         updateEmptyView();
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(Constants.TEST_DEVICE_A)
+//                .addTestDevice(Constants.TEST_DEVICE_B)
+//                .addTestDevice(Constants.TEST_DEVICE_C)
+//                .addTestDevice(Constants.TEST_DEVICE_D)
+//                .addTestDevice(Constants.TEST_DEVICE_E)
+//                .addTestDevice(Constants.TEST_DEVICE_G)
+                .build();
+        mAdView.loadAd(adRequest);
+
+
     }
 
 //    @Override

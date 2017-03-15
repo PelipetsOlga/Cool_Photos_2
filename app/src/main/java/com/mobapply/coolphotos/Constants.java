@@ -32,4 +32,5 @@ public final class Constants {
     public static final int REQUEST_CODE_PHOTO=33;
     public static final int REQUEST_CODE_GALLERY=34;
 
+    public static final String TEST_DEVICE_A = "B686CDA2AA5466E0F4C9B63DE9E8B368";
 }
