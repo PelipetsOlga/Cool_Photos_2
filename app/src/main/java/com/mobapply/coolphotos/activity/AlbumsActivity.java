@@ -64,11 +64,11 @@ public class AlbumsActivity extends ActionBarActivity
         setContentView(R.layout.activity_albums);
         instance = this;
 
-        if (getIntent().getExtras() != null && getIntent().getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)) {
-            stopService();
-            finish();
-            return;
-        }
+//        if (getIntent().getExtras() != null && getIntent().getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)) {
+//            stopService();
+//            finish();
+//            return;
+//        }
 
         startService();
         setupNavigationDrawer();
@@ -78,15 +78,15 @@ public class AlbumsActivity extends ActionBarActivity
         updateEmptyView();
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if (intent.getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)) {
-            stopService();
-            finish();
-            return;
-        }
-    }
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        super.onNewIntent(intent);
+//        if (intent.getBooleanExtra(Constants.EXTRA_STOP_SERVICE, false)) {
+//            stopService();
+//            finish();
+//            return;
+//        }
+//    }
 
     private void loadSettings() {
     }
