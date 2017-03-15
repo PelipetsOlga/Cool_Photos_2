@@ -1,5 +1,7 @@
 package com.mobapply.coolphotos.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
@@ -147,15 +149,41 @@ public class SettingsActivity extends AppCompatActivity {
         mSwitchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                llDuration.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putBoolean(Constants.MODE_CONSCIOUS, isChecked);
                 modeConscious = isChecked;
                 ed.commit();
+
+                if (isChecked) {
+                    animateIn(llDuration);
+                } else {
+                    animateOut(llDuration);
+                }
             }
         });
     }
 
+    private void animateOut(final View view) {
+        view.animate().alpha(0.0f)
+                .setDuration(300).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                view.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void animateIn(final View view) {
+        view.animate().alpha(1.0f)
+                .setDuration(300).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                view.setVisibility(View.VISIBLE);
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
