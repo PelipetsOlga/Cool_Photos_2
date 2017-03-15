@@ -19,7 +19,7 @@ public final class Constants {
 
     public static final long SHOW_TIME_CONSCIOUS=2000;
     public static final long SHOW_TIME_CONSCIOUS_MIN=500;
-    public static final long SHOW_TIME_CONSCIOUS_MAX=5000;
+    public static final long SHOW_TIME_CONSCIOUS_MAX=3500;
     public static final long SHOW_TIME_SUBCONSCIOUS=33;
 
     public static final String EXTRA_ID="extra_id";

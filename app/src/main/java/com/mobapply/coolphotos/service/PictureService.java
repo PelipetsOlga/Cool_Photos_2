@@ -43,7 +43,7 @@ public class PictureService extends Service {
     private SharedPreferences mPref;
     private boolean mDataValid;
     private int period;
-    private long duration;
+//    private long duration;
     private int periodMinutes;
     private boolean shuffle;
     private boolean modeConscious;
@@ -108,7 +108,7 @@ public class PictureService extends Service {
         modeConscious = mPref.getBoolean(Constants.MODE_CONSCIOUS, Constants.DEFAULT_MODE_CONSCIOUS);
         showTime = modeConscious ? mPref.getLong(Constants.DURATION, Constants.SHOW_TIME_CONSCIOUS) : Constants.SHOW_TIME_SUBCONSCIOUS;
         periodMinutes = period * 60 * 1000;
-        duration = mPref.getLong(Constants.DURATION, Constants.SHOW_TIME_CONSCIOUS_MIN);
+//        duration = mPref.getLong(Constants.DURATION, Constants.SHOW_TIME_CONSCIOUS_MIN);
     }
 
     private void process() {
@@ -120,7 +120,7 @@ public class PictureService extends Service {
         final View view = mInflater.inflate(R.layout.toast_fullscreen_picture, null);
         final ImageView fullPicture = (ImageView) view.findViewById(R.id.full_picture);
         toast.setView(view);
-        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setDuration(Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
 
         try {

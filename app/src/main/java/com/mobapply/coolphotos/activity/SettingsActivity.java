@@ -4,28 +4,22 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-
 import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
 
-import java.util.Formatter;
-import java.util.Locale;
-
 
 public class SettingsActivity extends AppCompatActivity {
-
 
     private SharedPreferences sPref;
     private SeekBar seekPeriod;
