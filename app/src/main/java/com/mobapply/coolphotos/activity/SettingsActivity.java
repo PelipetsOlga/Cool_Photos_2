@@ -79,7 +79,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void setDurationSeekBar(long value) {
         seekDuration.setProgress((int) value);
-        mDuration.setText(String.format("%.1f sec", (double) duration / 1000));
+        mDuration.setText(String.format(getString(R.string.miliseconds), (double) duration / 1000));
     }
 
     private void init() {
