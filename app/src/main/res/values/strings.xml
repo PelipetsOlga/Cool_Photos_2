@@ -9,9 +9,9 @@
     <string name="empty_album_text">Tap to add your\nHappy Moments</string>
     <string name="empty_all">Tap to add your\nHappy Albums</string>
 
-    <string name="minutes">minutes</string>
-    <string name="miliseconds" formatted="false">%.1f sec</string>
-    <string name="minute">minute</string>
+    <string name="minutes" translatable="false">minutes</string>
+    <string name="miliseconds" formatted="false" translatable="false">%.1f sec</string>
+    <string name="minute" translatable="false">minute</string>
     <string name="tv_shuffle_images">Shuffle images</string>
     <string name="tv_mode_subconsious">Subconscious</string>
     <string name="tv_mode_consious">Conscious</string>
@@ -38,19 +38,19 @@
     <string name="clear">Clear</string>
 
 
-    <string name="navigation_drawer_open">Menu open</string>
-    <string name="navigation_drawer_close">Menu close</string>
-    <string name="ab_play_selected_albums">Play</string>
-    <string name="ab_pause_selected_albums">Pause</string>
-    <string name="ab_delete_selected_albums">Delete</string>
-    <string name="ab_select_albums">Select albums</string>
-    <string name="ab_add_picture">Add picture from Gallery</string>
-    <string name="ab_capture">Capture</string>
-    <string name="ab_select_pictures">Select pictures</string>
-    <string name="ab_delete_selected_pictures">Delete</string>
-    <string name="ad_albums">ca-app-pub-6973932400636393/6291989462</string>
-    <string name="ad_pictures">ca-app-pub-6973932400636393/9435429063</string>
-    <string name="ad_sel_albs">ca-app-pub-6973932400636393/2704237860</string>
-    <string name="ad_sel_pict">ca-app-pub-6973932400636393~3338523065</string>
+    <string name="navigation_drawer_open" translatable="false">Menu open</string>
+    <string name="navigation_drawer_close" translatable="false">Menu close</string>
+    <string name="ab_play_selected_albums" translatable="false">Play</string>
+    <string name="ab_pause_selected_albums" translatable="false">Pause</string>
+    <string name="ab_delete_selected_albums" translatable="false">Delete</string>
+    <string name="ab_select_albums" translatable="false">Select albums</string>
+    <string name="ab_add_picture" translatable="false">Add picture from Gallery</string>
+    <string name="ab_capture" translatable="false">Capture</string>
+    <string name="ab_select_pictures" translatable="false">Select pictures</string>
+    <string name="ab_delete_selected_pictures" translatable="false">Delete</string>
+    <string name="ad_albums" translatable="false">ca-app-pub-6973932400636393/6291989462</string>
+    <string name="ad_pictures" translatable="false">ca-app-pub-6973932400636393/9435429063</string>
+    <string name="ad_sel_albs" translatable="false">ca-app-pub-6973932400636393/2704237860</string>
+    <string name="ad_sel_pict" translatable="false">ca-app-pub-6973932400636393~3338523065</string>
 
 </resources>

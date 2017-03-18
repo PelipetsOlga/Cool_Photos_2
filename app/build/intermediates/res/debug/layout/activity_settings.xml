@@ -11,7 +11,6 @@
         android:id="@+id/consiose_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="?attr/buttonBarButtonStyle"
         android:textOff="@string/tv_mode_subconsious"
         android:textOn="@string/tv_mode_consious" />
 

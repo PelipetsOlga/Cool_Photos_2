@@ -9,9 +9,6 @@
     <string name="empty_album_text">Добавьте ваши\nлюбимые фотки</string>
     <string name="empty_all">Создайте альбомы с\nлучшими фотками</string>
 
-    <string name="minutes">минут</string>
-    <string name="miliseconds" formatted="false">%.1f сек</string>
-    <string name="minute">минута</string>
     <string name="tv_shuffle_images">Перемешать картинки</string>
     <string name="tv_mode_subconsious">Бессознательно</string>
     <string name="tv_mode_consious">Сознательно</string>
@@ -37,20 +34,5 @@
     <string name="select_all">Выбрать все</string>
     <string name="clear">Очистить</string>
 
-
-    <string name="navigation_drawer_open">Menu open</string>
-    <string name="navigation_drawer_close">Menu close</string>
-    <string name="ab_play_selected_albums">Play</string>
-    <string name="ab_pause_selected_albums">Pause</string>
-    <string name="ab_delete_selected_albums">Delete</string>
-    <string name="ab_select_albums">Select albums</string>
-    <string name="ab_add_picture">Add picture from Gallery</string>
-    <string name="ab_capture">Capture</string>
-    <string name="ab_select_pictures">Select pictures</string>
-    <string name="ab_delete_selected_pictures">Delete</string>
-    <string name="ad_albums">ca-app-pub-6973932400636393/6291989462</string>
-    <string name="ad_pictures">ca-app-pub-6973932400636393/9435429063</string>
-    <string name="ad_sel_albs">ca-app-pub-6973932400636393/2704237860</string>
-    <string name="ad_sel_pict">ca-app-pub-6973932400636393~3338523065</string>
 
 </resources>
