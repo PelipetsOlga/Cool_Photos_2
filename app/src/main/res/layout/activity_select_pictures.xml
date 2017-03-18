@@ -108,7 +108,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/ad_pictures" />
+        ads:adUnitId="@string/ad_sel_albs" />
 
     <GridView
         android:id="@+id/gridPictures"

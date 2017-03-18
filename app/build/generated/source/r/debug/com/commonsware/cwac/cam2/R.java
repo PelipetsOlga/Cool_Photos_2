@@ -109,7 +109,7 @@ public final class R {
 		public static final int cwac_cam2_ic_stop = 0x7f02005e;
 		public static final int cwac_cam2_ic_switch_camera = 0x7f02005f;
 		public static final int cwac_cam2_ic_videocam = 0x7f020060;
-		public static final int fab_add = 0x7f020066;
+		public static final int fab_add = 0x7f020067;
 	}
 	public static final class id {
 		public static final int cwac_cam2_ok = 0x7f0c00b6;

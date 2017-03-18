@@ -664,15 +664,15 @@ public final class R {
 		public static final int cwac_cam2_ic_videocam = 0x7f020060;
 		public static final int design_fab_background = 0x7f020061;
 		public static final int design_snackbar_background = 0x7f020062;
-		public static final int fab_add = 0x7f020066;
-		public static final int fab_shadow = 0x7f020067;
-		public static final int fab_shadow_mini = 0x7f020068;
-		public static final int ic_action_camera_white = 0x7f02006b;
-		public static final int ic_action_done_white = 0x7f02006c;
-		public static final int ic_play_arrow = 0x7f02007d;
-		public static final int image_border = 0x7f020083;
-		public static final int notification_template_icon_bg = 0x7f02008e;
-		public static final int transparent = 0x7f02008f;
+		public static final int fab_add = 0x7f020067;
+		public static final int fab_shadow = 0x7f020068;
+		public static final int fab_shadow_mini = 0x7f020069;
+		public static final int ic_action_camera_white = 0x7f02006c;
+		public static final int ic_action_done_white = 0x7f02006d;
+		public static final int ic_play_arrow = 0x7f02007e;
+		public static final int image_border = 0x7f020084;
+		public static final int notification_template_icon_bg = 0x7f02008f;
+		public static final int transparent = 0x7f020090;
 	}
 	public static final class id {
 		public static final int action0 = 0x7f0c00a9;

@@ -44,7 +44,6 @@ public class SelectAlbumsActivity extends AppCompatActivity {
         restoreActionBar();
         mGrid = (GridView) findViewById(R.id.gridAlbums);
         fillData();
-        CoolPhotosUtils.addAdView(SelectAlbumsActivity.this);
     }
 
     public void restoreActionBar() {
