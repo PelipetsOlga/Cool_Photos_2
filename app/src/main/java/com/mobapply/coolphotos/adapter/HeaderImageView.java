@@ -22,7 +22,7 @@ public class HeaderImageView extends ImageView {
     @Override
     protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
         final int width = getDefaultSize(getSuggestedMinimumWidth(),widthMeasureSpec);
-        final int height=width*2/3;
+        final int height=width/2;
         setMeasuredDimension(width, height);
     }
 
