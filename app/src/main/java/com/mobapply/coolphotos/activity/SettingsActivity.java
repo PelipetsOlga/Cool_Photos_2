@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
@@ -27,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView mDelay;
     private TextView mDuration;
     private SwitchCompat mSwitchShuffle;
-    private SwitchCompat mSwitchMode;
+    private ToggleButton toggleButton;
     private LinearLayout llDuration;
     private int period;
     private long duration;
@@ -73,7 +74,7 @@ public class SettingsActivity extends AppCompatActivity {
         seekPeriod = (SeekBar) findViewById(R.id.seekbar);
         seekDuration = (SeekBar) findViewById(R.id.sb_duration);
         mSwitchShuffle = (SwitchCompat) findViewById(R.id.switch_shuffle);
-        mSwitchMode = (SwitchCompat) findViewById(R.id.switch_mode);
+        toggleButton = (ToggleButton) findViewById(R.id.consiose_toggle);
         llDuration = (LinearLayout) findViewById(R.id.ll_duration);
     }
 
@@ -139,8 +140,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        mSwitchMode.setChecked(modeConscious);
-        mSwitchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        toggleButton.setChecked(modeConscious);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor ed = sPref.edit();

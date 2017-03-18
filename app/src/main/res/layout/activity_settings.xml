@@ -7,33 +7,12 @@
     android:padding="16dp"
     tools:context="com.mobapply.coolphotos.activity.SettingsActivity">
 
-
-    <LinearLayout
+    <ToggleButton
+        android:id="@+id/consiose_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:text="@string/tv_mode"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/color_text_settings" />
-
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/switch_mode"
-            style="@style/Widget.AppCompat.CompoundButton.Switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingLeft="32dp"
-            android:textOff=""
-            android:textOn="" />
-    </LinearLayout>
+        android:textOff="@string/tv_mode_subconsious"
+        android:textOn="@string/tv_mode_consious" />
 
     <LinearLayout
         android:id="@+id/ll_duration"
@@ -119,6 +98,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="32dp"
         android:orientation="horizontal">
+
 
         <TextView
             android:layout_width="0dp"

@@ -108,6 +108,7 @@
     <string name="title_select_pictures_activity">Выбор фотографий</string>
     <string name="tv_delay">Время между показами</string>
     <string name="tv_duration">Длительность</string>
-    <string name="tv_mode">25-ый кадр/Видимо</string>
+    <string name="tv_mode_consious">Сознательно</string>
+    <string name="tv_mode_subconsious">Бессознательно</string>
     <string name="tv_shuffle_images">Перемешать картинки</string>
 </resources>

@@ -574,7 +574,8 @@
     <string name="title_select_pictures_activity">Select moments</string>
     <string name="tv_delay">Delay between slides</string>
     <string name="tv_duration">Duration</string>
-    <string name="tv_mode">Subconscious/Conscious</string>
+    <string name="tv_mode_consious">Conscious</string>
+    <string name="tv_mode_subconsious">Subconscious</string>
     <string name="tv_shuffle_images">Shuffle images</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/net.yazeed44.imagepicker/imagepicker/1.3.0/res/values/values.xml -->
     <eat-comment/>

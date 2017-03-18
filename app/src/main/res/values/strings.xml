@@ -13,7 +13,8 @@
     <string name="miliseconds" formatted="false">%.1f sec</string>
     <string name="minute">minute</string>
     <string name="tv_shuffle_images">Shuffle images</string>
-    <string name="tv_mode">Subconscious/Conscious</string>
+    <string name="tv_mode_subconsious">Subconscious</string>
+    <string name="tv_mode_consious">Conscious</string>
     <string name="tv_delay">Delay between slides</string>
     <string name="tv_duration">Duration</string>
 
