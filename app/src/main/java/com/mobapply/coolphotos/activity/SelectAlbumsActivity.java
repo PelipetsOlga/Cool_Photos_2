@@ -42,10 +42,9 @@ public class SelectAlbumsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_albums);
         restoreActionBar();
-
         mGrid = (GridView) findViewById(R.id.gridAlbums);
-
         fillData();
+        CoolPhotosUtils.addAdView(SelectAlbumsActivity.this);
     }
 
     public void restoreActionBar() {

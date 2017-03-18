@@ -7,10 +7,15 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.mobapply.coolphotos.Constants;
+import com.mobapply.coolphotos.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,8 +71,8 @@ public class CoolPhotosUtils {
         int photoH = opt.outHeight;
         // Determine how much to scale down the image
         int scaleFactor = photoW / targetW;
-        if (scaleFactor<1){
-            scaleFactor=1;
+        if (scaleFactor < 1) {
+            scaleFactor = 1;
         }
         // Decode the image file into a Bitmap sized to fill the View
         opt.inJustDecodeBounds = false;
@@ -114,9 +119,9 @@ public class CoolPhotosUtils {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(newFilepath);
-            if(b != null) {
+            if (b != null) {
                 b.compress(Bitmap.CompressFormat.PNG, 100, out);
-            }else{
+            } else {
                 result = false;
             }
             if (out != null)
@@ -128,7 +133,7 @@ public class CoolPhotosUtils {
             e.printStackTrace();
             result = false;
         }
-        return  result;
+        return result;
     }
 
     public static void generatePreview(String bifFilePath, String previewPath) {
@@ -145,7 +150,7 @@ public class CoolPhotosUtils {
         opt.inSampleSize = scaleFactor;
         opt.inPurgeable = true;
         b = BitmapFactory.decodeFile(bifFilePath, opt);
-        if(b == null){
+        if (b == null) {
             return;
         }
 
@@ -185,30 +190,31 @@ public class CoolPhotosUtils {
     }
 
     public static boolean deleteDirectory(String path) {
-        File folder=new File(path);
-        if( folder.exists() ) {
+        File folder = new File(path);
+        if (folder.exists()) {
             File[] files = folder.listFiles();
             if (files == null) {
                 return true;
             }
-            for(int i=0; i<files.length; i++) {
-                if(files[i].isDirectory()) {
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
                     deleteDirectory(files[i].getAbsolutePath());
-                }
-                else {
+                } else {
                     files[i].delete();
                 }
             }
         }
-        return(folder.delete() );
+        return (folder.delete());
     }
 
-
-
-
-
-
-
+    public static void addAdView(AppCompatActivity activity) {
+        AdView mAdView = (AdView) activity.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("B686CDA2AA5466E0F4C9B63DE9E8B368")
+                .addTestDevice("E5D6254D9530CC76DFECCB08D2540E3B")
+                .build();
+        mAdView.loadAd(adRequest);
+    }
 }
 
 

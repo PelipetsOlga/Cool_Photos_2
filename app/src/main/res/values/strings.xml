@@ -48,6 +48,9 @@
     <string name="select_all">Select All</string>
     <string name="clear">Clear</string>
 
-    <string name="ad_albums">ca-app-pub-6973932400636393/6291989462</string>
+      <string name="ad_albums">ca-app-pub-6973932400636393/6291989462</string>
+    <string name="ad_pictures">ca-app-pub-6973932400636393/9435429063</string>
+    <string name="ad_sel_albs">ca-app-pub-6973932400636393/2704237860</string>
+    <string name="ad_sel_pict">ca-app-pub-6973932400636393~3338523065</string>
 
 </resources>

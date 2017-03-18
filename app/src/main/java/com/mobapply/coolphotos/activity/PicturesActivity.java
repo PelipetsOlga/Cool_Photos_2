@@ -82,6 +82,7 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_pictures);
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         initViews();
+        CoolPhotosUtils.addAdView(PicturesActivity.this);
         parseIntent();
         restoreActionBar();
         updateLayout();

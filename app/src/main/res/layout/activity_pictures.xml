@@ -1,144 +1,162 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mobapply.coolphotos.activity.PicturesActivity">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/container"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:padding="4dp"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport ="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <FrameLayout
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true">
-
-                <com.mobapply.coolphotos.adapter.HeaderImageView
-                    android:id="@+id/header_picture"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/empty_big" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/album_title_background"
-                    android:orientation="vertical"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="24dp">
-
-                    <TextView
-                        android:id="@+id/tv_album_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="title"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@android:color/white" />
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingTop="6dp">
-
-                        <TextView
-                            android:id="@+id/tv_album_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="CC"
-                            android:textAppearance="?android:attr/textAppearance"
-                            android:textColor="@android:color/white" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="8dp"
-                            android:text="@string/moments_count"
-                            android:textAppearance="?android:attr/textAppearance"
-                            android:textColor="@android:color/white" />
-
-                        <LinearLayout
-                            android:id="@+id/ll_is_playing"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingTop="6dp"
-                            android:visibility="visible">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="16dp"
-                                android:src="@drawable/ic_play_circle_fill_white_24dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="8dp"
-                                android:text="@string/now_playing"
-                                android:textAppearance="?android:attr/textAppearance"
-                                android:textColor="@android:color/white" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-
-            </FrameLayout>
-
-            <GridView
-                android:id="@+id/gridPictures"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/header"
-                android:layout_gravity="center"
-                android:choiceMode="multipleChoice"
-                android:clickable="true"
-                android:horizontalSpacing="4dp"
-                android:numColumns="3"
-                android:paddingTop="4dp"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="4dp"
-                android:nestedScrollingEnabled="true"/>
-
-
-        </RelativeLayout>
-        </android.support.v4.widget.NestedScrollView>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_pictures"
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:src="@drawable/ic_play_arrow_white_36dp"
-            app:fabSize="normal"
-            app:layout_anchor="@id/header"
-            app:layout_anchorGravity="bottom|right|end" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/ad_pictures" />
 
-    </android.support.design.widget.CoordinatorLayout>
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/adView"
+            android:background="@android:color/white"
+            android:padding="4dp"
+            android:visibility="gone">
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <FrameLayout
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true">
+
+                        <com.mobapply.coolphotos.adapter.HeaderImageView
+                            android:id="@+id/header_picture"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/empty_big" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/album_title_background"
+                            android:orientation="vertical"
+                            android:paddingBottom="12dp"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp"
+                            android:paddingTop="24dp">
+
+                            <TextView
+                                android:id="@+id/tv_album_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="title"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@android:color/white" />
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingTop="6dp">
+
+                                <TextView
+                                    android:id="@+id/tv_album_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="CC"
+                                    android:textAppearance="?android:attr/textAppearance"
+                                    android:textColor="@android:color/white" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="8dp"
+                                    android:text="@string/moments_count"
+                                    android:textAppearance="?android:attr/textAppearance"
+                                    android:textColor="@android:color/white" />
+
+                                <LinearLayout
+                                    android:id="@+id/ll_is_playing"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:paddingTop="6dp"
+                                    android:visibility="visible">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="16dp"
+                                        android:src="@drawable/ic_play_circle_fill_white_24dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="8dp"
+                                        android:text="@string/now_playing"
+                                        android:textAppearance="?android:attr/textAppearance"
+                                        android:textColor="@android:color/white" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </FrameLayout>
+
+                    <GridView
+                        android:id="@+id/gridPictures"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/header"
+                        android:layout_gravity="center"
+                        android:choiceMode="multipleChoice"
+                        android:clickable="true"
+                        android:horizontalSpacing="4dp"
+                        android:nestedScrollingEnabled="true"
+                        android:numColumns="3"
+                        android:paddingTop="4dp"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="4dp" />
+
+
+                </RelativeLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_pictures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_play_arrow_white_36dp"
+                app:fabSize="normal"
+                app:layout_anchor="@id/header"
+                app:layout_anchorGravity="bottom|right|end" />
+
+        </android.support.design.widget.CoordinatorLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/empty"
@@ -151,16 +169,16 @@
             android:id="@+id/frame_with_icecream"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_above="@+id/empty_text"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true">
 
             <ImageView
-                android:layout_marginTop="16dp"
                 android:id="@+id/eyescream_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="16dp"
                 android:src="@drawable/empty_big" />
         </FrameLayout>
 
@@ -183,10 +201,10 @@
 
     <ProgressBar
         android:id="@+id/progressbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:visibility="gone" />
 
     <!--style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"-->

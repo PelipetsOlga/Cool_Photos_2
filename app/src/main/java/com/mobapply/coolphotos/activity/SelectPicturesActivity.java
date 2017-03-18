@@ -30,6 +30,7 @@ import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.adapter.HeaderImageView;
 import com.mobapply.coolphotos.adapter.PicturesViewBinder;
 import com.mobapply.coolphotos.provider.PictureProvider;
+import com.mobapply.coolphotos.utils.CoolPhotosUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -67,6 +68,7 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_select_pictures);
 
         initViews();
+        CoolPhotosUtils.addAdView(SelectPicturesActivity.this);
         parseIntent();
         restoreActionBar();
         fillData();

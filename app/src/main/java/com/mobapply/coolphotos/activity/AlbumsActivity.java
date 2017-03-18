@@ -3,33 +3,22 @@ package com.mobapply.coolphotos.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.SwitchCompat;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.adapter.AlbumViewBinder;
@@ -37,6 +26,7 @@ import com.mobapply.coolphotos.dialog.CreateAlbumDialog;
 import com.mobapply.coolphotos.menu.NavigationDrawerFragment;
 import com.mobapply.coolphotos.provider.PictureProvider;
 import com.mobapply.coolphotos.service.PictureService;
+import com.mobapply.coolphotos.utils.CoolPhotosUtils;
 
 public class AlbumsActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
@@ -78,19 +68,7 @@ public class AlbumsActivity extends ActionBarActivity
         loadSettings();
         fillData();
         updateEmptyView();
-
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(Constants.TEST_DEVICE_A)
-//                .addTestDevice(Constants.TEST_DEVICE_B)
-//                .addTestDevice(Constants.TEST_DEVICE_C)
-//                .addTestDevice(Constants.TEST_DEVICE_D)
-//                .addTestDevice(Constants.TEST_DEVICE_E)
-//                .addTestDevice(Constants.TEST_DEVICE_G)
-                .build();
-        mAdView.loadAd(adRequest);
-
-
+        CoolPhotosUtils.addAdView(this);
     }
 
 //    @Override
