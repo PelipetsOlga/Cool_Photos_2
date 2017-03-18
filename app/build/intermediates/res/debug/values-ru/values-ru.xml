@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values-ru/strings.xml -->
+    <eat-comment/>
+    <string name="ab_add_picture">Add picture from Gallery</string>
+    <string name="ab_capture">Capture</string>
+    <string name="ab_delete_selected_albums">Delete</string>
+    <string name="ab_delete_selected_pictures">Delete</string>
+    <string name="ab_pause_selected_albums">Pause</string>
+    <string name="ab_play_selected_albums">Play</string>
+    <string name="ab_select_albums">Select albums</string>
+    <string name="ab_select_pictures">Select pictures</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Перейти на главный экран"</string>
@@ -22,6 +32,20 @@
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/10.2.0/res/values-ru/values.xml -->
     <eat-comment/>
     <string msgid="5835639618285370804" name="accept">"Принять"</string>
+    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values-ru/strings.xml -->
+    <eat-comment/>
+    <string name="action_home">Альбомы</string>
+    <string name="action_rate">Оцените нас</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_sign_out">Выход и Стоп</string>
+    <string name="ad_albums">ca-app-pub-6973932400636393/6291989462</string>
+    <string name="ad_pictures">ca-app-pub-6973932400636393/9435429063</string>
+    <string name="ad_sel_albs">ca-app-pub-6973932400636393/2704237860</string>
+    <string name="ad_sel_pict">ca-app-pub-6973932400636393~3338523065</string>
+    <string name="app_name">Лучшие фотографии</string>
+    <string name="btn_cancel">Отменить</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="clear">Очистить</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/10.2.0/res/values-ru/values.xml -->
     <eat-comment/>
     <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Включить"</string>
@@ -54,6 +78,23 @@
     <string msgid="2039274714455389140" name="debug_menu_title">"Выбрать режим отладки"</string>
     <string msgid="1173358804935285568" name="debug_menu_troubleshooting">"Устранение неполадок"</string>
     <string msgid="6099173376375995052" name="decline">"Отклонить"</string>
+    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values-ru/strings.xml -->
+    <eat-comment/>
+    <string name="dialog_hint">Название</string>
+    <string name="dialog_title">Новый альбом</string>
+    <string name="empty_album">Пустой альбом</string>
+    <string name="empty_album_text">Добавьте ваши\nлюбимые фотки</string>
+    <string name="empty_all">Создайте альбомы с\nлучшими фотками</string>
+    <string name="error_picture">Ошибка загрузки фотографии</string>
+    <string formatted="false" name="miliseconds">%.1f сек</string>
+    <string name="minute">минута</string>
+    <string name="minutes">минут</string>
+    <string name="moments_count">фото</string>
+    <string name="navigation_drawer_close">Menu close</string>
+    <string name="navigation_drawer_open">Menu open</string>
+    <string name="now_playing">Проигрывается</string>
+    <string name="running">Выполняется показ</string>
+    <string name="select_all">Выбрать все</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">">999"</string>
@@ -61,4 +102,12 @@
     <eat-comment/>
     <string msgid="8020323581538738027" name="store_picture_message">"Разрешить объявлению сохранить изображение в галерее?"</string>
     <string msgid="4180630057627064606" name="store_picture_title">"Сохранение изображения"</string>
+    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values-ru/strings.xml -->
+    <eat-comment/>
+    <string name="title_select_albums_activity">Выбор альбомов</string>
+    <string name="title_select_pictures_activity">Выбор фотографий</string>
+    <string name="tv_delay">Время между показами</string>
+    <string name="tv_duration">Длительность</string>
+    <string name="tv_mode">25-ый кадр/Видимо</string>
+    <string name="tv_shuffle_images">Перемешать картинки</string>
 </resources>

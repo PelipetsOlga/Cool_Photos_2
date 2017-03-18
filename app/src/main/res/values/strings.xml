@@ -1,18 +1,11 @@
 <resources>
     <string name="app_name">Happy Moments</string>
 
-    <string name="navigation_drawer_open">Menu open</string>
-    <string name="navigation_drawer_close">Menu close</string>
-
     <string name="action_home">Albums</string>
     <string name="action_settings">Settings</string>
     <string name="action_rate">Rate us</string>
     <string name="action_sign_out">Sign Out &amp; Stop</string>
 
-    <string name="ab_select_albums">Select albums</string>
-    <string name="ab_add_picture">Add picture from Gallery</string>
-    <string name="ab_capture">Capture</string>
-    <string name="ab_select_pictures">Select pictures</string>
     <string name="empty_album_text">Tap to add your\nHappy Moments</string>
     <string name="empty_all">Tap to add your\nHappy Albums</string>
 
@@ -30,12 +23,7 @@
     <string name="btn_cancel">Cancel</string>
 
     <string name="title_select_albums_activity">Select albums</string>
-    <string name="ab_play_selected_albums">Play</string>
-    <string name="ab_pause_selected_albums">Pause</string>
-    <string name="ab_delete_selected_albums">Delete</string>
-
     <string name="title_select_pictures_activity">Select moments</string>
-    <string name="ab_delete_selected_pictures">Delete</string>
 
     <string name="moments_count">images</string>
     <string name="now_playing">Now playing</string>
@@ -48,6 +36,17 @@
     <string name="select_all">Select All</string>
     <string name="clear">Clear</string>
 
+
+    <string name="navigation_drawer_open">Menu open</string>
+    <string name="navigation_drawer_close">Menu close</string>
+    <string name="ab_play_selected_albums">Play</string>
+    <string name="ab_pause_selected_albums">Pause</string>
+    <string name="ab_delete_selected_albums">Delete</string>
+    <string name="ab_select_albums">Select albums</string>
+    <string name="ab_add_picture">Add picture from Gallery</string>
+    <string name="ab_capture">Capture</string>
+    <string name="ab_select_pictures">Select pictures</string>
+    <string name="ab_delete_selected_pictures">Delete</string>
     <string name="ad_albums">ca-app-pub-6973932400636393/6291989462</string>
     <string name="ad_pictures">ca-app-pub-6973932400636393/9435429063</string>
     <string name="ad_sel_albs">ca-app-pub-6973932400636393/2704237860</string>
