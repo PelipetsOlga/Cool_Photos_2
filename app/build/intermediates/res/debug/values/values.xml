@@ -414,6 +414,7 @@
     <string name="ab_capture" translatable="false">Capture</string>
     <string name="ab_delete_selected_albums" translatable="false">Delete</string>
     <string name="ab_delete_selected_pictures" translatable="false">Delete</string>
+    <string name="ab_edit" translatable="false">Edit</string>
     <string name="ab_pause_selected_albums" translatable="false">Pause</string>
     <string name="ab_play_selected_albums" translatable="false">Play</string>
     <string name="ab_select_albums" translatable="false">Select albums</string>
@@ -527,6 +528,7 @@
     <string name="dialog_choose_camera_title">Choose camera</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="dialog_edit">Edit album</string>
     <string name="dialog_hint">Enter a name</string>
     <string name="dialog_title">New album</string>
     <string name="empty_album">Empty album</string>

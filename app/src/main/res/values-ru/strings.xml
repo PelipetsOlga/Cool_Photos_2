@@ -16,6 +16,7 @@
     <string name="tv_duration">Длительность</string>
 
     <string name="dialog_title">Новый альбом</string>
+    <string name="dialog_edit">Редактировать альбом</string>
     <string name="dialog_hint">Название</string>
     <string name="btn_save">Сохранить</string>
     <string name="btn_cancel">Отменить</string>

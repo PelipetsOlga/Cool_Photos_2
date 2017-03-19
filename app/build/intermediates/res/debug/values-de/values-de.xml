@@ -66,6 +66,7 @@
     <string msgid="6099173376375995052" name="decline">"Ablehnen"</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values-de/strings.xml -->
     <eat-comment/>
+    <string name="dialog_edit">Album bearbeiten</string>
     <string name="dialog_hint">Titel</string>
     <string name="dialog_title">Neues Album</string>
     <string name="empty_album">Leeres Album</string>

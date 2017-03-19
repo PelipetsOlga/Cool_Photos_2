@@ -287,7 +287,7 @@ public class SelectPicturesActivity extends AppCompatActivity implements View.On
 
                 tvTitle.setText(titleActivity);
                 albumTvCount.setText(Integer.toString(countPictures));
-
+//// TODO: 19.03.2017
                 Uri updatedAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
                 ContentValues cvAlbum = new ContentValues();
                 cvAlbum.put(PictureProvider.ALBUM_COUNT, countPictures);

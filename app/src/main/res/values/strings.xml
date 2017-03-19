@@ -19,6 +19,7 @@
     <string name="tv_duration">Duration</string>
 
     <string name="dialog_title">New album</string>
+    <string name="dialog_edit">Edit album</string>
     <string name="dialog_hint">Enter a name</string>
     <string name="btn_save">Save</string>
     <string name="btn_cancel">Cancel</string>
@@ -46,6 +47,7 @@
     <string name="ab_select_albums" translatable="false">Select albums</string>
     <string name="ab_add_picture" translatable="false">Add picture from Gallery</string>
     <string name="ab_capture" translatable="false">Capture</string>
+    <string name="ab_edit" translatable="false">Edit</string>
     <string name="ab_select_pictures" translatable="false">Select pictures</string>
     <string name="ab_delete_selected_pictures" translatable="false">Delete</string>
     <string name="ad_albums" translatable="false">ca-app-pub-6973932400636393/6291989462</string>

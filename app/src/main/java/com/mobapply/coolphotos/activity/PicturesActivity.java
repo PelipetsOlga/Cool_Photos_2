@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -18,7 +17,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +37,7 @@ import com.mobapply.coolphotos.Constants;
 import com.mobapply.coolphotos.R;
 import com.mobapply.coolphotos.adapter.HeaderImageView;
 import com.mobapply.coolphotos.adapter.PicturesViewBinder;
+import com.mobapply.coolphotos.dialog.EditAlbumDialog;
 import com.mobapply.coolphotos.provider.PictureProvider;
 import com.mobapply.coolphotos.utils.CoolPhotosUtils;
 import com.squareup.picasso.Picasso;
@@ -50,12 +49,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PicturesActivity extends AppCompatActivity implements View.OnClickListener {
+public class PicturesActivity extends AppCompatActivity implements View.OnClickListener, EditAlbumDialog.UpdateCallback {
 
     private long idAlbum;
     private long countPictures;
     private String titleAlbum;
-    private Uri uriAlbum;
     private CoordinatorLayout container;
     private RelativeLayout empty;
     private GridView grid;
@@ -74,13 +72,17 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
     private boolean isAddPicture = false;
     private Cursor albumCursor;
-    private LayoutInflater mInflater;
+
+    @Override
+    public void update(String newTitle) {
+        this.titleAlbum=newTitle;
+        fillData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pictures);
-        mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         initViews();
         CoolPhotosUtils.addAdView(PicturesActivity.this);
         parseIntent();
@@ -114,9 +116,6 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void init() {
-        if (idAlbum > 0) {
-            uriAlbum = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
-        }
         albumUri = ContentUris.withAppendedId(PictureProvider.ALBUM_CONTENT_URI, idAlbum);
         albumCursor = getContentResolver().query(albumUri, null, null, null, null);
         if (albumCursor.moveToFirst()) {
@@ -337,6 +336,12 @@ public class PicturesActivity extends AppCompatActivity implements View.OnClickL
                     selectMenu = true;
                     capturePicture();
                 }
+                break;
+
+            case R.id.action_edit_title:
+                EditAlbumDialog dialog = EditAlbumDialog.create(idAlbum, titleAlbum);
+                dialog.setCallback(this);
+                dialog.show(getFragmentManager(), null);
                 break;
 
             case R.id.action_select_pictures:

@@ -10,6 +10,7 @@
     <string name="clear">Klar</string>
     <string name="dialog_hint">Titel</string>
     <string name="dialog_title">Neues Album</string>
+    <string name="dialog_edit">Album bearbeiten</string>
     <string name="empty_album">Leeres Album</string>
     <string name="empty_album_text">Tippen Sie auf, um Ihre glücklichen Momente hinzuzufügen</string>
     <string name="empty_all">Tippen Sie auf, um Ihre Alben zu erstellen</string>

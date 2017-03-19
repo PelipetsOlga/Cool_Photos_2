@@ -13,6 +13,11 @@
         android:title="@string/ab_capture"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_edit_title"
+        android:icon="@drawable/ionicons_edit_4"
+        android:title="@string/ab_edit"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_select_pictures"
         android:icon="@drawable/ic_check_white_24dp"
         android:title="@string/ab_select_pictures"
