@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/src/main/res/values-ru/strings.xml -->
-    <eat-comment/>
-    <string name="ab_add_picture">Add picture from Gallery</string>
-    <string name="ab_capture">Capture</string>
-    <string name="ab_delete_selected_albums">Delete</string>
-    <string name="ab_delete_selected_pictures">Delete</string>
-    <string name="ab_pause_selected_albums">Pause</string>
-    <string name="ab_play_selected_albums">Play</string>
-    <string name="ab_select_albums">Select albums</string>
-    <string name="ab_select_pictures">Select pictures</string>
     <!-- From: file:/D:/AndroidStudioProjects/Cool_Photos/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values-ru/values-ru.xml -->
     <eat-comment/>
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Перейти на главный экран"</string>
@@ -38,11 +28,7 @@
     <string name="action_rate">Оцените нас</string>
     <string name="action_settings">Настройки</string>
     <string name="action_sign_out">Выход и Стоп</string>
-    <string name="ad_albums">ca-app-pub-6973932400636393/6291989462</string>
-    <string name="ad_pictures">ca-app-pub-6973932400636393/9435429063</string>
-    <string name="ad_sel_albs">ca-app-pub-6973932400636393/2704237860</string>
-    <string name="ad_sel_pict">ca-app-pub-6973932400636393~3338523065</string>
-    <string name="app_name">Лучшие фотографии</string>
+    <string name="app_name">Счастливые моменты</string>
     <string name="btn_cancel">Отменить</string>
     <string name="btn_save">Сохранить</string>
     <string name="clear">Очистить</string>
@@ -83,15 +69,10 @@
     <string name="dialog_hint">Название</string>
     <string name="dialog_title">Новый альбом</string>
     <string name="empty_album">Пустой альбом</string>
-    <string name="empty_album_text">Добавьте ваши\nлюбимые фотки</string>
-    <string name="empty_all">Создайте альбомы с\nлучшими фотками</string>
+    <string name="empty_album_text">Добавьте ваши\счастливые моменты</string>
+    <string name="empty_all">Создайте альбомы с\вашими счастливыми моментами</string>
     <string name="error_picture">Ошибка загрузки фотографии</string>
-    <string formatted="false" name="miliseconds">%.1f сек</string>
-    <string name="minute">минута</string>
-    <string name="minutes">минут</string>
     <string name="moments_count">фото</string>
-    <string name="navigation_drawer_close">Menu close</string>
-    <string name="navigation_drawer_open">Menu open</string>
     <string name="now_playing">Проигрывается</string>
     <string name="running">Выполняется показ</string>
     <string name="select_all">Выбрать все</string>
