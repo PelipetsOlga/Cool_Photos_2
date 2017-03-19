@@ -69,8 +69,8 @@
     <string name="dialog_hint">Название</string>
     <string name="dialog_title">Новый альбом</string>
     <string name="empty_album">Пустой альбом</string>
-    <string name="empty_album_text">Добавьте ваши\счастливые моменты</string>
-    <string name="empty_all">Создайте альбомы с\вашими счастливыми моментами</string>
+    <string name="empty_album_text">Добавьте ваши\nсчастливые моменты</string>
+    <string name="empty_all">Создайте альбомы \nсвашими счастливыми моментами</string>
     <string name="error_picture">Ошибка загрузки фотографии</string>
     <string name="moments_count">фото</string>
     <string name="now_playing">Проигрывается</string>

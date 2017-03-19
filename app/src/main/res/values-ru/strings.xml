@@ -6,8 +6,8 @@
     <string name="action_rate">Оцените нас</string>
     <string name="action_sign_out">Выход и Стоп</string>
 
-    <string name="empty_album_text">Добавьте ваши\счастливые моменты</string>
-    <string name="empty_all">Создайте альбомы с\вашими счастливыми моментами</string>
+    <string name="empty_album_text">Добавьте ваши\nсчастливые моменты</string>
+    <string name="empty_all">Создайте альбомы \nс вашими счастливыми моментами</string>
 
     <string name="tv_shuffle_images">Перемешать картинки</string>
     <string name="tv_mode_subconsious">Бессознательно</string>
