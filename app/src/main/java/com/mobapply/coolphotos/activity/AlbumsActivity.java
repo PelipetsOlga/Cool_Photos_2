@@ -173,7 +173,7 @@ public class AlbumsActivity extends ActionBarActivity
             case 2:
                 Intent intentEstimate = new Intent(Intent.ACTION_VIEW);
                 intentEstimate.setData(Uri
-                        .parse("market://details?id=com.mobapply.coolphotos"));
+                        .parse("market://details?id=com.mobapply.happymoments"));
                 startActivity(intentEstimate);
                 break;
             case 3:
